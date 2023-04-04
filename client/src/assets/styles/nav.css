@@ -1,0 +1,40 @@
+.navbar{
+display: flex;
+align-items: center;
+background-color:rgb(220, 22, 45);
+color: aliceblue;
+font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+justify-content: space-between;
+padding: 10px;
+}
+.h1--{
+    align-items: center;
+    display: flex;
+   padding-left: 250px;
+   padding-right: 350px;
+    
+}
+.navbar--items{
+   list-style: none;
+   display: flex;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.navbar--items>li{
+    padding: 10px;
+    
+}
+.nav-a{
+    text-decoration: none;
+    color: aliceblue;
+    
+}
+
+.shop-icon{
+    display: flex;
+    color: aliceblue;
+}
+.div1{
+color: rgb(36, 38, 37);
+font-size: medium;
+}
