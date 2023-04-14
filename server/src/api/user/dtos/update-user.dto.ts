@@ -9,7 +9,7 @@ import {
 import { User } from '../entities/user.entity';
 import { UserRoles } from '../enums/roles.enum';
 import { UserGender } from '../enums/userGender.enum';
-import { IsUnique } from 'src/common/db/decorators/validation.decorator';
+import { IsUnique } from 'src/common/decorators/validation.decorator';
 
 export class UpdateUserDto {
   @IsString()

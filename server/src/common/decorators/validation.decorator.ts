@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import {
   registerDecorator,
   ValidationArguments,
@@ -5,7 +6,7 @@ import {
   ValidatorConstraint,
   ValidatorConstraintInterface,
 } from 'class-validator';
-import AppDataSource from '../dataSource/data-source.initialize';
+import AppDataSource from '../db/dataSource/data-source.initialize';
 
 export function SameAs(
   property: string,
