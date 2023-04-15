@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { DataSourceOptions } from 'typeorm';
 import { config } from './common/db/dataSource/data-source.config';
+import { UserModule } from './api/user/user.module';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { config } from './common/db/dataSource/data-source.config';
     ConfigModule.forRoot({
       envFilePath: ['.env'],
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
