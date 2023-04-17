@@ -1,2 +1,6 @@
 server/src/common/db/dataSource/data-source.config.ts
 server/node_modules/.package-lock.json
+
+# Dependency directories
+node_modules/
+jspm_packages/
