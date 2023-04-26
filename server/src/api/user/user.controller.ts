@@ -10,6 +10,7 @@ import {
   UsePipes,
   ValidationPipe,
   Delete,
+  ClassSerializerInterceptor
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { IUserController } from './interfaces/user.controller.interface';
@@ -23,6 +24,7 @@ import { UpdateUserDto } from './dtos/update-user.dto';
 @ApiBearerAuth()
 @ApiTags('User')
 @UsePipes(new ValidationPipe())
+@UseInterceptors(ClassSerializerInterceptor)
 export class UserController implements IUserController {
   constructor(private readonly usersService: UserService) {}
 
