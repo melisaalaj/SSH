@@ -1,4 +1,4 @@
 export const jwtConstants = {
-  at_secret: process.env.AT_SECRET,
-  rt_secret: process.env.RT_SECRET,
+  at_secret: "at-secretKey",
+  rt_secret: "rt_secretKey",
 };

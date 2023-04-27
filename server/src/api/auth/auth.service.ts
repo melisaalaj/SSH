@@ -116,11 +116,11 @@ export class AuthService implements IAuthService {
     const [at, rt] = await Promise.all([
       this.jwtService.signAsync(jwtPayload, {
         secret: jwtConstants.at_secret,
-        expiresIn: process.env.AT_TOKEN_EXPIRATION_TIME,
+        expiresIn: '15m',
       }),
       this.jwtService.signAsync(jwtPayload, {
         secret: jwtConstants.rt_secret,
-        expiresIn: process.env.RT_TOKEN_EXPIRATION_TIME,
+        expiresIn: '1d',
       }),
     ]);
 
