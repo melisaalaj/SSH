@@ -1,5 +1,9 @@
 import React from "react";
 import "../assets/styles/kontakti.css";
+import backgroundImage from '../assets/images/bottom-image-contact.jpg';
+import backgroundImage1 from '../assets/images/map.png';
+import { useState } from "react";
+
 
 
 
