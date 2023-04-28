@@ -1,4 +1,5 @@
 /* eslint-disable prettier/prettier */
+import { PasswordReset } from 'src/api/user/entities/reset-password.entity';
 import { User } from 'src/api/user/entities/user.entity';
 
 export const config = {
@@ -7,11 +8,11 @@ export const config = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'root',
+  password: 'Leona.456',
   database: 'food_service',
   synchronize: true,
   dropSchema: false,
-  entities: [User],
+  entities: [User, PasswordReset],
   migrations: ['dist/common/db/migrations/*.js'],
   logging: 'localhost',
   seeds: [],
@@ -23,10 +24,10 @@ export const configNoEntities = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'root',
+  password: 'Leona.456',
   database: 'food_service',
   synchronize: true,
-  entities: [User],
+  entities: [User, PasswordReset],
   migrations: ['dist/common/db/migrations/*.js'],
   logging: 'localhost',
   seeds: [],
