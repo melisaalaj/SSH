@@ -1,4 +1,9 @@
-/* eslint-disable prettier/prettier */
+import { Food } from 'src/api/food/entities/food-entity';
+import { Location } from 'src/api/location/entities/location-entity';
+import { Order } from 'src/api/order/entities/orders-entity';
+import { Photo } from 'src/api/photo/entities/photo-entity';
+import { Product } from 'src/api/product/entities/product-entity';
+import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
 import { User } from 'src/api/user/entities/user.entity';
 
 export const config = {
@@ -7,11 +12,11 @@ export const config = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'root',
+  password: '190470',
   database: 'food_service',
   synchronize: true,
   dropSchema: false,
-  entities: [User],
+  entities: [User, Restaurant, Food, Order, Product, Location, Photo],
   migrations: ['dist/common/db/migrations/*.js'],
   logging: 'localhost',
   seeds: [],
@@ -23,10 +28,10 @@ export const configNoEntities = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'root',
+  password: '190470',
   database: 'food_service',
   synchronize: true,
-  entities: [User],
+  entities: [User, Restaurant, Food, Order, Product, Location, Photo],
   migrations: ['dist/common/db/migrations/*.js'],
   logging: 'localhost',
   seeds: [],
