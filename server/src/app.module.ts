@@ -23,15 +23,15 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     }),
     MailerModule.forRoot({
       transport: {
-        host: process.env.MAIL_HOST,
-        port: process.env.MAIL_PORT,
+        host: 'smtp.gmail.com',
+        port: 587,
         auth: {
-          user: process.env.MAIL_AUTH_USER,
-          pass: process.env.MAIL_AUTH_PASSWORD,
+          user: 'food.service808@gmail.com',
+          pass: 'DishDash808',
         },
       },
       defaults: {
-        from: process.env.SENDER_MAIL,
+        from: 'food.service808@gmail.com',
       },
       template: {
         dir: __dirname + '/../templates',
@@ -46,9 +46,6 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService,
-    MailService,
-  ],
+  providers: [AppService, MailService],
 })
 export class AppModule {}

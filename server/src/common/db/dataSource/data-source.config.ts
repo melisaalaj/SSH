@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { PasswordReset } from 'src/api/user/entities/reset-password.entity';
 import { User } from 'src/api/user/entities/user.entity';
 
@@ -8,7 +7,7 @@ export const config = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'Leona.456',
+  password: '190470',
   database: 'food_service',
   synchronize: true,
   dropSchema: false,
@@ -24,7 +23,7 @@ export const configNoEntities = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'Leona.456',
+  password: '190470',
   database: 'food_service',
   synchronize: true,
   entities: [User, PasswordReset],
