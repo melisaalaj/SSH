@@ -1,13 +1,30 @@
 import React from "react";
 import "../assets/styles/kontakti.css";
-
+import backgroundImage from '../assets/images/bottom-image-contact.jpg';
+import backgroundImage1 from '../assets/images/map.png';
+import { useState } from "react";
 
 
 export default function Kontakti(){
-   return(
+  const [formData, setFormData] = useState({name: "",email: "",tel:"",message: ""});
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert(`Name: ${formData.name}, Email: ${formData.email},Tel: ${formData.tel}, Message: ${formData.message}`
+    );
+};
+ return(
+
     <div class="layer">
 
-    <div id="parallax-wrap" class="parallax-search" data-parallax="scroll"data-position="top"data-bleed="10" style="background-image: url('bottom-image-contact.jpg');">
+    <div id="parallax-wrap" class="parallax-search" data-parallax="scroll"data-position="top"data-bleed="10" style={{
+        backgroundImage: `url(${backgroundImage})`,}}>
+
         <div class="search-wraps">
             <h1>Kontakti</h1>
             <p>
@@ -19,7 +36,9 @@ export default function Kontakti(){
             <p> " info@dishdash.com"</p>
         </div>
     </div>
-    <div class="contact-map" style="background-image: url('map.png');">
+    <div class="contact-map"  style={{
+        backgroundImage: `url(${backgroundImage1})`,}}>
+
     <div class="container-map">
         <div class="inner">
            <div class="row">
@@ -33,56 +52,40 @@ export default function Kontakti(){
               </div>
               <div class="col-md-5 black">
               
-                <div class="top30"></div>
-              
-                <form class="uk-form uk-form-horizontal forms has-validation-callback" id="forms" onsubmit="return false;">   
-                <input type="hidden" value="contacUsSubmit" name="action" id="action"> </input>           
-                 <input type="hidden" value="store" name="currentController" id="currentController">        </input>                  
-                             
-                
-                                                                                
-                   <div class="row top10">
-                <div class="col-md-12">
-                  <input placeholder="Emri" class="grey-fields full-width" data-validation="required" type="text" value="" name="name" id="name">    </input>
-                           </div>
-                </div>
-                             
-                                                                   
-                             <div class="row top10">
-                <div class="col-md-12">
-                  <input placeholder="Email Adresa" class="grey-fields full-width" data-validation="email" type="text" value="" name="email" id="email">    </input>         </div>
-                </div>
-                             
-                                                                   
-                             <div class="row top10">
-                <div class="col-md-12">
-                  <input placeholder="Tel." class="grey-fields full-width" data-validation="required" type="text" value="" name="phone" id="phone">     </input>        </div>
-                </div>
-                             
-                                                                   
-                             <div class="row top10">
-                <div class="col-md-12">
-                  <textarea placeholder="Mesazhi" class="grey-fields full-width" name="message" id="message"></textarea>           
-                    </div>
-                </div>
-                             
-                             
-                                           
-                <div class="row top10">
-                <div class="col-md-12 text-center">
-                   <input type="submit" value="Dërgo" class="orange-button medium inline rounded"></input>
-                </div>
-                </div>
-                             </form>
-                
-                
-                               </div> 
-           </div> 
+              <form onSubmit={handleSubmit} class="uk-form uk-form-horizontal forms has-validation-callback"id="forms">
+      
+      <div className="row top10">
+        <div className="col-md-12">
+      <input type="text" className="grey-fields full-width"placeholder="Emri" id="name" name="name" value={formData.name} onChange={handleChange}/>
+</div></div>
+
+<div className="row top10">
+        <div className="col-md-12">
+      <input type="email" className="grey-fields full-width"placeholder="Email"id="email" name="email" value={formData.email} onChange={handleChange}/>
+      </div></div>
+      <div className="row top10">
+        <div className="col-md-12">
+      <input type="text" className="grey-fields full-width"placeholder="Tel"id="phone" name="tel" value={formData.email} onChange={handleChange}/>
+      </div></div>
+
+      <div className="row top10">
+        <div className="col-md-12">
+      <textarea id="message"className="grey-fields full-width"placeholder="Mesazhi" name="message" value={formData.message} onChange={handleChange}/>
+      </div></div>
+      <div className="row top10">
+        <div className="col-md-12">
+      <button type="submit"class="orange-button medium inline rounded">Submit</button>
+      </div></div>
+    </form>
+    </div>
+              </div>
+             </div>
         </div> 
      </div>
        </div>
-    </div>
+   
 
    );
 
 }
+
