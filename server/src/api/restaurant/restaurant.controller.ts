@@ -62,9 +62,11 @@ export class RestaurantController {
     const restaurantInfo = await this.restaurantService.getRestaurantDetails(
       id,
     );
+
     if (!restaurantInfo) {
       throw new NotFoundException('Restaurant not found');
     }
+
     return restaurantInfo;
   }
 

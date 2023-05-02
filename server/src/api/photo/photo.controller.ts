@@ -1,4 +1,5 @@
 import {
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
@@ -6,16 +7,21 @@ import {
   HttpStatus,
   NotFoundException,
   Param,
+  ParseIntPipe,
   Post,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
 import { PhotoService } from './photo.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
+import { Readable } from 'stream';
+import { Response } from 'express';
 
 @Controller('photo')
 @ApiTags('Photos')
+@UseInterceptors(ClassSerializerInterceptor)
 export class PhotoController {
   constructor(private readonly photoService: PhotoService) {}
 
@@ -40,11 +46,13 @@ export class PhotoController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const photo = await this.photoService.findOne(id);
-    if (!photo) {
-      throw new NotFoundException('Restaurant not found');
-    }
-    return photo;
+  async findOne(
+    @Res() response: Response,
+    @Param('id') id: string,
+  ) {
+    const photo = await this.photoService.getPhotoById(id);
+
+    const stream = Readable.from(photo.data);
+    stream.pipe(response);
   }
 }
