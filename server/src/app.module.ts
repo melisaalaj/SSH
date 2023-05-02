@@ -9,6 +9,7 @@ import { config } from './common/db/dataSource/data-source.config';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './api/auth/auth.module';
 import { RestaurantModule } from './api/restaurant/restaurant.module';
+import { PhotoModule } from './api/photo/photo.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { RestaurantModule } from './api/restaurant/restaurant.module';
     UserModule,
     AuthModule,
     RestaurantModule,
+    PhotoModule,
   ],
   controllers: [AppController],
   providers: [AppService],

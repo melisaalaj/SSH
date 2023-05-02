@@ -4,11 +4,14 @@ import { Restaurant } from './entities/restaurant-entity';
 import { In, Repository } from 'typeorm';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
+import { PhotoService } from '../photo/photo.service';
+import { Photo } from '../photo/entities/photo-entity';
 
 @Injectable()
 export class RestaurantService {
   constructor(
     @InjectRepository(Restaurant) private repo: Repository<Restaurant>,
+    private readonly photoService: PhotoService,
   ) {}
 
   create(createRestaurantDto: CreateRestaurantDto) {
@@ -86,5 +89,23 @@ export class RestaurantService {
         id: location.id,
       })),
     };
+  }
+
+  async addPhotoToRestaurant(
+    restaurantId: number,
+    photo: Photo,
+  ): Promise<Restaurant> {
+    const restaurant = await this.repo.findOne({
+      where: { id: restaurantId },
+      relations: ['photos'],
+    });
+
+    if (!restaurant) {
+      throw new NotFoundException('Restaurant not found');
+    }
+
+    restaurant.photos = restaurant.photos || [];
+    restaurant.photos.push(photo);
+    return this.repo.save(restaurant);
   }
 }

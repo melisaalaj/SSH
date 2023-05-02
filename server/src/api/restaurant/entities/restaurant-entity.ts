@@ -4,18 +4,25 @@ import { Order } from 'src/api/order/entities/orders-entity';
 import { Photo } from 'src/api/photo/entities/photo-entity';
 import { Product } from 'src/api/product/entities/product-entity';
 import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  OneToMany,
+} from 'typeorm';
 
 @Entity()
 export class Restaurant extends BaseEntity {
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
   @Column({ nullable: true })
   description: string;
 
-  @OneToMany(() => Photo, (photo) => photo.restaurant)
-  photos: Photo[];
+  @JoinColumn({ name: 'photoId' })
+  @OneToMany(() => Photo, (photo) => photo.restaurant, { nullable: true })
+  photos?: Photo[];
 
   @ManyToMany(() => Food, (food) => food.restaurants)
   foods: Food[];
