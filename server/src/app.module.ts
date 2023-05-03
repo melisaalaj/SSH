@@ -8,6 +8,9 @@ import { DataSourceOptions } from 'typeorm';
 import { config } from './common/db/dataSource/data-source.config';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './api/auth/auth.module';
+import { RestaurantModule } from './api/restaurant/restaurant.module';
+import { PhotoModule } from './api/photo/photo.module';
+import { LocationModule } from './api/location/location.module';
 
 @Module({
   imports: [
@@ -17,6 +20,9 @@ import { AuthModule } from './api/auth/auth.module';
     }),
     UserModule,
     AuthModule,
+    RestaurantModule,
+    PhotoModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService],
