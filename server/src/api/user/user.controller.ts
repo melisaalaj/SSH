@@ -10,7 +10,7 @@ import {
   UsePipes,
   ValidationPipe,
   Delete,
-  ClassSerializerInterceptor
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { IUserController } from './interfaces/user.controller.interface';

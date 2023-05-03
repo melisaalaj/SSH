@@ -11,6 +11,7 @@ import { AuthModule } from './api/auth/auth.module';
 import { RestaurantModule } from './api/restaurant/restaurant.module';
 import { PhotoModule } from './api/photo/photo.module';
 import { LocationModule } from './api/location/location.module';
+import { ReviewModule } from './api/review/review.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { LocationModule } from './api/location/location.module';
     RestaurantModule,
     PhotoModule,
     LocationModule,
+    ReviewModule,
   ],
   controllers: [AppController],
   providers: [AppService],

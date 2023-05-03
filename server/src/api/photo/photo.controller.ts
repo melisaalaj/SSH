@@ -38,18 +38,11 @@ export class PhotoController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string) {
-    const restaurant = await this.photoService.findOne(id);
-    if (!restaurant) {
-      throw new NotFoundException('Restaurant not found');
-    }
     await this.photoService.remove(id);
   }
 
   @Get(':id')
-  async findOne(
-    @Res() response: Response,
-    @Param('id') id: string,
-  ) {
+  async findOne(@Res() response: Response, @Param('id') id: string) {
     const photo = await this.photoService.getPhotoById(id);
 
     const stream = Readable.from(photo.data);

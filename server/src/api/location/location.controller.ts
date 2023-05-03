@@ -27,10 +27,6 @@ export class LocationController {
     @Body() createLocationDto: CreateLocationDto,
   ) {
     const restaurant = await this.resturantService.findOne(restaurantId);
-    if (!restaurant) {
-      throw new NotFoundException('Location not found');
-    }
-
     const location = await this.locationService.create(
       createLocationDto,
       restaurant,
@@ -46,19 +42,11 @@ export class LocationController {
 
   @Delete(':id')
   async remove(@Param('id') id: string) {
-    const location = await this.locationService.findOne(id);
-    if (!location) {
-      throw new NotFoundException('Location not found');
-    }
     await this.locationService.remove(id);
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    const location = await this.locationService.findOne(id);
-    if (!location) {
-      throw new NotFoundException('Location not found');
-    }
-    return location;
+    return await this.locationService.findOne(id);
   }
 }
