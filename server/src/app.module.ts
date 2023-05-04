@@ -11,7 +11,11 @@ import { AuthModule } from './api/auth/auth.module';
 import { RestaurantModule } from './api/restaurant/restaurant.module';
 import { PhotoModule } from './api/photo/photo.module';
 import { LocationModule } from './api/location/location.module';
-
+import { MailService } from './services/mail/mail.service';
+import { MailerModule } from '@nestjs-modules/mailer';
+import EventEmitter from 'events';
+import { NestEmitterModule } from 'nest-emitter';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
@@ -21,11 +25,11 @@ import { LocationModule } from './api/location/location.module';
     }),
     MailerModule.forRoot({
       transport: {
-        host: 'smtp.gmail.com',
-        port: 587,
+        host: 'sandbox.smtp.mailtrap.io',
+        port: 2525,
         auth: {
-          user: 'food.service808@gmail.com',
-          pass: 'DishDash808',
+          user: '024a529052e2c4',
+          pass: '2a6d25515f1531',
         },
       },
       defaults: {

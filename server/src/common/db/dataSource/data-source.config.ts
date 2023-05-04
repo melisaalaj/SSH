@@ -4,6 +4,7 @@ import { Order } from 'src/api/order/entities/orders-entity';
 import { Photo } from 'src/api/photo/entities/photo-entity';
 import { Product } from 'src/api/product/entities/product-entity';
 import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
+import { PasswordReset } from 'src/api/user/entities/reset-password.entity';
 import { User } from 'src/api/user/entities/user.entity';
 
 export const config = {
@@ -16,7 +17,7 @@ export const config = {
   database: 'food_service',
   synchronize: true,
   dropSchema: false,
-  entities: [User, Restaurant, Food, Order, Product, Location, Photo],
+  entities: [User, Restaurant, Food, Order, Product, Location, Photo, PasswordReset],
   migrations: ['dist/common/db/migrations/*.js'],
   logging: 'localhost',
   seeds: [],
