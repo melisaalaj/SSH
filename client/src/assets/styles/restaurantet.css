@@ -1,0 +1,76 @@
+*{
+    box-sizing: border-box;
+    }
+    .layer{
+        position: relative;
+    }
+    
+    
+    .layer .parallax-search{
+        border: 0px solid #4C3398;
+        height: 400px;
+        width: 100%;
+        
+    }
+    .parallax-search .search-wraps{
+        padding-top: 100px;
+        border: 0px solid #4C3398;
+       
+    }
+    .search-wraps{
+        width: 60%;
+        margin: auto;
+    }
+    .search-wraps h1{
+        color: #fff;
+        font-size: 56px;
+        text-align: center;
+        font-weight: 300;
+        font-family: 'Lato', sans-serif;
+    }
+    .search-wraps p{
+        color: #fff;
+        text-align: center;
+        margin: 0;
+    }
+    .search-bar{
+      padding-top: 30px;
+      padding-bottom: 60px;
+      text-align: center;
+      background: #fff;
+    }
+    .search-content{
+      max-width: 100%;
+      width: 970px;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+  
+    }
+    .h1, h2{
+      color:#0000;
+      font-size: 36px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-family: inherit;
+      font-weight: 500;
+      line-height: 1.1;
+      margin: 0.67em 0;
+      margin-block-start: 0.67em;
+      margin-block-end: 0.67em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      display: block;
+    }
+    p{
+      font-size: 13px;
+      color: #7a7e8a;
+      margin: 0 0 10px;
+      display: block;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+    }
+

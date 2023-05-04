@@ -8,12 +8,10 @@ import { DataSourceOptions } from 'typeorm';
 import { config } from './common/db/dataSource/data-source.config';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './api/auth/auth.module';
-import { MailService } from './services/mail/mail.service';
-import { MailerModule } from '@nestjs-modules/mailer';
-//import EventEmitter from 'events';
-import * as EventEmitter from 'events';
-import { NestEmitterModule } from 'nest-emitter';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { RestaurantModule } from './api/restaurant/restaurant.module';
+import { PhotoModule } from './api/photo/photo.module';
+import { LocationModule } from './api/location/location.module';
+
 
 @Module({
   imports: [
@@ -44,6 +42,9 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     NestEmitterModule.forRoot(new EventEmitter()),
     UserModule,
     AuthModule,
+    RestaurantModule,
+    PhotoModule,
+    LocationModule,
   ],
   controllers: [AppController],
   providers: [AppService, MailService],
