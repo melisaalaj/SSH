@@ -6,13 +6,15 @@ import { CreateFoodDto } from './dto/create-food';
 import { UpdateFoodDto } from './dto/update-food';
 import { Restaurant } from '../restaurant/entities/restaurant-entity';
 import { RestaurantService } from '../restaurant/restaurant.service';
-
+import { PhotoService } from '../photo/photo.service';
+import { Photo } from '../photo/entities/photo-entity';
 
 @Injectable()
 export class FoodService {
   constructor(
     @InjectRepository(Food) private repo: Repository<Food>,
     private restaurantService: RestaurantService,
+    private photoService: PhotoService,
   ) {}
 
 
@@ -21,7 +23,15 @@ export class FoodService {
     food.restaurants = [res];
     return this.repo.save(food);
   }
+
+  createFood(createFoodDto: CreateFoodDto, photo: Photo) {
+    const food = this.repo.create(createFoodDto);
+    food.photos = [photo];
+    return this.repo.save(food);
+  }
+
   
+
   findOne(id: string) {
     if (!id) {
       return null;
@@ -67,4 +77,5 @@ export class FoodService {
         })),
       };
   }
+
 }
