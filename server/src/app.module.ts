@@ -12,12 +12,34 @@ import { RestaurantModule } from './api/restaurant/restaurant.module';
 import { PhotoModule } from './api/photo/photo.module';
 import { LocationModule } from './api/location/location.module';
 
+
 @Module({
   imports: [
     TypeOrmModule.forRoot(config as DataSourceOptions),
     ConfigModule.forRoot({
       envFilePath: ['.env'],
     }),
+    MailerModule.forRoot({
+      transport: {
+        host: 'smtp.gmail.com',
+        port: 587,
+        auth: {
+          user: 'food.service808@gmail.com',
+          pass: 'DishDash808',
+        },
+      },
+      defaults: {
+        from: 'food.service808@gmail.com',
+      },
+      template: {
+        dir: __dirname + '/../templates',
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
+        },
+      },
+    }),
+    NestEmitterModule.forRoot(new EventEmitter()),
     UserModule,
     AuthModule,
     RestaurantModule,
@@ -25,6 +47,6 @@ import { LocationModule } from './api/location/location.module';
     LocationModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, MailService],
 })
 export class AppModule {}
