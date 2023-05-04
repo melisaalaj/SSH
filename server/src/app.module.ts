@@ -12,6 +12,11 @@ import { RestaurantModule } from './api/restaurant/restaurant.module';
 import { PhotoModule } from './api/photo/photo.module';
 import { LocationModule } from './api/location/location.module';
 import { ReviewModule } from './api/review/review.module';
+import { MailService } from './services/mail/mail.service';
+import { MailerModule } from '@nestjs-modules/mailer';
+import EventEmitter from 'events';
+import { NestEmitterModule } from 'nest-emitter';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
@@ -19,6 +24,27 @@ import { ReviewModule } from './api/review/review.module';
     ConfigModule.forRoot({
       envFilePath: ['.env'],
     }),
+    MailerModule.forRoot({
+      transport: {
+        host: 'sandbox.smtp.mailtrap.io',
+        port: 2525,
+        auth: {
+          user: '024a529052e2c4',
+          pass: '2a6d25515f1531',
+        },
+      },
+      defaults: {
+        from: 'food.service808@gmail.com',
+      },
+      template: {
+        dir: __dirname + '/../templates',
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
+        },
+      },
+    }),
+    NestEmitterModule.forRoot(new EventEmitter()),
     UserModule,
     AuthModule,
     RestaurantModule,
@@ -27,6 +53,6 @@ import { ReviewModule } from './api/review/review.module';
     ReviewModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, MailService],
 })
 export class AppModule {}
