@@ -6,7 +6,7 @@ import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import backgroundImage2 from '../assets/images/perime.jpg';
 import Footer from '../component/Footer';
-
+import { Link } from 'react-router-dom';
 function Restaurantet() {
   return (
  
@@ -33,7 +33,7 @@ function Restaurantet() {
               sx={{ ml: 1, flex: 1 }}
               placeholder="Address:"
               inputProps={{ 'aria-label': 'search' }} />
-            <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+            <IconButton type="button" sx={{ p: '10px' }} aria-label="search"component={Link} to="/Restaurant2">
               <SearchIcon />
             </IconButton>
           </Paper>
