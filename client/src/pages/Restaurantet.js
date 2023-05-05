@@ -33,7 +33,7 @@ function Restaurantet() {
               sx={{ ml: 1, flex: 1 }}
               placeholder="Address:"
               inputProps={{ 'aria-label': 'search' }} />
-            <IconButton type="button" sx={{ p: '10px' }} aria-label="search"component={Link} to="/Restaurant2">
+            <IconButton type="button" sx={{ p: '10px' }} aria-label="search"component={Link} to="/Restaurant">
               <SearchIcon />
             </IconButton>
           </Paper>

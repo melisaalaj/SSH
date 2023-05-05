@@ -6,6 +6,7 @@ import Restaurantet from "./pages/Restaurantet";
 import Kontakti from "./pages/Kontakti";
 import LoginSignUp from "./pages/LoginSignUp";
 import ShopCard from "./pages/ShopCard";
+import Restaurant from './pages/Restaurant';
 import {
   BrowserRouter as Router,
   Routes,
@@ -29,6 +30,7 @@ function App() {
     
               <Route path="/shop-card" element={<ShopCard />}/>
     
+              <Route path="/restaurant" element={< Restaurant/>}/>
             </Routes>
     
             </Router>
