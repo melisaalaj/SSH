@@ -11,6 +11,7 @@ import icon4 from '../assets/images/icon4.jpg';
 import StarIcon from '@mui/icons-material/Star';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import backgroundImage2 from '../assets/images/perime.jpg';
+import Footer from '../component/Footer';
 import { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 
@@ -85,12 +86,13 @@ function RestaurantCard({ name, image, image1, address, breakfast, distance, tra
         <img src={image} alt={name} style={{ width: 350, height: 450, objectFit: "cover", alignItems: "center", marginBottom:0}} />
       </div>
     </div>
+    
   );
 }
 
 function Restaurant() {
   return (
-<div class="layer">
+    <><div class="layer">
 
 <div id="parallax-wrap" class="parallax-search" data-parallax="scroll"data-position="top"data-bleed="10"style={{
     backgroundImage: `url(${backgroundImage2})`,}} >
@@ -146,5 +148,6 @@ function Restaurant() {
         />
         </div>
         </div>
+       <Footer /></>
         );}
 export default Restaurant;
