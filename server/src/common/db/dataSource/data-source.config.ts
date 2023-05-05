@@ -1,39 +1,31 @@
-import { Food } from 'src/api/food/entities/food-entity';
-import { Location } from 'src/api/location/entities/location-entity';
-import { Order } from 'src/api/order/entities/orders-entity';
-import { Photo } from 'src/api/photo/entities/photo-entity';
-import { Product } from 'src/api/product/entities/product-entity';
-import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
-import { PasswordReset } from 'src/api/user/entities/reset-password.entity';
-import { User } from 'src/api/user/entities/user.entity';
+import 'dotenv/config';
 
 export const config = {
   name: 'default',
-  type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: '190470',
-  database: 'food_service',
+  type: process.env.TYPEORM_TYPE,
+  host: process.env.TYPEORM_HOST,
+  port: process.env.TYPEORM_PORT || 5432,
+  username: process.env.TYPEORM_USER,
+  password: process.env.TYPEORM_PASSWORD,
+  database: process.env.TYPEORM_NAME,
   synchronize: true,
   dropSchema: false,
-  entities: [User, Restaurant, Food, Order, Product, Location, Photo, PasswordReset],
-  migrations: ['dist/common/db/migrations/*.js'],
-  logging: 'localhost',
-  seeds: [],
+  entities: [process.env.TYPEORM_ENTITIES],
+  migrations: [process.env.TYPEORM_MIGRATIONS],
+  logging: process.env.NODE_ENV === 'localhost',
+  seeds: process.env.TYPEORM_SEEDING_SEEDS,
 };
 
 export const configNoEntities = {
   name: 'default',
-  type: 'postgres',
-  host: 'localhost',
-  port: 5432,
-  username: 'postgres',
-  password: '190470',
-  database: 'food_service',
-  synchronize: true,
-  entities: [User, Restaurant, Food, Order, Product, Location, Photo],
-  migrations: ['dist/common/db/migrations/*.js'],
-  logging: 'localhost',
-  seeds: [],
+  type: process.env.TYPEORM_TYPE,
+  host: process.env.TYPEORM_HOST,
+  port: process.env.TYPEORM_PORT || 5432,
+  username: process.env.TYPEORM_USER,
+  password: process.env.TYPEORM_PASSWORD,
+  entities: [process.env.TYPEORM_ENTITIES],
+  database: process.env.TYPEORM_NAME,
+  migrations: [process.env.TYPEORM_MIGRATIONS],
+  logging: process.env.NODE_ENV === 'localhost',
+  seeds: process.env.TYPEORM_SEEDING_SEEDS,
 };

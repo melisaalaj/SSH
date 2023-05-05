@@ -8,8 +8,8 @@ export class MailService {
     @Inject(MailerService) private readonly mailerService: MailerService,
   ) {}
 
-  readonly fromEmail: string = "food.service808@gmail.com";
-  readonly FRONT_APP_URL: string = 'http://localhost:3000/api';
+  readonly fromEmail: string = process.env.SENDER_MAIL;
+  readonly FRONT_APP_URL: string = process.env.APP_URL;
 
   public forgotPassword(userToken: any) {
     this.mailerService
