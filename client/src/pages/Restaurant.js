@@ -40,7 +40,7 @@ function StarRating() {
           <StarIcon style={{ color: index <= stars ? starColor : 'white' }} onClick={handleToggleColor} />
         </IconButton>
       ))}
-      <span style={{ fontSize: 12, marginLeft: 5 }}>Vlerësimet {numStars} </span>
+      <span style={{ fontSize: 12, marginLeft: 5 }}>Ratings {numStars} </span>
     </>
   );
 }
@@ -57,7 +57,7 @@ function RestaurantCard({ name, image, image1, address, breakfast, distance, tra
         <img src={image1} alt={name} style={{ width: 150, height: 150, objectFit: "cover" ,margin:10}} />
         <div style={{ display: "flex", alignItems: "center", marginTop: 10 }}>
          <LocalShippingIcon/>
-          <span style={{ fontSize: 14, margin:10 }}>Lejohet para ne dore</span>
+          <span style={{ fontSize: 14, margin:10 }}>Cash is allowed in hand</span>
         </div>
       </div>
       <div style={{ flex: 1 , border:"solid #f5f5f5", margin:30, backgroundColor:"#f5f5f5"}} >
@@ -67,20 +67,20 @@ function RestaurantCard({ name, image, image1, address, breakfast, distance, tra
               <span style={{ fontSize: 24,marginRight:20}}><StarRating/></span>
               
             </div>
-            <button style={{ padding: "8px 16px", borderRadius: 5, border: "none", marginRight: 10, backgroundColor:"greenyellow" }}>Hapur</button>
+            <button style={{ padding: "8px 16px", borderRadius: 5, border: "none", marginRight: 10, backgroundColor:"greenyellow" }}>Open</button>
             <FavoriteIcon />
           </div>
          
         </div>
         <h2 style={{ color:"black", marginLeft:0}}>{name}</h2>
         <p>{address}</p>
-        <p>{`Mëngjesi: ${breakfast}`}</p>
-        <p>{`Distanca: ${distance} km`}</p>
-        <p>{`Koha e transportit: nuk është në dispozicion`}</p>
+        <p>{`Breakfast: ${breakfast}`}</p>
+        <p>{`Distance: ${distance} km`}</p>
+        <p>{`Shipping time: not available`}</p>
         <p>{`Delivery Distance: ${distance} km`}</p>
-        <p>{`Pagesa e transportit: €${transportCost}`}</p>
-        <p>{`Porosia minimale: €${minOrder}`}</p>
-        <button style={{ padding: "8px 16px", borderRadius: 5, backgroundColor: "darkred",color:"white", border: "none" ,marginLeft:0}}>Shiko Mënynë</button>
+        <p>{`Shipping payment: €${transportCost}`}</p>
+        <p>{`Minimum order: €${minOrder}`}</p>
+        <button style={{ padding: "8px 16px", borderRadius: 5, backgroundColor: "darkred",color:"white", border: "none" ,marginLeft:0}}>Menu</button>
       </div>
       <div style={{ marginRight: 240 }} >
         <img src={image} alt={name} style={{ width: 350, height: 450, objectFit: "cover", alignItems: "center", marginBottom:0}} />
@@ -97,9 +97,9 @@ function Restaurant() {
 <div id="parallax-wrap" class="parallax-search" data-parallax="scroll"data-position="top"data-bleed="10"style={{
     backgroundImage: `url(${backgroundImage2})`,}} >
     <div class="search-wraps">
-        <h1  style={{ marginTop:100}}>Shfleto Restaurantin</h1>
+        <h1  style={{ marginTop:100}}>Order Food Online</h1>
         <p>
-          Zgjidhe restaurantin tënd të preferuar
+        Choose your favorite restaurant
         </p>
        
     </div>
@@ -107,19 +107,19 @@ function Restaurant() {
     
     <div>
       <RestaurantCard
-        name="Bregu i Diellit"
+        name="The Joint"
         image={restaurant1}
-        address="Prishtinë Bregu i Diellit 10000"
-        breakfast="Mëngjesi"
+        address="123 Street French"
+        breakfast="Breakfast"
         distance={2.1}
         transportCost={1.5}
         minOrder={5.0}
         image1={icon1}
       />
       <RestaurantCard
-        name="Restaurant 2"
+        name="Pasta Palace"
         image={restaurant2}
-        address="Address 2"
+        address="456 Street Italian"
         breakfast="Breakfast 2"
         distance={2.1}
         transportCost={1}
@@ -127,9 +127,9 @@ function Restaurant() {
         image1={icon2}
         />
          <RestaurantCard
-        name="Restaurant 3"
+        name="Pizza Express"
         image={restaurant3}
-        address="Address 3"
+        address="789 Street Japanese"
         breakfast="Breakfast 3"
         distance={7.4}
         transportCost={0.5}
@@ -137,9 +137,9 @@ function Restaurant() {
         image1={icon3}
         />
         <RestaurantCard
-        name="Restaurant 4"
+        name="Luxury Restaurant"
         image={restaurant4}
-        address="Address 4"
+        address="101"
         breakfast="Breakfast 4"
         distance={1.54}
         transportCost={2.0}
