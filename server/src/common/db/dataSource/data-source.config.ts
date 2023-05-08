@@ -1,4 +1,5 @@
 
+import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 import { Food } from 'src/api/food/entities/food-entity';
 import { Location } from 'src/api/location/entities/location-entity';
 import { Menu } from 'src/api/menu/entities/menu-entity';
@@ -19,7 +20,7 @@ export const config = {
   database: 'food_service',
   synchronize: true,
   dropSchema: false,
-  entities: [User, Restaurant, Food, Order, Product, Location, Photo, Review, Menu],
+  entities: [User, Restaurant, Food, Order, Product, Location, Photo, Review, Menu, Delivery],
   migrations: ['dist/common/db/migrations/*.js'],
   logging: 'localhost',
   seeds: [],
@@ -34,7 +35,7 @@ export const configNoEntities = {
   password: 'Leona.456',
   database: 'food_service',
   synchronize: true,
-  entities: [User, Restaurant, Food, Order, Product, Location, Photo, Review, Menu],
+  entities: [User, Restaurant, Food, Order, Product, Location, Photo, Review, Menu, Delivery],
   migrations: ['dist/common/db/migrations/*.js'],
   logging: 'localhost',
   seeds: [],
