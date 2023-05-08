@@ -1,36 +1,35 @@
+import "./assets/styles/App.css";
 
-import './assets/styles/App.css';
-import Navbar from "./component/Navbar";
-import SearchBar from './component/SearchBar';
-import Footer from './component/Footer';
-import Carousel1 from './component/Carousel1';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import Ballina from "./pages/Ballina";
+import Restaurantet from "./pages/Restaurantet";
+import Kontakti from "./pages/Kontakti";
+import LoginSignUp from "./pages/LoginSignUp";
+import ShopCard from "./pages/ShopCard";
 
-import { ScreenClassProvider } from 'react-grid-system';
-
+import { ScreenClassProvider } from "react-grid-system";
 
 function App() {
-  return ( 
-    
-    <ScreenClassProvider className='App'>
+  return (
+    <ScreenClassProvider className="App">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Ballina />} />
 
-    <Navbar className='navbar'/>
-   <div className='searchbar--'>
-    <SearchBar />
-   </div>
- 
-   <Carousel1/>
+          <Route path="/restaurantet" element={<Restaurantet />} />
 
- {/* <Footer/> */}
-</ScreenClassProvider>
-  
+          <Route path="/kontakti" element={<Kontakti />} />
 
+          <Route path="/login" element={<LoginSignUp />} />
+
+          <Route path="/shop-card" element={<ShopCard />} />
+        </Routes>
+      </Router>
+
+      {/* <Footer/> */}
+    </ScreenClassProvider>
   );
 }
 
 export default App;
-
-
-
-
-
