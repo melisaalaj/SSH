@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Ballina from "./pages/Ballina";
 import Restaurantet from "./pages/Restaurantet";
+import MenuPage from "./pages/MenuPage";
 import Kontakti from "./pages/Kontakti";
 import LoginSignUp from "./pages/LoginSignUp";
 import ShopCard from "./pages/ShopCard";
@@ -16,13 +17,11 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Ballina />} />
-
           <Route path="/restaurantet" element={<Restaurantet />} />
-
+          <Route path="/restaurantet/:menuId" element={<MenuPage />} />
+          
           <Route path="/kontakti" element={<Kontakti />} />
-
           <Route path="/login" element={<LoginSignUp />} />
-
           <Route path="/shop-card" element={<ShopCard />} />
         </Routes>
       </Router>
