@@ -5,7 +5,7 @@ import "./MenuPage.css";
 import { menuData } from "../data/datacard";
 import { useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
-import Button from "@mui/material/Button";
+import {Button, Tooltip} from "@mui/material";
 
 const MenuPage = () => {
   let { menuId } = useParams();
@@ -88,10 +88,12 @@ const MenuPage = () => {
                         </div>
                         <div className="item-price">
                           <p>{item.price}</p>
-                          <Button variant="contained">
-                            <AddIcon />
-                            Shto
-                          </Button>
+                          <Tooltip title="Shto ne shporte">
+                            <Button variant="contained">
+                              <AddIcon />
+                              Shto
+                            </Button>
+                          </Tooltip>
                         </div>
                       </div>
                     ))}
