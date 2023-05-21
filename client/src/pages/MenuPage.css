@@ -110,7 +110,11 @@
 }
 
 .menu-section .section-menu-items .section-menu-item .item-price {
-    width: 50px;
+    width: 75px;
     margin: 0 15px;
     padding-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
 }

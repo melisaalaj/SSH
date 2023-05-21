@@ -42,12 +42,14 @@ export default function Kontakti() {
                     type="hidden"
                     value="contacUsSubmit"
                     name="action"
-                    id="action" />
+                    id="action"
+                  />
                   <input
                     type="hidden"
                     value="store"
                     name="currentController"
-                    id="currentController" />
+                    id="currentController"
+                  />
 
                   <div class="row top10">
                     <div class="col-md-12">
@@ -58,7 +60,8 @@ export default function Kontakti() {
                         type="text"
                         value=""
                         name="name"
-                        id="name" />
+                        id="name"
+                      />
                     </div>
                   </div>
 
@@ -71,7 +74,8 @@ export default function Kontakti() {
                         type="text"
                         value=""
                         name="email"
-                        id="email" />
+                        id="email"
+                      />
                     </div>
                   </div>
 
@@ -84,7 +88,8 @@ export default function Kontakti() {
                         type="text"
                         value=""
                         name="phone"
-                        id="phone" />
+                        id="phone"
+                      />
                     </div>
                   </div>
 
@@ -94,7 +99,8 @@ export default function Kontakti() {
                         placeholder="Mesazhi"
                         class="grey-fields full-width"
                         name="message"
-                        id="message" />
+                        id="message"
+                      />
                     </div>
                   </div>
 

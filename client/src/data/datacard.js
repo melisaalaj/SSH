@@ -85,3 +85,74 @@ export const productData = [
     description: "With sauce",
   },
 ];
+
+export const menuData = {
+  sandwiches: [
+    {
+      name: "Turkey Club",
+      desc: "Roasted turkey, bacon, lettuce, and tomato on toasted bread",
+      price: "$9.99",
+    },
+    {
+      name: "BLT",
+      desc: "Crispy bacon, lettuce, and tomato on toasted bread",
+      price: "$8.99",
+    },
+    {
+      name: "Chicken Caesar Wrap",
+      desc: "Grilled chicken, romaine lettuce, Parmesan cheese, and Caesar dressing wrapped in a tortilla",
+      price: "$7.99",
+    },
+  ],
+  pizza: [
+    {
+      name: "Margherita",
+      desc: "Fresh mozzarella, tomatoes, and basil",
+      price: "$12.99",
+    },
+    {
+      name: "Pepperoni",
+      desc: "Classic pepperoni with marinara sauce and mozzarella cheese",
+      price: "$13.99",
+    },
+    {
+      name: "Vegetarian",
+      desc: "Assorted fresh vegetables with marinara sauce and mozzarella cheese",
+      price: "$11.99",
+    },
+  ],
+  rizotto: [
+    {
+      name: "Mushroom Rizotto",
+      desc: "Creamy Arborio rice cooked with mushrooms and Parmesan cheese",
+      price: "$10.99",
+    },
+    {
+      name: "Seafood Rizotto",
+      desc: "Arborio rice cooked with a variety of seafood in a rich tomato-based sauce",
+      price: "$14.99",
+    },
+    {
+      name: "Pumpkin Rizotto",
+      desc: "Creamy Arborio rice cooked with roasted pumpkin and sage",
+      price: "$9.99",
+    },
+  ],
+  salads: [
+    {
+      name: "Caesar Salad",
+      desc: "Romaine lettuce, croutons, Parmesan cheese, and Caesar dressing",
+      price: "$6.99",
+    },
+    {
+      name: "Greek Salad",
+      desc: "Mixed greens, tomatoes, cucumbers, red onions, Kalamata olives, and feta cheese with Greek dressing",
+      price: "$7.99",
+    },
+    {
+      name: "Caprese Salad",
+      desc: "Fresh mozzarella, tomatoes, basil, and balsamic glaze",
+      price: "$8.99",
+    },
+  ],
+};

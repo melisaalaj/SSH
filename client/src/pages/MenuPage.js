@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../component/Navbar";
 import SearchBar from "../component/SearchBar";
 import "./MenuPage.css";
+import { menuData } from "../data/datacard";
 import { useParams } from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
+import Button from "@mui/material/Button";
 
 const MenuPage = () => {
   let { menuId } = useParams();
   const [currentItem, setCurrentItem] = useState(null);
+  const itemsRef = useRef([]);
 
   const menuItems = [
     {
@@ -26,13 +30,18 @@ const MenuPage = () => {
       name: "Sallata",
     },
   ];
-  const menuSections = [];
 
   const toggleScroll = (item) => {
     setCurrentItem(item);
   };
 
-  console.log(currentItem);
+  useEffect(() => {
+
+    // Replace api call below with backend endpoint api, to fetch data
+    fetch("https://dog.ceo/api/breeds/image/random")
+      .then((response) => response.json())
+      .then((data) => console.log(data.message));
+  }, []);
 
   return (
     <>
@@ -49,11 +58,12 @@ const MenuPage = () => {
           <div className="menu-wrapper">
             <div className="aside">
               <ul className="menu">
-                {menuItems.map((item) => (
+                {menuItems.map((item, idx) => (
                   <li
                     className={`menu-item ${
                       currentItem === item.value ? "active" : ""
                     }`}
+                    key={`key-${idx}`}
                     onClick={() => toggleScroll(item.value)}>
                     <p>{item.name}</p>
                   </li>
@@ -61,166 +71,33 @@ const MenuPage = () => {
               </ul>
             </div>
             <div className="menu-container">
-              <div className="menu-section">
-                <div className="header-wrapper">
-                  <h3>Sandwich</h3>
-                </div>
-                <div className="section-menu-items">
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>Pule</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€2.30</p>
-                    </div>
+              {Object.keys(menuData).map((category, cid) => (
+                <div className="menu-section" key={`categoryKey-${cid}`}>
+                  <div className="header-wrapper">
+                    <h3>{category}</h3>
                   </div>
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>Tuna</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€2.30</p>
-                    </div>
+                  <div className="section-menu-items">
+                    {menuData[category].map((item, iid) => (
+                      <div className="section-menu-item" key={`itemKey-${iid}`}>
+                        <div className="item-image">
+                          {/* <img src="" alt="sample-sandwich-pic" /> */}
+                        </div>
+                        <div className="item-desc">
+                          <h5>{item.name}</h5>
+                          <p>{item.desc}</p>
+                        </div>
+                        <div className="item-price">
+                          <p>{item.price}</p>
+                          <Button variant="contained">
+                            <AddIcon />
+                            Shto
+                          </Button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
-              <div className="menu-section">
-                <div className="header-wrapper">
-                  <h3>Rizotto</h3>
-                </div>
-                <div className="section-menu-items">
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>Pule</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€4.30</p>
-                    </div>
-                  </div>
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>Beef</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€6.50</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="menu-section">
-                <div className="header-wrapper">
-                  <h3>Pizza</h3>
-                </div>
-                <div className="section-menu-items">
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>Margarita</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€4.00</p>
-                    </div>
-                  </div>
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>Capricciosa</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€5.50</p>
-                    </div>
-                  </div>
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>Pepperoni</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€5.00</p>
-                    </div>
-                  </div>
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>Funghi</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€5.00</p>
-                    </div>
-                  </div>
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>{menuId}</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€5.00</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="menu-section">
-                <div className="header-wrapper">
-                  <h3>Sallata</h3>
-                </div>
-                <div className="section-menu-items">
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>Pule</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€4.50</p>
-                    </div>
-                  </div>
-                  <div className="section-menu-item">
-                    <div className="item-image">
-                      {/* <img src="" alt="sample-sandwich-pic" /> */}
-                    </div>
-                    <div className="item-desc">
-                      <h5>Cezar</h5>
-                      <p>Lorem Ipsum dolor sit amet</p>
-                    </div>
-                    <div className="item-price">
-                      <p>€5.50</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
             <div className="info"></div>
           </div>
