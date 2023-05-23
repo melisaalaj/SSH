@@ -92,16 +92,22 @@ export const menuData = {
       name: "Turkey Club",
       desc: "Roasted turkey, bacon, lettuce, and tomato on toasted bread",
       price: "$9.99",
+      image:
+        "https://images.unsplash.com/photo-1540713434306-58505cf1b6fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
     },
     {
       name: "BLT",
       desc: "Crispy bacon, lettuce, and tomato on toasted bread",
       price: "$8.99",
+      image:
+        "https://images.unsplash.com/photo-1540713434306-58505cf1b6fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
     },
     {
       name: "Chicken Caesar Wrap",
       desc: "Grilled chicken, romaine lettuce, Parmesan cheese, and Caesar dressing wrapped in a tortilla",
       price: "$7.99",
+      image:
+        "https://images.unsplash.com/photo-1540713434306-58505cf1b6fc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
     },
   ],
   pizza: [
@@ -109,16 +115,22 @@ export const menuData = {
       name: "Margherita",
       desc: "Fresh mozzarella, tomatoes, and basil",
       price: "$12.99",
+      image:
+        "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
     },
     {
       name: "Pepperoni",
       desc: "Classic pepperoni with marinara sauce and mozzarella cheese",
       price: "$13.99",
+      image:
+        "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
     },
     {
       name: "Vegetarian",
       desc: "Assorted fresh vegetables with marinara sauce and mozzarella cheese",
       price: "$11.99",
+      image:
+        "https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
     },
   ],
   rizotto: [
@@ -126,16 +138,19 @@ export const menuData = {
       name: "Mushroom Rizotto",
       desc: "Creamy Arborio rice cooked with mushrooms and Parmesan cheese",
       price: "$10.99",
+      image: "https://images.unsplash.com/photo-1546456674-7ce72b9286b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
     },
     {
       name: "Seafood Rizotto",
       desc: "Arborio rice cooked with a variety of seafood in a rich tomato-based sauce",
       price: "$14.99",
+      image: "https://images.unsplash.com/photo-1546456674-7ce72b9286b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
     },
     {
       name: "Pumpkin Rizotto",
       desc: "Creamy Arborio rice cooked with roasted pumpkin and sage",
       price: "$9.99",
+      image: "https://images.unsplash.com/photo-1546456674-7ce72b9286b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
     },
   ],
   salads: [
@@ -143,16 +158,19 @@ export const menuData = {
       name: "Caesar Salad",
       desc: "Romaine lettuce, croutons, Parmesan cheese, and Caesar dressing",
       price: "$6.99",
+      image: "https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1078&q=80"
     },
     {
       name: "Greek Salad",
       desc: "Mixed greens, tomatoes, cucumbers, red onions, Kalamata olives, and feta cheese with Greek dressing",
       price: "$7.99",
+      image: "https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1078&q=80"
     },
     {
       name: "Caprese Salad",
       desc: "Fresh mozzarella, tomatoes, basil, and balsamic glaze",
       price: "$8.99",
+      image: "https://images.unsplash.com/photo-1607532941433-304659e8198a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1078&q=80"
     },
   ],
 };
