@@ -1,15 +1,7 @@
-/* eslint-disable prettier/prettier */
-// remove eslint comment when you start to populate the interface
-
 import { CreateUserDto } from '../dtos/create-user.dto';
-import {
-  ForgotPasswordDto,
-  ResetPasswordDto,
-} from '../dtos/password-reset.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { User } from '../entities/user.entity';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface IUserService {
   create(createUserDto: CreateUserDto): Promise<User>;
 
@@ -21,9 +13,5 @@ export interface IUserService {
 
   remove(userId: string): Promise<void>;
 
-  forgotPassword(forgotPassword: ForgotPasswordDto): Promise<void>;
-  resetPassword(
-    token: string,
-    resetPasswordDto: ResetPasswordDto,
-  ): Promise<void>;
+  findByEmail(email: string): Promise<User>;
 }
