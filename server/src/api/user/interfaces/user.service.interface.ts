@@ -1,6 +1,11 @@
+/* eslint-disable prettier/prettier */
 // remove eslint comment when you start to populate the interface
 
 import { CreateUserDto } from '../dtos/create-user.dto';
+import {
+  ForgotPasswordDto,
+  ResetPasswordDto,
+} from '../dtos/password-reset.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { User } from '../entities/user.entity';
 
@@ -15,4 +20,10 @@ export interface IUserService {
   update(userId: string, updateUserDto: UpdateUserDto): Promise<User>;
 
   remove(userId: string): Promise<void>;
+
+  forgotPassword(forgotPassword: ForgotPasswordDto): Promise<void>;
+  resetPassword(
+    token: string,
+    resetPasswordDto: ResetPasswordDto,
+  ): Promise<void>;
 }
