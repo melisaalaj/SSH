@@ -9,13 +9,13 @@ import { FoodType } from "../enums/food.enum";
 
 @Entity()
 export class Food extends AuditEntity {
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: true })
   description: string;
 
-  @Column()
+  @Column({ nullable: true })
   price: number;
 
   @Column({ 
