@@ -48,6 +48,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     NestEmitterModule.forRoot(new EventEmitter()),
     UserModule,
     AuthModule,
+    MailerModule,
     RestaurantModule,
     PhotoModule,
     LocationModule,

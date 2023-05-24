@@ -28,9 +28,9 @@ export default function Kontakti(){
      }}>
 
        <div class="search-wraps">
-         <h1>Kontakti</h1>
+         <h1>Contact</h1>
          <p>
-           " Rr. Zejnel Salihu, Prishtinë Kosovo"
+           " Bill Clinton, Prishtinë, Kosovë"
          </p>
          <p>
            " +383 43 922 224 "
@@ -46,9 +46,9 @@ export default function Kontakti(){
          <div class="inner">
            <div class="row">
              <div class="col-md-7 dim">
-               <h2>Kontakti DishDash </h2>
+               <h2>DishDash Contact</h2>
                <p>
-                 Ne jemi gjithmonë të gatshëm të kontaktojmë me klientët dhe vizitorët tanë.             </p>
+               We are always ready to contact our customers and visitors.             </p>
 
                <p></p>
 
@@ -59,7 +59,7 @@ export default function Kontakti(){
 
                  <div className="row top10">
                    <div className="col-md-12">
-                     <input type="text" className="grey-fields full-width" placeholder="Emri" id="name" name="name" value={formData.name} onChange={handleChange} />
+                     <input type="text" className="grey-fields full-width" placeholder="Name" id="name" name="name" value={formData.name} onChange={handleChange} />
                    </div></div>
 
                  <div className="row top10">
@@ -73,7 +73,7 @@ export default function Kontakti(){
 
                  <div className="row top10">
                    <div className="col-md-12">
-                     <textarea id="message" className="grey-fields full-width" placeholder="Mesazhi" name="message" value={formData.message} onChange={handleChange} />
+                     <textarea id="message" className="grey-fields full-width" placeholder="Message" name="message" value={formData.message} onChange={handleChange} />
                    </div></div>
                  <div className="row top10">
                    <div className="col-md-12">

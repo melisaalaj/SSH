@@ -19,8 +19,6 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { User } from './entities/user.entity';
 import { PaginationInterceptor } from 'src/common/interceptors/pagination.interceptor';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { ForgotPasswordDto, ResetPasswordDto } from './dtos/password-reset.dto';
-import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('user')
 @ApiBearerAuth()
@@ -57,21 +55,5 @@ export class UserController implements IUserController {
   @Delete(':userId')
   async remove(@Param('userId') userId: string): Promise<void> {
     return await this.usersService.remove(userId);
-  }
-  @Public()
-  @Post('forgot')
-  async forgotPassword(
-    @Body() forgotPassword: ForgotPasswordDto,
-  ): Promise<void> {
-    return await this.usersService.forgotPassword(forgotPassword);
-  }
-
-  @Public()
-  @Post('reset/:token')
-  async resetPassword(
-    @Param('token') token: string,
-    @Body() resetPasswordDto: ResetPasswordDto,
-  ): Promise<void> {
-    return await this.usersService.resetPassword(token, resetPasswordDto);
   }
 }
