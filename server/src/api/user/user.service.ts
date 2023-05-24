@@ -1,15 +1,23 @@
-/* eslint-disable prettier/prettier */
-import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import {
+  NotFoundException,
+  UnprocessableEntityException,
+} from '@nestjs/common/exceptions';
 import { IUserService } from './interfaces/user.service.interface';
-import { UserRepository } from './repository/user.repository';
 import { User } from './entities/user.entity';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { In } from 'typeorm';
+import { In, Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
+import EventEmitter from 'events';
+import { InjectEventEmitter } from 'nest-emitter';
 
 @Injectable()
 export class UserService implements IUserService {
-  constructor(private userRepository: UserRepository) {}
+  constructor(
+    @InjectRepository(User) private userRepository: Repository<User>,
+    @InjectEventEmitter() private readonly emitter: EventEmitter,
+  ) {}
 
   async findOne(userId: string): Promise<User> {
     const user = await this.userRepository.findOneBy({ uuid: userId });
@@ -38,6 +46,14 @@ export class UserService implements IUserService {
     return await this.userRepository.save(
       this.userRepository.create(createUserDto),
     );
+  }
+
+  async findByEmail(email: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
   }
 
   async findUsersByIds(userIds: string[]): Promise<User[]> {

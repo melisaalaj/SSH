@@ -12,8 +12,8 @@ export default function SearchBar(){
     return(
        <div className="firstpart" >
         <div className="text--">
-       <b>Porosi për delivery</b> në Prishtinë
-      <br/><span className="span">Porosit ushqim online tani!</span>
+       <b>Order for delivery</b> in Prishtinë
+      <br/><span className="span">Order food online now!</span>
         </div>
 
 
