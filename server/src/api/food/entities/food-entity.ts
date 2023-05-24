@@ -28,12 +28,12 @@ export class Food extends AuditEntity {
   @OneToMany(() => Photo, (photo) => photo.food)
   photos: Photo[];
 
-  @ManyToOne(() => Menu, (menu) => menu.food)
+  @OneToMany(() => Menu, (menu) => menu.food)
   @JoinTable()
   menus: Menu[];
 
   @ManyToOne(() => Order, (order) => order.foods)
-  order: Order[];
+  order: Order;
 
   @OneToMany(() => Review, (review) => review.food)
   reviews: Review[];
