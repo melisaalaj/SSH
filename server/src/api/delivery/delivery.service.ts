@@ -14,7 +14,7 @@ export class DeliveryService {
 
   create(createDeliveryDto: CreateDeliveryDto, res: Restaurant) {
     const delivery = this.repo.create(createDeliveryDto);
-    delivery.restaurant = [res];
+    delivery.restaurant = res;
     return this.repo.save(delivery);
   }
 
