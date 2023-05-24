@@ -11,11 +11,13 @@ import { AuthModule } from './api/auth/auth.module';
 import { RestaurantModule } from './api/restaurant/restaurant.module';
 import { PhotoModule } from './api/photo/photo.module';
 import { LocationModule } from './api/location/location.module';
+import { FoodModule } from './api/food/food.module';
 import { MailService } from './services/mail/mail.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import EventEmitter from 'events';
 import { NestEmitterModule } from 'nest-emitter';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+
 
 @Module({
   imports: [
@@ -50,6 +52,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     RestaurantModule,
     PhotoModule,
     LocationModule,
+    FoodModule,
   ],
   controllers: [AppController],
   providers: [AppService, MailService],

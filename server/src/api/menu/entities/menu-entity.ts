@@ -4,10 +4,11 @@ import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
 import { Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()
-export class Order extends BaseEntity {
-  @ManyToOne(() => Restaurant, (restuarant) => restuarant.orders)
-  restaurant: Restaurant;
+export class Menu extends BaseEntity {
 
-  @OneToMany(() => Food, (food) => food.order)
-  foods: Food[];
+//   @ManyToOne(() => Restaurant, (restaurant) => restaurant.menus)
+//   restaurant: Restaurant;
+
+  @OneToMany(() => Food, (food) => food.menus)
+  food: Food[];
 }
