@@ -1,46 +1,32 @@
-
-import './assets/styles/App.css';
+import "./assets/styles/App.css";
 import Navbar from "./component/Navbar";
 import Ballina from "./pages/Ballina";
 import Restaurantet from "./pages/Restaurantet";
 import Kontakti from "./pages/Kontakti";
 import LoginSignUp from "./pages/LoginSignUp";
 import ShopCard from "./pages/ShopCard";
-import Restaurant from './pages/Restaurant';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import Restaurant from "./pages/Restaurant";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  return ( 
-    
+  return (
     <Router>
-    <Navbar className='navbar'/>
-     <Routes>
-    
-              <Route exact path="/"  element={<Ballina />}/> 
-                
-              <Route path="/restaurantet" element={<Restaurantet />}/>
-              
-              <Route path="/kontakti"element={<Kontakti />}/>
-             
-              <Route path="/login" element={<LoginSignUp />}/>
-    
-              <Route path="/shop-card" element={<ShopCard />}/>
-    
-              <Route path="/restaurant" element={< Restaurant/>}/>
-            </Routes>
-    
-            </Router>
+      <Navbar className="navbar" />
+      <Routes>
+        <Route exact path="/" element={<Ballina />} />
 
+        <Route path="/restaurantet" element={<Restaurantet />} />
+
+        <Route path="/kontakti" element={<Kontakti />} />
+
+        <Route path="/login" element={<LoginSignUp />} />
+
+        <Route path="/shop-card" element={<ShopCard />} />
+
+        <Route path="/restaurant" element={<Restaurant />} />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
-
-
-
-
-
