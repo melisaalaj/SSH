@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Navbar from "../component/Navbar";
 import SearchBar from "../component/SearchBar";
-import "./MenuPage.css";
+import "../assets/styles/MenuPage.css";
 import { menuData } from "../data/datacard";
 import { useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
