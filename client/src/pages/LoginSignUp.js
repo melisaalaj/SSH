@@ -1,8 +1,23 @@
-import React from "react";
+import React, {useEffect} from "react";
 
 import "./LoginSignUp.css";
 
 const LoginSignUp = () => {
+
+  useEffect(() => {
+    const request = {
+      firstName: 'Jeta',
+      lastName: 'Kajtazi',
+      email: 'jetakajtazi@gmail.com',
+      username: 'jetakajtazi',
+      role: 2,
+      phone: '043-123-456',
+    }
+    fetch('http://localhost:3000/api/user', {
+      method: 'POST',
+      body: request
+    })
+  }, [])
   return (
     <div class="main-wrapper">
       <div class="card-image">
