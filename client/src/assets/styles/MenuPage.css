@@ -65,6 +65,14 @@
     background-color: #e5e5e5;
 }
 
+.menuPage .container {
+    flex-direction: column;
+}
+
+.menuPage .container h2 {
+    color: #030303;
+}
+
 .menu-section {
     /* margin-bottom: 20px; */
 }

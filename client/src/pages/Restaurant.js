@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import restaurant1 from "../assets/images/res1.jpg";
 import restaurant2 from "../assets/images/res2.jpg";
@@ -64,8 +64,11 @@ function RestaurantCard({
 }) {
 
   let navigate = useNavigate();
+  
+  const location = useLocation();
   const navigateToLink = (url) => {
-    let path = `restaurantet/${url}`; 
+    console.log(location);
+    let path = `/restaurant/${url}`; 
     navigate(path);
   }
 

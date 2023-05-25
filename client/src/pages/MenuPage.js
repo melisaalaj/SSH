@@ -9,6 +9,8 @@ import {Button, Tooltip} from "@mui/material";
 
 const MenuPage = () => {
   let { menuId } = useParams();
+
+  console.log(menuId);
   const [currentItem, setCurrentItem] = useState(null);
   const itemsRef = useRef([]);
 
@@ -38,9 +40,9 @@ const MenuPage = () => {
   useEffect(() => {
 
     // Replace api call below with backend endpoint api, to fetch data
-    fetch("https://dog.ceo/api/breeds/image/random")
-      .then((response) => response.json())
-      .then((data) => console.log(data.message));
+    // fetch("https://dog.ceo/api/breeds/image/random")
+    //   .then((response) => response.json())
+    //   .then((data) => console.log(data.message));
   }, []);
 
   return (
@@ -53,7 +55,7 @@ const MenuPage = () => {
       <div className="menuPage">
         <div className="container">
           <h2 className="pageTitle">
-            Menu e <span>{menuId}</span>
+            Menu e Restaurantit #<span>{menuId}</span>
           </h2>
           <div className="menu-wrapper">
             <div className="aside">
