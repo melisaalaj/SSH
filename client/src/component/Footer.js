@@ -19,33 +19,31 @@ function Footer() {
           <p id="p3">"info@dishdash.com"</p>
 
           {/* <p className="gjuha">Zgjidh gjuhën</p>
-      <select id="gjuha" className="but">
-      <option value="al">al</option>
-      <option value="en">en</option>
-      </select> */}
+        <select id="gjuha" className="but">
+        <option value="al">al</option>
+        <option value="en">en</option>
+        </select> */}
+        </div>
       </div>
-      
-      
-    </div>
-    <div className="right-side">
-      <div className="project">
-        <h3 className="h33">The project</h3>
-        <a href="#">Main</a>
-        <a href="#">Order food</a>
-        <a href="#">News</a>
-        <a href="#">Restaurants</a>
-        <a href="#">Login</a>
+      <div className="right-side">
+        <div className="project">
+          <h3 className="h33">The project</h3>
+          <a href="#">Main</a>
+          <a href="#">Order food</a>
+          <a href="#">News</a>
+          <a href="#">Restaurants</a>
+          <a href="#">Login</a>
+        </div>
+        <div className="legal-note">
+          <h3 className="h33">Legal note</h3>
+          <a href="#">We Are Hiring!</a>
+          <a href="#">Privacy Statement</a>
+          <a href="#">Terms & Conditions</a>
+          <a href="#">SignUp</a>
+        </div>
       </div>
-      <div className="legal-note">
-      <h3 className="h33">Legal note</h3>
-        <a href="#">We Are Hiring!</a>
-        <a href="#">Privacy Statement</a>
-        <a href="#">Terms & Conditions</a>
-        <a href="#">SignUp</a>
-      </div>
-    </div>
-  </footer>
-);
+    </footer>
+  );
 }
 
 export default Footer;

@@ -1,7 +1,7 @@
 import "./assets/styles/App.css";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import Navbar from "./component/Navbar";
 import Ballina from "./pages/Ballina";
 import Restaurantet from "./pages/Restaurantet";
 import MenuPage from "./pages/MenuPage";
@@ -27,8 +27,6 @@ function App() {
           <Route path="/shop-card" element={<ShopCard />} />
         </Routes>
       </Router>
-
-      {/* <Footer/> */}
     </ScreenClassProvider>
   );
 }
