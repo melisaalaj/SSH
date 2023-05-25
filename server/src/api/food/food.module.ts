@@ -3,18 +3,18 @@ import { FoodService } from './food.service';
 import { FoodController } from './food.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Food } from './entities/food-entity';
-import { Restaurant } from '../restaurant/entities/restaurant-entity';
-import { RestaurantService } from '../restaurant/restaurant.service';
-import { PhotoService } from '../photo/photo.service';
-import { Photo } from '../photo/entities/photo-entity';
+import { RestaurantModule } from '../restaurant/restaurant.module';
+import { PhotoModule } from '../photo/photo.module';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Food]), 
-    TypeOrmModule.forFeature([Restaurant]),
-    TypeOrmModule.forFeature([Photo]),
+    RestaurantModule,
+    PhotoModule, 
+    UserModule
 ],
-  providers: [FoodService, RestaurantService, PhotoService],
+  providers: [FoodService],
   controllers: [FoodController],
   exports: [FoodService],
 })

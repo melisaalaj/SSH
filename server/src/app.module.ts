@@ -20,7 +20,6 @@ import { NestEmitterModule } from 'nest-emitter';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { OrderModule } from './api/order/order.module';
 
-
 @Module({
   imports: [
     TypeOrmModule.forRoot(config as DataSourceOptions),
