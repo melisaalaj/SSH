@@ -7,22 +7,26 @@ import { Repository } from 'typeorm';
 import { UserService } from '../user/user.service';
 import { User } from '../user/entities/user.entity';
 import { CreateUserDto } from '../user/dtos/create-user.dto';
+import { LoginDto } from '../user/dtos/login-user.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectRepository(User) private usersRepository:Repository<User>,
+    @InjectRepository(User) private usersRepository: Repository<User>,
     private usersService: UserService,
     private jwtService: JwtService,
   ) {}
 
-  async signIn(email, password) {
-    const user = await this.usersService.findByEmail(email);
+  async signIn(loginDto: LoginDto) {
+    const user = await this.usersService.findByEmail(loginDto.email);
     if (!user) {
       throw new UnauthorizedException('Invalid email or password');
     }
 
-    const passwordMatch = await bcrypt.compare(password, user.password);
+    const passwordMatch = await bcrypt.compare(
+      loginDto.password,
+      user.password,
+    );
 
     if (!passwordMatch) {
       throw new UnauthorizedException('Invalid email or password');
@@ -35,7 +39,7 @@ export class AuthService {
   }
 
   async getUserByEmail(email: string): Promise<User | null> {
-    return await this.usersRepository.findOne({ where: { email} });
+    return await this.usersRepository.findOne({ where: { email } });
   }
 
   async signUp(user: CreateUserDto) {

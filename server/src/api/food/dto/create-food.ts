@@ -14,4 +14,3 @@ export class CreateFoodDto {
   @ApiProperty()
   price: number;
 }
-  

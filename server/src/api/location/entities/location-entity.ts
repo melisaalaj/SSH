@@ -16,7 +16,6 @@ export class Location extends BaseEntity {
 
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.locations)
   restaurant: Restaurant;
-  location: Promise<Restaurant>;
 
   @OneToOne(() => Delivery, (delivery) => delivery.location)
   delivery: Delivery[];

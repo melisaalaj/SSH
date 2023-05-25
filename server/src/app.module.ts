@@ -19,7 +19,6 @@ import EventEmitter from 'events';
 import { NestEmitterModule } from 'nest-emitter';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
-
 @Module({
   imports: [
     TypeOrmModule.forRoot(config as DataSourceOptions),
@@ -55,7 +54,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     LocationModule,
     FoodModule,
     DeliveryModule,
-    ],
+  ],
   controllers: [AppController],
   providers: [AppService, MailService],
 })

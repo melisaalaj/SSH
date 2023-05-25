@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Location } from './entities/location-entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { Restaurant } from '../restaurant/entities/restaurant-entity';
 import { UpdateLocationDto } from './dto/update-location.dto';
@@ -37,5 +37,14 @@ export class LocationService {
     return this.repo.findOneBy({ id: parseInt(id) });
   }
 
-  
+  async findByName(city?: string, street?: string) {
+    const location = {
+      where: {
+        ...(city && { city: ILike(`%${city}%`) }),
+        ...(street && { street: ILike(`%${street}%`) }),
+      },
+    };
+
+    return await this.repo.find(location);
+  }
 }
