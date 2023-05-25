@@ -10,6 +10,8 @@ import Footer from "../component/Footer";
 
 const MenuPage = () => {
   let { menuId } = useParams();
+
+  console.log(menuId);
   const [currentItem, setCurrentItem] = useState(null);
   // const [menuData, setMenuData] = useState([]);
   const itemsRef = useRef([]);
@@ -58,7 +60,7 @@ const MenuPage = () => {
       <div className="menuPage">
         <div className="container">
           <h2 className="pageTitle">
-            Menu e <span>{menuId}</span>
+            Menu e Restaurantit #<span>{menuId}</span>
           </h2>
           <div className="menu-wrapper">
             <div className="aside">
