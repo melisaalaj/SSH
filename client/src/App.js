@@ -8,8 +8,8 @@ import MenuPage from "./pages/MenuPage";
 import Kontakti from "./pages/Kontakti";
 import LoginSignUp from "./pages/LoginSignUp";
 import ShopCard from "./pages/ShopCard";
-
-import { ScreenClassProvider } from "react-grid-system";
+import Restaurant from "./pages/Restaurant";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
@@ -18,8 +18,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Ballina />} />
           <Route path="/restaurantet" element={<Restaurantet />} />
-          <Route path="/restaurantet/:menuId" element={<MenuPage />} />
-          
+          <Route path="/restaurant/:menuId" element={<MenuPage />} />
+          <Route path="/restaurant" element={<Restaurant />} />
           <Route path="/kontakti" element={<Kontakti />} />
           <Route path="/login" element={<LoginSignUp />} />
           <Route path="/shop-card" element={<ShopCard />} />
