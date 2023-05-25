@@ -11,9 +11,9 @@ export class LocationService {
   constructor(@InjectRepository(Location) private repo: Repository<Location>) {}
 
   create(dto: CreateLocationDto, res: Restaurant) {
-    const report = this.repo.create(dto);
-    report.restaurant = res;
-    return this.repo.save(report);
+    const location = this.repo.create(dto);
+    location.restaurant = res;
+    return this.repo.save(location);
   }
 
   async update(id: string, dto: UpdateLocationDto) {
