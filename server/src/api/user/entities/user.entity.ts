@@ -51,4 +51,8 @@ export class User extends AuditEntity {
 
   @Column({ nullable: true })
   birthdate: Date;
+  
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order;
+  
 } 
