@@ -18,6 +18,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
 import EventEmitter from 'events';
 import { NestEmitterModule } from 'nest-emitter';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { OrderModule } from './api/order/order.module';
 
 @Module({
   imports: [
@@ -54,7 +55,8 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     LocationModule,
     FoodModule,
     DeliveryModule,
-  ],
+    OrderModule,
+    ],
   controllers: [AppController],
   providers: [AppService, MailService],
 })
