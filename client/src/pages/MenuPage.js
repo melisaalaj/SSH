@@ -6,6 +6,7 @@ import { menuData } from "../data/datacard";
 import { useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import {Button, Tooltip} from "@mui/material";
+import Footer from "../component/Footer";
 
 const MenuPage = () => {
   let { menuId } = useParams();
@@ -109,6 +110,7 @@ const MenuPage = () => {
           </div>
         </div>
       </div>
+      <Footer /> 
     </>
   );
 };
