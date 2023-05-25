@@ -9,11 +9,11 @@ import Kontakti from "./pages/Kontakti";
 import LoginSignUp from "./pages/LoginSignUp";
 import ShopCard from "./pages/ShopCard";
 import Restaurant from "./pages/Restaurant";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 
 function App() {
   return (
-    <ScreenClassProvider className="App">
+    
       <Router>
         <Routes>
           <Route path="/" element={<Ballina />} />
@@ -25,9 +25,6 @@ function App() {
           <Route path="/shop-card" element={<ShopCard />} />
         </Routes>
       </Router>
-
-      {/* <Footer/> */}
-    </ScreenClassProvider>
   );
 }
 
