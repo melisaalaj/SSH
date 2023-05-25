@@ -8,6 +8,7 @@ import MenuPage from "./pages/MenuPage";
 import Kontakti from "./pages/Kontakti";
 import LoginSignUp from "./pages/LoginSignUp";
 import ShopCard from "./pages/ShopCard";
+import Restaurant from "./pages/Restaurant";
 
 import { ScreenClassProvider } from "react-grid-system";
 
@@ -18,6 +19,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Ballina />} />
           <Route path="/restaurantet" element={<Restaurantet />} />
+          <Route path="/restaurant" element={<Restaurant />} />
           <Route path="/restaurantet/:menuId" element={<MenuPage />} />
           
           <Route path="/kontakti" element={<Kontakti />} />

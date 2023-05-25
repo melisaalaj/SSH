@@ -8,6 +8,14 @@ import { DataSourceOptions } from 'typeorm';
 import { config } from './common/db/dataSource/data-source.config';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './api/auth/auth.module';
+import { RestaurantModule } from './api/restaurant/restaurant.module';
+import { PhotoModule } from './api/photo/photo.module';
+import { LocationModule } from './api/location/location.module';
+import { MailService } from './services/mail/mail.service';
+import { MailerModule } from '@nestjs-modules/mailer';
+import EventEmitter from 'events';
+import { NestEmitterModule } from 'nest-emitter';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 
 @Module({
   imports: [
@@ -15,10 +23,35 @@ import { AuthModule } from './api/auth/auth.module';
     ConfigModule.forRoot({
       envFilePath: ['.env'],
     }),
+    MailerModule.forRoot({
+      transport: {
+        host: process.env.MAIL_HOST,
+        port: process.env.MAIL_PORT,
+        auth: {
+          user: process.env.MAIL_AUTH_USER,
+          pass: process.env.MAIL_AUTH_PASSWORD,
+        },
+      },
+      defaults: {
+        from: process.env.SENDER_MAIL,
+      },
+      template: {
+        dir: __dirname + '/../templates',
+        adapter: new HandlebarsAdapter(),
+        options: {
+          strict: true,
+        },
+      },
+    }),
+    NestEmitterModule.forRoot(new EventEmitter()),
     UserModule,
     AuthModule,
+    MailerModule,
+    RestaurantModule,
+    PhotoModule,
+    LocationModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, MailService],
 })
 export class AppModule {}

@@ -34,6 +34,7 @@
   color: white;
   border: none;
   cursor: pointer;
+  margin-left: 10px;
 }
 .left-side form button {
   color: white;
@@ -92,7 +93,7 @@ footer #p3 {
   margin-left: -177px;
 }
 footer .gjuha {
-  margin-left: -180px;
+  margin-left: 0px;
 }
 footer .project ul {
   margin: 0px;

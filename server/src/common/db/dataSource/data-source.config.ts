@@ -1,5 +1,4 @@
-/* eslint-disable prettier/prettier */
-import { User } from 'src/api/user/entities/user.entity';
+import 'dotenv/config';
 
 export const config = {
   name: 'default',
@@ -11,10 +10,10 @@ export const config = {
   database: 'food_service',
   synchronize: true,
   dropSchema: false,
-  entities: [User],
-  migrations: ['dist/common/db/migrations/*.js'],
-  logging: 'localhost',
-  seeds: [],
+  entities: [process.env.TYPEORM_ENTITIES],
+  migrations: [process.env.TYPEORM_MIGRATIONS],
+  logging: process.env.NODE_ENV === 'localhost',
+  seeds: process.env.TYPEORM_SEEDING_SEEDS,
 };
 
 export const configNoEntities = {
