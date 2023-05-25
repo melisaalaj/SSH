@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { User } from 'src/api/user/entities/user.entity';
 
 export const config = {
   name: 'default',

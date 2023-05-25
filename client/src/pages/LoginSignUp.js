@@ -19,11 +19,11 @@ const LoginSignUp = () => {
     username: "",
     password: "",
     phone: "043-123-456",
+    gender: "female",
     role: 2,
   });
 
   const handleSignUpChange = (e) => {
-    console.log(e);
     const { name, value } = e.target;
     setSignUpFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
@@ -35,18 +35,20 @@ const LoginSignUp = () => {
   const toggleSignIn = (value) => setSignIn(value);
 
   const handleSignUpSubmit = async (event) => {
+    console.log(signUpFormData);
     event.preventDefault();
     const response = await fetch("http://localhost:3000/api/auth/signup", {
       method: "POST",
-      body: signUpFormData
+      body: JSON.stringify(signUpFormData)
     }).then((data) => data.json())
 
-    if (response) {
-      setSuccessState("signup-success");
-    }
-
     console.log(response);
-    
+
+    if (!response.error) {
+      setSuccessState("signup-success");
+    } else {
+      setSuccessState("signup-error");
+    }
   };
 
   const handleLoginSubmit = async (event) => {
@@ -55,11 +57,15 @@ const LoginSignUp = () => {
 
     const response = await fetch("http://localhost:3000/api/auth/login", {
       method: "POST",
-      body: signUpFormData
+      body: JSON.stringify(loginFormData)
     }).then((data) => data.json())
 
-    if (response.access_token) {
+    if (
+      !response.statusCode
+      ) {
       setSuccessState("login-success");
+    } else {
+      setSuccessState("has-error");
     }
     console.log(response);
   };
@@ -70,6 +76,8 @@ const LoginSignUp = () => {
         return <h1>Login was successfull</h1>;
       case "signup-success":
         return <h1>Signup was successfull</h1>;
+      case "has-error":
+        return <h1>There was a problem with your request!</h1>;
       default:
         return (
           <>
