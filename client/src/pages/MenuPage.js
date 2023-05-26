@@ -12,6 +12,7 @@ const MenuPage = () => {
 
   console.log(menuId);
   const [currentItem, setCurrentItem] = useState(null);
+  // const [menuData, setMenuData] = useState([]);
   const itemsRef = useRef([]);
 
   const menuItems = [
@@ -40,9 +41,12 @@ const MenuPage = () => {
   useEffect(() => {
 
     // Replace api call below with backend endpoint api, to fetch data
-    // fetch("https://dog.ceo/api/breeds/image/random")
-    //   .then((response) => response.json())
-    //   .then((data) => console.log(data.message));
+    fetch(`https://localhost:3000/api/restaurants/${menuId}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // setMenuData(data);
+      });
   }, []);
 
   return (
@@ -82,7 +86,7 @@ const MenuPage = () => {
                     {menuData[category].map((item, iid) => (
                       <div className="section-menu-item" key={`itemKey-${iid}`}>
                         <div className="item-image">
-                          {/* <img src="" alt="sample-sandwich-pic" /> */}
+                          <img src={item.image} alt="sample-sandwich-pic" />
                         </div>
                         <div className="item-desc">
                           <h5>{item.name}</h5>
