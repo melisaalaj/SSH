@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import { Exclude } from 'class-transformer';
-import {Column,Entity} from 'typeorm';
+import {Column,Entity, OneToMany} from 'typeorm';
 import { UserGender } from '../enums/userGender.enum';
 import { UserRoles } from '../enums/roles.enum';
 import { AuditEntity } from '../../../common/db/customBaseEntites/AuditEntity';
+import { Order } from 'src/api/order/entities/orders-entity';
 
 @Entity('users')
 export class User extends AuditEntity {
@@ -50,4 +51,8 @@ export class User extends AuditEntity {
 
   @Column({ nullable: true })
   birthdate: Date;
+  
+  @OneToMany(() => Order, (order) => order.user)
+  orders: Order;
+  
 } 

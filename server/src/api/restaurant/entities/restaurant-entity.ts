@@ -1,3 +1,5 @@
+import { Delivery } from 'src/api/delivery/entities/delivery-entity';
+import { Event } from 'src/api/event/entities/event-entity';
 import { Food } from 'src/api/food/entities/food-entity';
 import { Location } from 'src/api/location/entities/location-entity';
 import { Order } from 'src/api/order/entities/orders-entity';
@@ -35,4 +37,10 @@ export class Restaurant extends BaseEntity {
 
   @OneToMany(() => Product, (product) => product.restaurant)
   products: Product[];
+
+  @OneToMany(() => Delivery, (delivery) => delivery.restaurant)
+  deliveries: Delivery[];
+
+  @OneToMany(() => Event, (event) => event.restaurant)
+  events: Event[];
 }

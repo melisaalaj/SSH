@@ -16,6 +16,7 @@ import { CreateUserDto } from '../user/dtos/create-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { ForgetPasswordDto } from '../user/dtos/forget-password.dto';
 import { ResetPasswordDto } from '../user/dtos/reset-password.dto';
+import { LoginDto } from '../user/dtos/login-user.dto';
 
 @Controller('auth')
 @ApiBearerAuth()
@@ -28,8 +29,8 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  signIn(@Body() signInDto: Record<string, any>) {
-    return this.authService.signIn(signInDto.email, signInDto.password);
+  signIn(@Body() signInDto: LoginDto) {
+    return this.authService.signIn(signInDto);
   }
 
   @UseGuards(AuthGuard)
