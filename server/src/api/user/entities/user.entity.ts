@@ -58,5 +58,4 @@ export class User extends AuditEntity {
 
   @OneToMany(() => Contact, contact => contact.user)
   contacts: Contact[];
-  
 } 
