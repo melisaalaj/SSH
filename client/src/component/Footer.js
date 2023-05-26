@@ -18,11 +18,7 @@ function Footer() {
 
           <p id="p3">"info@dishdash.com"</p>
 
-          {/* <p className="gjuha">Zgjidh gjuhën</p>
-        <select id="gjuha" className="but">
-        <option value="al">al</option>
-        <option value="en">en</option>
-        </select> */}
+         
         </div>
       </div>
       <div className="right-side">

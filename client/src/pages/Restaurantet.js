@@ -1,6 +1,4 @@
 import * as React from "react";
-
-import Navbar from "../component/Navbar";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
@@ -13,7 +11,7 @@ import "../assets/styles/restaurantet.css"; // Importimi i CSS fajllit të jasht
 function Restaurantet() {
   return (
     <>
-      <Navbar />
+     
       <div class="layer">
         <div
           id="parallax-wrap"
