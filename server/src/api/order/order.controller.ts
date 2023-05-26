@@ -28,7 +28,7 @@ export class OrderController {
   ) {
     const restaurant = await this.restaurantService.findOne(restaurantId);
     if (!restaurant) {
-      throw new NotFoundException('Order not found');
+      throw new NotFoundException('Restaurant not found');
     }
 
     const order = await this.orderService.create(createOrderDto, restaurant);
