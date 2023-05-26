@@ -35,9 +35,6 @@ export class Food extends AuditEntity {
   @ManyToOne(() => Order, (order) => order.foods)
   order: Order;
 
-  @OneToMany(() => Review, (review) => review.food)
-  reviews: Review[];
-
   @ManyToMany(() => Restaurant, (resturant) => resturant.foods)
   @JoinTable()
   restaurants: Restaurant[];

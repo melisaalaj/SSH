@@ -1,11 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Exclude } from 'class-transformer';
-import {Column,Entity, OneToMany} from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { UserGender } from '../enums/userGender.enum';
 import { UserRoles } from '../enums/roles.enum';
 import { AuditEntity } from '../../../common/db/customBaseEntites/AuditEntity';
 import { Order } from 'src/api/order/entities/orders-entity';
 import { Contact } from 'src/api/contact/entities/contact-entity';
+import { Review } from 'src/api/review/entities/review-entity';
 
 @Entity('users')
 export class User extends AuditEntity {
@@ -52,10 +53,13 @@ export class User extends AuditEntity {
 
   @Column({ nullable: true })
   birthdate: Date;
-  
+
   @OneToMany(() => Order, (order) => order.user)
   orders: Order;
 
-  @OneToMany(() => Contact, contact => contact.user)
+  @OneToMany(() => Contact, (contact) => contact.user)
   contacts: Contact[];
-} 
+
+  @OneToMany(() => Review, (review) => review.restaurant)
+  reviews: Review[];
+}

@@ -20,6 +20,7 @@ import { NestEmitterModule } from 'nest-emitter';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { OrderModule } from './api/order/order.module';
 import { ContactModule } from './api/contact/contact.module';
+import { ReviewModule } from './api/review/review.module';
 
 @Module({
   imports: [
@@ -58,6 +59,7 @@ import { ContactModule } from './api/contact/contact.module';
     DeliveryModule,
     OrderModule,
     ContactModule,
+    ReviewModule
   ],
   controllers: [AppController],
   providers: [AppService, MailService],
