@@ -25,7 +25,7 @@ function App() {
           <Route path="/shop-card" element={<ShopCard />} />
         </Routes>
       </Router>
-    </ScreenClassProvider>
+      </ScreenClassProvider>
   );
 }
 
