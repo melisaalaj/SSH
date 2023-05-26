@@ -3,7 +3,7 @@ import { Food } from 'src/api/food/entities/food-entity';
 import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
 import { User } from 'src/api/user/entities/user.entity';
 import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity({ name: 'order' })
 export class Order extends BaseEntity {
