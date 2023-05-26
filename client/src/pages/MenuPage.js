@@ -1,14 +1,16 @@
-import React, { useEffect, useState, useRef } from "react";
-import Navbar from "../component/Navbar";
-import SearchBar from "../component/SearchBar";
-import "./MenuPage.css";
+import React, { useEffect, useState, useRef,useContext } from "react";
+import "../assets/styles/MenuPage.css";
 import { menuData } from "../data/datacard";
 import { useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import {Button, Tooltip} from "@mui/material";
+import Footer from "../component/Footer";
+import { SelectedItemsContext } from "../services/SelectedItemsContext";
 
 const MenuPage = () => {
   let { menuId } = useParams();
+
+  console.log(menuId);
   const [currentItem, setCurrentItem] = useState(null);
   // const [menuData, setMenuData] = useState([]);
   const itemsRef = useRef([]);
@@ -37,27 +39,26 @@ const MenuPage = () => {
   };
 
   useEffect(() => {
-
     // Replace api call below with backend endpoint api, to fetch data
     fetch(`https://localhost:3000/api/restaurants/${menuId}`)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        // setMenuData(data);
+        
       });
   }, []);
+  const { addToSelectedItems } = useContext(SelectedItemsContext);
 
+  const handleAddToCart = (item) => {
+    addToSelectedItems({ name: item.name, price: item.price });
+  };
   return (
     <>
-      <Navbar className="navbar" />
-      <div className="searchbar--">
-        <SearchBar />
-      </div>
-
+    
       <div className="menuPage">
         <div className="container">
           <h2 className="pageTitle">
-            Menu e <span>{menuId}</span>
+            Menu e Restaurantit #<span>{menuId}</span>
           </h2>
           <div className="menu-wrapper">
             <div className="aside">
@@ -93,7 +94,7 @@ const MenuPage = () => {
                         <div className="item-price">
                           <p>{item.price}</p>
                           <Tooltip title="Shto ne shporte">
-                            <Button variant="contained">
+                            <Button variant="contained"   onClick={() => handleAddToCart(item)}>
                               <AddIcon />
                               Shto
                             </Button>
@@ -109,6 +110,7 @@ const MenuPage = () => {
           </div>
         </div>
       </div>
+      <Footer /> 
     </>
   );
 };

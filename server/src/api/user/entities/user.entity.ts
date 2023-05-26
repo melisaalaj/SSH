@@ -62,6 +62,4 @@ export class User extends AuditEntity {
 
   @OneToMany(() => Booking, (booking) => booking.user)
   bookings: Booking;
-
-  
 } 

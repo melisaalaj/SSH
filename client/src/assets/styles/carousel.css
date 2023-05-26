@@ -12,18 +12,6 @@
   font-family: arial;
 }
 
-.card {
-  margin: 2rem auto;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 425px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
-  padding: 0.75rem 0;
-  margin-top: 3rem;
-}
 
 .number {
   color: grey;
@@ -48,38 +36,18 @@
 
 .photosess {
   width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  /* max-width: 120rem; */
-  /* margin: 15rem auto; */
+  position: absolute;
+  padding: 5px;
 }
 
-.photosess .item-wrapper {
-  width: 30%;
-  min-height: 45rem;
-  padding: 1rem;
-  border-radius: 10px;
-  background-color: #fff;
-}
 
-img {
+
+.--image{
   height: auto;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.react-multi-carousel-list {
-  max-width: 120rem;
-  margin: 0 auto;
-}
-
-.react-multi-carousel-item {
-  margin: 0 5px;
-  max-width: 230px;
-}
-
-/* .App .react-multi-carousel-dot-list {
-  margin-top: 10px; 
-} */
+  width: 350px;
+  border-radius: 50%;
+  align-items: center;
+  margin: auto;
+  margin-top: 50px;
+  padding: 10px;
+ }
