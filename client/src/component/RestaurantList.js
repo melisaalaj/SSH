@@ -50,7 +50,7 @@ function RestaurantList() {
 
   return (
     <div>
-      <div class="container">
+      <div className="container">
         {restaurants.map(restaurant => (
           <div className="" key={restaurant.id}>
             <RestaurantCard restaurant={restaurant} />
