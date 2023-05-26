@@ -22,7 +22,6 @@ import { OrderModule } from './api/order/order.module';
 import { Contact } from './api/contact/entities/contact-entity';
 import { ContactModule } from './api/contact/contact.module';
 
-
 @Module({
   imports: [
     TypeOrmModule.forRoot(config as DataSourceOptions),

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsString } from 'class-validator';
 
-export class CreateFoodDto {
+export class CreateEventDto {
   @IsString()
   @ApiProperty()
   name: string;
@@ -10,7 +10,8 @@ export class CreateFoodDto {
   @ApiProperty()
   description: string;
 
-  @IsNumber()
+  @IsDateString()
   @ApiProperty()
-  price: number;
+  date: Date;
 }
+  

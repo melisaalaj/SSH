@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { Contact } from 'src/api/contact/entities/contact-entity';
 import { Delivery } from 'src/api/delivery/entities/delivery-entity';
+import { Event } from 'src/api/event/entities/event-entity';
 import { Food } from 'src/api/food/entities/food-entity';
 import { Location } from 'src/api/location/entities/location-entity';
 import { Menu } from 'src/api/menu/entities/menu-entity';
@@ -21,7 +22,7 @@ export const config = {
   database: process.env.TYPEORM_NAME,
   synchronize: true,
   dropSchema: false,
-  entities: [User, Delivery, Order, Restaurant, Photo, Food, Location, Product, Menu, Review, Contact],
+  entities: [User, Delivery, Event, Order, Restaurant, Photo, Food, Location, Product, Menu, Review, Contact],
   migrations: [process.env.TYPEORM_MIGRATIONS],
   logging: process.env.NODE_ENV === 'localhost',
   seeds: process.env.TYPEORM_SEEDING_SEEDS,
@@ -34,7 +35,7 @@ export const configNoEntities = {
   port: process.env.TYPEORM_PORT || 5432,
   username: process.env.TYPEORM_USER,
   password: process.env.TYPEORM_PASSWORD,
-  entities: [User, Delivery, Order, Restaurant, Photo, Food, Location, Product, Menu, Review, Contact],
+  entities: [User, Delivery, Event, Order, Restaurant, Photo, Food, Location, Product, Menu, Review, Contact],
   database: process.env.TYPEORM_NAME,
   migrations: [process.env.TYPEORM_MIGRATIONS],
   logging: process.env.NODE_ENV === 'localhost',
