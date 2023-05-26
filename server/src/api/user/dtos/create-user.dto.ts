@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsEnum,
+  IsNotEmpty,
   IsOptional,
   IsString,
   Validate,
@@ -30,6 +31,10 @@ export class CreateUserDto {
   @ApiProperty()
   username: string;
 
+  @ApiProperty()
+  @IsNotEmpty()
+  password: string;
+  
   @IsEnum(UserGender)
   @ApiProperty()
   gender: UserGender;

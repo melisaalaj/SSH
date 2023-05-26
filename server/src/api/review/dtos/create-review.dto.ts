@@ -1,12 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDecimal, IsNumber, IsString, Max, Min } from 'class-validator';
+import { IsNumberString, IsString, Max, Min } from 'class-validator';
 
 export class CreateReviewDto {
-  @Min(0)
-  @Max(5)
-  @IsNumber()
+  @IsNumberString({}, { message: 'rating must be a valid decimal number' })
   @ApiProperty()
-  rating: number;
+  rating: string;
 
   @IsString()
   @ApiProperty()

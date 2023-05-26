@@ -1,11 +1,11 @@
-import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateReviewDto } from './dtos/create-review.dto';
 import { RestaurantService } from '../restaurant/restaurant.service';
-import { GetCurrentUser } from 'src/common/decorators/get-current-user.decorator';
 import { User } from '../user/entities/user.entity';
 import { UpdateReviewDto } from './dtos/update-review.dto';
+import { CurrentUser } from '../auth/currentUser';
 
 @Controller('review')
 @ApiTags('Review')
@@ -15,11 +15,10 @@ export class ReviewController {
     private readonly restaurantService: RestaurantService,
   ) {}
 
-  // Todo fix GetCurrentUser()
   @Post('/create/:resId')
   async createReview(
     @Body() dto: CreateReviewDto,
-    @GetCurrentUser() user: User,
+    @CurrentUser() user: User,
     @Param('resId') resId: string,
   ) {
     const restaurant = await this.restaurantService.findOne(resId);
@@ -35,5 +34,10 @@ export class ReviewController {
   @Post('/update/:id')
   async update(@Param('id') id: string, @Body() body: UpdateReviewDto) {
     return await this.reviewService.update(id, body);
+  }
+
+  @Get('average-rating/:id')
+  async getAverageRating(@Param('id') restaurantId: number): Promise<number> {
+    return this.reviewService.getAverageRating(restaurantId);
   }
 }

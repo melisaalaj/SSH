@@ -1,3 +1,4 @@
+import { Food } from 'src/api/food/entities/food-entity';
 import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
 import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
 import { Column, Entity, ManyToOne } from 'typeorm';
@@ -10,8 +11,11 @@ export class Photo extends BaseEntity {
   @Column({
     type: 'bytea',
   })
-  data: Uint8Array;
+  data: Buffer;
 
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.photos)
   restaurant: Restaurant;
+
+  @ManyToOne(() => Food, (food) => food.photos)
+   food: Food[];
 }

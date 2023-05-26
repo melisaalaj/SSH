@@ -12,6 +12,12 @@
         width: 100%;
         
     }
+    .forma{
+    justify-content: center;
+    align-items: center;
+    margin-left: 30%;
+    border: black;
+    }
     .parallax-search .search-wraps{
         padding-top: 100px;
         border: 0px solid #4C3398;
@@ -27,6 +33,7 @@
         text-align: center;
         font-weight: 300;
         font-family: 'Lato', sans-serif;
+        margin-top: 100px
     }
     .search-wraps p{
         color: #fff;
@@ -37,7 +44,7 @@
       padding-top: 30px;
       padding-bottom: 60px;
       text-align: center;
-      background: #fff;
+      background-color:rgb(240, 245, 245);
     }
     .search-content{
       max-width: 100%;
@@ -46,6 +53,7 @@
       padding-left: 15px;
       margin-right: auto;
       margin-left: auto;
+      
   
     }
     .h1, h2{
@@ -73,4 +81,3 @@
       margin-inline-start: 0px;
       margin-inline-end: 0px;
     }
-

@@ -11,20 +11,30 @@ import {
   Post,
   Res,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { PhotoService } from './photo.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiTags } from '@nestjs/swagger';
 import { Readable } from 'stream';
 import { Response } from 'express';
+import { AuthGuard } from '../auth/auth.guard';
+import { RolesGuard } from 'src/common/guards/roles.guard';
+import { Roles } from 'src/common/decorators/roles.decorato';
+import { UserRoles } from '../user/enums/roles.enum';
 
 @Controller('photo')
 @ApiTags('Photos')
+@UsePipes(new ValidationPipe())
 @UseInterceptors(ClassSerializerInterceptor)
+@UseGuards(AuthGuard, RolesGuard)
 export class PhotoController {
   constructor(private readonly photoService: PhotoService) {}
 
+  @Roles(UserRoles.ADMIN)
   @Post()
   @UseInterceptors(FileInterceptor('file'))
   async uploadPhoto(@UploadedFile() file: Express.Multer.File) {
@@ -35,9 +45,14 @@ export class PhotoController {
     return newPhoto;
   }
 
+  @Roles(UserRoles.ADMIN)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string) {
+    const restaurant = await this.photoService.findOne(id);
+    if (!restaurant) {
+      throw new NotFoundException('Photo not found');
+    }
     await this.photoService.remove(id);
   }
 

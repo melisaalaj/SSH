@@ -1,64 +1,78 @@
 import {
-  Controller,
-  Post,
   Body,
-  UsePipes,
-  ValidationPipe,
-  UseGuards,
+  Controller,
+  Get,
   HttpCode,
   HttpStatus,
-  UseInterceptors,
-  ClassSerializerInterceptor,
+  Post,
+  UseGuards,
+  Request,
+  Param,
 } from '@nestjs/common';
-import { Public } from '../../common/decorators/public.decorator';
-import { GetCurrentUserId } from '../../common/decorators/get-current-user-id.decorator';
-import { GetCurrentUser } from '../../common/decorators/get-current-user.decorator';
-import { AtGuard } from '../../common/guards/at.guard';
-import { RtGuard } from '../../common/guards/rt.guard';
-import { RegisterDTO } from './dtos/register.dto';
 import { AuthService } from './auth.service';
-import { LoginDto } from './dtos/login.dto';
-import { Tokens } from './types/tokens.types';
-import { IAuthController } from './interfaces/auth.controller.interface';
+import { AuthGuard } from './auth.guard';
+import { MailerService } from '../mailer/mailer.service';
+import { CreateUserDto } from '../user/dtos/create-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ForgetPasswordDto } from '../user/dtos/forget-password.dto';
+import { ResetPasswordDto } from '../user/dtos/reset-password.dto';
+import { LoginDto } from '../user/dtos/login-user.dto';
 
+@Controller('auth')
 @ApiBearerAuth()
 @ApiTags('Auth')
-@UsePipes(new ValidationPipe())
-@UseInterceptors(ClassSerializerInterceptor)
-@Controller('auth')
-export class AuthController implements IAuthController {
-  constructor(private readonly authService: AuthService) {}
+export class AuthController {
+  constructor(
+    private authService: AuthService,
+    private mailerService: MailerService,
+  ) {}
 
-  @Public()
-  @Post('register')
-  @HttpCode(HttpStatus.CREATED)
-  async register(@Body() registerDto: RegisterDTO): Promise<Tokens> {
-    return await this.authService.signup(registerDto);
-  }
-
-  @Public()
+  @HttpCode(HttpStatus.OK)
   @Post('login')
-  @HttpCode(HttpStatus.OK)
-  async login(@Body() loginDto: LoginDto): Promise<Tokens> {
-    return this.authService.login(loginDto);
+  signIn(@Body() signInDto: LoginDto) {
+    return this.authService.signIn(signInDto);
   }
 
-  @UseGuards(AtGuard)
-  @Post('logout')
-  @HttpCode(HttpStatus.OK)
-  async logout(@GetCurrentUserId() userId: string): Promise<void> {
-    return this.authService.logout(userId);
+  @UseGuards(AuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 
-  @Public()
-  @UseGuards(RtGuard)
-  @Post('token')
-  @HttpCode(HttpStatus.OK)
-  async refreshToken(
-    @GetCurrentUserId() userId: string,
-    @GetCurrentUser('refreshToken') refreshToken: string,
-  ): Promise<Tokens> {
-    return await this.authService.refreshToken(userId, refreshToken);
+  @Post('signup')
+  async signUp(@Body() createUserDto: CreateUserDto) {
+    const user = await this.authService.signUp(createUserDto);
+    return user;
+  }
+
+  @Post('forgot-password')
+  async forgotPassword(@Body() body: ForgetPasswordDto) {
+    const user = await this.authService.getUserByEmail(body.email);
+
+    if (!user) {
+      return { status: 404, content: { msg: 'User not found' } };
+    }
+
+    const token = await this.authService.generateResetPasswordToken(user);
+    console.log(token);
+
+    await this.mailerService.sendResetPasswordEmail(user.email, token);
+
+    return { status: 200, content: { msg: 'Reset password email sent' } };
+  }
+
+  @Post('reset-password/:token')
+  async resetPassword(
+    @Param('token') token: string,
+    @Body() body: ResetPasswordDto,
+  ) {
+    const resetPasswordResult = await this.authService.resetPassword(
+      token,
+      body.password,
+    );
+    return {
+      status: resetPasswordResult.status,
+      content: resetPasswordResult.msg,
+    };
   }
 }

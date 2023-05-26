@@ -11,6 +11,7 @@ import {
   ValidationPipe,
   Delete,
   ClassSerializerInterceptor,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { IUserController } from './interfaces/user.controller.interface';
@@ -19,27 +20,33 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { User } from './entities/user.entity';
 import { PaginationInterceptor } from 'src/common/interceptors/pagination.interceptor';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { ForgotPasswordDto, ResetPasswordDto } from './dtos/password-reset.dto';
-import { Public } from 'src/common/decorators/public.decorator';
+import { AuthGuard } from '../auth/auth.guard';
+import { Roles } from 'src/common/decorators/roles.decorato';
+import { UserRoles } from './enums/roles.enum';
+import { RolesGuard } from 'src/common/guards/roles.guard';
 
 @Controller('user')
-@ApiBearerAuth()
 @ApiTags('User')
+@ApiBearerAuth()
 @UsePipes(new ValidationPipe())
 @UseInterceptors(ClassSerializerInterceptor)
+@UseGuards(AuthGuard, RolesGuard)
 export class UserController implements IUserController {
   constructor(private readonly usersService: UserService) {}
 
+  @Roles(UserRoles.ADMIN)
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
     return await this.usersService.create(createUserDto);
   }
 
+  @Roles(UserRoles.ADMIN)
   @Get(':userId')
   async findOne(@Param('userId') userId: string): Promise<User> {
     return await this.usersService.findOne(userId);
   }
 
+  @Roles(UserRoles.ADMIN)
   @Get()
   @UseInterceptors(PaginationInterceptor)
   async findAll(): Promise<User[]> {
@@ -54,24 +61,9 @@ export class UserController implements IUserController {
     return await this.usersService.update(userId, updateUserDto);
   }
 
+  @Roles(UserRoles.ADMIN)
   @Delete(':userId')
   async remove(@Param('userId') userId: string): Promise<void> {
     return await this.usersService.remove(userId);
-  }
-  @Public()
-  @Post('forgot')
-  async forgotPassword(
-    @Body() forgotPassword: ForgotPasswordDto,
-  ): Promise<void> {
-    return await this.usersService.forgotPassword(forgotPassword);
-  }
-
-  @Public()
-  @Post('reset/:token')
-  async resetPassword(
-    @Param('token') token: string,
-    @Body() resetPasswordDto: ResetPasswordDto,
-  ): Promise<void> {
-    return await this.usersService.resetPassword(token, resetPasswordDto);
   }
 }

@@ -11,12 +11,16 @@ import { AuthModule } from './api/auth/auth.module';
 import { RestaurantModule } from './api/restaurant/restaurant.module';
 import { PhotoModule } from './api/photo/photo.module';
 import { LocationModule } from './api/location/location.module';
-import { ReviewModule } from './api/review/review.module';
+import { FoodModule } from './api/food/food.module';
+import { DeliveryModule } from './api/delivery/delivery.module';
 import { MailService } from './services/mail/mail.service';
 import { MailerModule } from '@nestjs-modules/mailer';
 import EventEmitter from 'events';
 import { NestEmitterModule } from 'nest-emitter';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { OrderModule } from './api/order/order.module';
+import { ContactModule } from './api/contact/contact.module';
+import { ReviewModule } from './api/review/review.module';
 
 @Module({
   imports: [
@@ -26,15 +30,15 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     }),
     MailerModule.forRoot({
       transport: {
-        host: 'sandbox.smtp.mailtrap.io',
-        port: 2525,
+        host: process.env.MAIL_HOST,
+        port: process.env.MAIL_PORT,
         auth: {
-          user: '024a529052e2c4',
-          pass: '2a6d25515f1531',
+          user: process.env.MAIL_AUTH_USER,
+          pass: process.env.MAIL_AUTH_PASSWORD,
         },
       },
       defaults: {
-        from: 'food.service808@gmail.com',
+        from: process.env.SENDER_MAIL,
       },
       template: {
         dir: __dirname + '/../templates',
@@ -47,10 +51,15 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     NestEmitterModule.forRoot(new EventEmitter()),
     UserModule,
     AuthModule,
+    MailerModule,
     RestaurantModule,
     PhotoModule,
     LocationModule,
-    ReviewModule,
+    FoodModule,
+    DeliveryModule,
+    OrderModule,
+    ContactModule,
+    ReviewModule
   ],
   controllers: [AppController],
   providers: [AppService, MailService],

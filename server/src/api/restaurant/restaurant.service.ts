@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, StreamableFile } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Restaurant } from './entities/restaurant-entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Photo } from '../photo/entities/photo-entity';
@@ -63,6 +63,16 @@ export class RestaurantService {
         postalCode: location.postalCode,
       })),
     };
+  }
+
+  async findByName(name?: string) {
+    const restaurant = {
+      where: {
+        ...(name && { name: ILike(`%${name}%`) }),
+      },
+    };
+
+    return await this.repo.find(restaurant);
   }
 
   async addPhotoToRestaurant(
