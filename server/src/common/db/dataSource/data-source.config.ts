@@ -9,6 +9,8 @@ import { Product } from 'src/api/product/entities/product-entity';
 import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
 import { Review } from 'src/api/review/entities/review-entity';
 import { User } from 'src/api/user/entities/user.entity';
+import { Event } from 'src/api/event/entities/event-entity';
+
 
 export const config = {
   name: 'default',
@@ -20,7 +22,7 @@ export const config = {
   database: process.env.TYPEORM_NAME,
   synchronize: true,
   dropSchema: false,
-  entities: [User, Delivery, Order, Restaurant, Photo, Food, Location, Product, Menu, Review],
+  entities: [Delivery, Event, Food, Menu, Order, Photo, Product, Restaurant, Review, Location, User],
   migrations: [process.env.TYPEORM_MIGRATIONS],
   logging: process.env.NODE_ENV === 'localhost',
   seeds: process.env.TYPEORM_SEEDING_SEEDS,
@@ -33,7 +35,7 @@ export const configNoEntities = {
   port: process.env.TYPEORM_PORT || 5432,
   username: process.env.TYPEORM_USER,
   password: process.env.TYPEORM_PASSWORD,
-  entities: [User, Delivery, Order, Restaurant, Photo, Food, Location, Product, Menu, Review],
+  entities: [Delivery, Event, Food, Menu, Order, Photo, Product, Restaurant, Review, Location, User],
   database: process.env.TYPEORM_NAME,
   migrations: [process.env.TYPEORM_MIGRATIONS],
   logging: process.env.NODE_ENV === 'localhost',
