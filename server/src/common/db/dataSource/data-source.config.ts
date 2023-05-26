@@ -11,18 +11,6 @@ import { Product } from 'src/api/product/entities/product-entity';
 import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
 import { Review } from 'src/api/review/entities/review-entity';
 import { User } from 'src/api/user/entities/user.entity';
-import { Delivery } from 'src/api/delivery/entities/delivery-entity';
-import { Food } from 'src/api/food/entities/food-entity';
-import { Location } from 'src/api/location/entities/location-entity';
-import { Menu } from 'src/api/menu/entities/menu-entity';
-import { Order } from 'src/api/order/entities/orders-entity';
-import { Photo } from 'src/api/photo/entities/photo-entity';
-import { Product } from 'src/api/product/entities/product-entity';
-import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
-import { Review } from 'src/api/review/entities/review-entity';
-import { User } from 'src/api/user/entities/user.entity';
-import { Event } from 'src/api/event/entities/event-entity';
-
 
 export const config = {
   name: 'default',
@@ -34,7 +22,6 @@ export const config = {
   database: process.env.TYPEORM_NAME,
   synchronize: true,
   dropSchema: false,
-  entities: [Delivery, Event, Food, Menu, Order, Photo, Product, Restaurant, Review, Location, User],
   entities: [
     User,
     Delivery,

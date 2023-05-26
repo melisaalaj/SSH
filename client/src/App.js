@@ -10,7 +10,6 @@ import ShopCard from "./pages/ShopCard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ScreenClassProvider } from "react-grid-system";
 
-
 function App() {
   return (
     <ScreenClassProvider class="">
@@ -25,7 +24,7 @@ function App() {
           <Route path="/shop-card" element={<ShopCard />} />
         </Routes>
       </Router>
-      </ScreenClassProvider>
+    </ScreenClassProvider>
   );
 }
 

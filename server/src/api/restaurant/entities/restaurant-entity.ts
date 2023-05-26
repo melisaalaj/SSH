@@ -15,7 +15,7 @@ import {
   ManyToMany,
   OneToMany,
 } from 'typeorm';
-import { Delivery } from 'src/api/delivery/entities/delivery-entity';
+//import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 
 @Entity()
 export class Restaurant extends BaseEntity {
