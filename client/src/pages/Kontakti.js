@@ -1,6 +1,5 @@
 import React from "react";
 
-import Navbar from "../component/Navbar";
 import "../assets/styles/kontakti.css";
 import backgroundImage from "../assets/images/bottom-image-contact.jpg";
 import backgroundImage1 from "../assets/images/map.png";
@@ -14,6 +13,7 @@ export default function Kontakti() {
     tel: "",
     message: "",
   });
+  const [successMessage, setSuccessMessage] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -22,13 +22,29 @@ export default function Kontakti() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert(
-      `Name: ${formData.name}, Email: ${formData.email},Tel: ${formData.tel}, Message: ${formData.message}`
-    );
+    
+    fetch("http://localhost:3000/api/contact/create", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setSuccessMessage("Data posted successfully!");
+     
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Error submitting data. Please try again."); 
+     
+      });
   };
   return (
     <>
-      <Navbar />
+     
       <div class="layer">
         <div
           id="parallax-wrap"
@@ -102,7 +118,7 @@ export default function Kontakti() {
                           placeholder="Tel"
                           id="phone"
                           name="tel"
-                          value={formData.email}
+                          value={formData.tel}
                           onChange={handleChange}
                         />
                       </div>
@@ -124,7 +140,8 @@ export default function Kontakti() {
                       <div className="col-md-12">
                         <button
                           type="submit"
-                          class="orange-button medium inline rounded">
+                          class="orange-button medium inline rounded"
+                          onChange={handleSubmit}>
                           Submit
                         </button>
                       </div>
