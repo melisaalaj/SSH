@@ -1,6 +1,7 @@
+import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
 import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()
 export class Location extends BaseEntity {
@@ -15,5 +16,7 @@ export class Location extends BaseEntity {
 
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.locations)
   restaurant: Restaurant;
-  location: Promise<Restaurant>;
+
+  @OneToOne(() => Delivery, (delivery) => delivery.location)
+  delivery: Delivery[];
 }
