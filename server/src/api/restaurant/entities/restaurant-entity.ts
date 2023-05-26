@@ -1,3 +1,4 @@
+import { Contact } from 'src/api/contact/entities/contact-entity';
 import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 import { Event } from 'src/api/event/entities/event-entity';
 import { Food } from 'src/api/food/entities/food-entity';
@@ -21,6 +22,9 @@ export class Restaurant extends BaseEntity {
 
   @Column({ nullable: true })
   description: string;
+
+  @Column({ nullable: true })
+  email: string;
 
   @JoinColumn({ name: 'photoId' })
   @OneToMany(() => Photo, (photo) => photo.restaurant, { nullable: true })

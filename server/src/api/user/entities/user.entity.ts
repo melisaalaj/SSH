@@ -5,6 +5,7 @@ import { UserGender } from '../enums/userGender.enum';
 import { UserRoles } from '../enums/roles.enum';
 import { AuditEntity } from '../../../common/db/customBaseEntites/AuditEntity';
 import { Order } from 'src/api/order/entities/orders-entity';
+import { Contact } from 'src/api/contact/entities/contact-entity';
 
 @Entity('users')
 export class User extends AuditEntity {
@@ -54,5 +55,8 @@ export class User extends AuditEntity {
   
   @OneToMany(() => Order, (order) => order.user)
   orders: Order;
+
+  @OneToMany(() => Contact, contact => contact.user)
+  contacts: Contact[];
   
 } 

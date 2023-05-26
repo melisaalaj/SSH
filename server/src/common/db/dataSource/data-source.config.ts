@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { Contact } from 'src/api/contact/entities/contact-entity';
 import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 import { Event } from 'src/api/event/entities/event-entity';
 import { Food } from 'src/api/food/entities/food-entity';
