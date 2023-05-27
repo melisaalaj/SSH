@@ -84,8 +84,7 @@ export class FoodController {
       throw new NotFoundException('Restaurant not found');
     }
 
-    const food = await this.foodService.createFood(createFoodDto, photo);
-    food.restaurants = [restaurant];
+    const food = await this.foodService.create(createFoodDto, restaurant, photo);
     return food;
   }
 

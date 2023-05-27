@@ -54,6 +54,9 @@ export class User extends AuditEntity {
   @Column({ nullable: true })
   birthdate: Date;
 
+  @Column({ nullable: true })
+  public stripeCustomerId: string;
+  
   @OneToMany(() => Order, (order) => order.user)
   orders: Order;
 

@@ -21,6 +21,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
 import { OrderModule } from './api/order/order.module';
 import { ContactModule } from './api/contact/contact.module';
 import { ReviewModule } from './api/review/review.module';
+import { StripeModule } from './api/stripe/stripe.module';
 
 @Module({
   imports: [
@@ -59,7 +60,8 @@ import { ReviewModule } from './api/review/review.module';
     DeliveryModule,
     OrderModule,
     ContactModule,
-    ReviewModule
+    ReviewModule,
+    StripeModule
   ],
   controllers: [AppController],
   providers: [AppService, MailService],
