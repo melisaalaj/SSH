@@ -11,7 +11,6 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { FoodType } from '../enums/food.enum';
 
 @Entity()
 export class Food extends AuditEntity {
@@ -23,13 +22,6 @@ export class Food extends AuditEntity {
 
   @Column({ nullable: true })
   price: number;
-
-  @Column({
-    type: 'enum',
-    enum: FoodType,
-    default: FoodType.OTHER,
-  })
-  type: FoodType;
 
   @Column({ nullable: true })
   productId: string;
@@ -48,4 +40,5 @@ export class Food extends AuditEntity {
   })
   @JoinTable()
   restaurants?: Restaurant[];
+
 }

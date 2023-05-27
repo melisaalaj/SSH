@@ -12,6 +12,8 @@ import { BookingService } from './booking.service';
 import { RestaurantService } from '../restaurant/restaurant.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
+import { Roles } from 'src/common/decorators/roles.decorato';
+import { UserRoles } from '../user/enums/roles.enum';
   
   @ApiTags('Booking')
   @Controller('booking')
@@ -58,7 +60,8 @@ import { UpdateBookingDto } from './dto/update-booking.dto';
       }
       return booking;
     }
-  
+    
+    @Roles(UserRoles.ADMIN)
     @Get()
     async findAll() {
       return await this.bookingService.findAll();

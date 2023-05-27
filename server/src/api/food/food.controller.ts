@@ -34,44 +34,7 @@ export class FoodController {
     private readonly foodService: FoodService,
     private readonly resturantService: RestaurantService,
   ) {}
-
-  // @Post('/create/:id')
-  // async createFood(
-  //   @Param('id') restaurantId: string,
-  //   @Body() createFoodDto: CreateFoodDto,
-  // ) {
-  //   const restaurant = await this.resturantService.findOne(restaurantId);
-  //   if (!restaurant) {
-  //     throw new NotFoundException('Food not found');
-  //   }
-
-  //   const food = await this.foodService.create(
-  //     createFoodDto,
-  //     restaurant,
-  //   );
-
-  //   return food;
-  // }
-
-  // @Post('/create/:id')
-  // async createFood(
-  // @Param('id') restaurantId: string,
-  // @Body() createFoodDto: CreateFoodDto,
-  // @Body() photo: Photo,
-  // ) {
-  // const restaurant = await this.resturantService.findOne(restaurantId);
-  // if (!restaurant) {
-  //   throw new NotFoundException('Food not found');
-  // }
-
-  // const food = await this.foodService.createFood(
-  //   createFoodDto,
-  //   photo,
-  // );
-
-  // return food;
-  // }
-
+  
   @Roles(UserRoles.ADMIN)
   @Post('/create/:id')
   async createFood(

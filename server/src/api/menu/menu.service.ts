@@ -58,11 +58,11 @@ export class MenuService {
     return this.repo.remove(menu);
   }
 
-  findOne(id: string) {
+  async findOne(id: string) {
     if (!id) {
       return null;
     }
-    return this.repo.findOneBy({ id: parseInt(id) });
+    return this.repo.findOne({ where: { id: parseInt(id) }, relations: ['restaurant', 'foods'] });
   }
 
   
