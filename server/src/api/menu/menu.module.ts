@@ -9,16 +9,19 @@ import { PhotoService } from "../photo/photo.service";
 import { MenuController } from "./menu.controller";
 import { Food } from "../food/entities/food-entity";
 import { FoodService } from "../food/food.service";
+import { RestaurantModule } from "../restaurant/restaurant.module";
+import { PhotoModule } from "../photo/photo.module";
+import { FoodModule } from "../food/food.module";
 
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Menu]),
-    TypeOrmModule.forFeature([Restaurant]),
-    TypeOrmModule.forFeature([Photo]),
-    TypeOrmModule.forFeature([Food]),
+    RestaurantModule,
+    PhotoModule,
+    FoodModule
   ],
-  providers: [MenuService, RestaurantService, PhotoService, FoodService],
+  providers: [MenuService],
   controllers: [MenuController],
   exports: [MenuService],
 })

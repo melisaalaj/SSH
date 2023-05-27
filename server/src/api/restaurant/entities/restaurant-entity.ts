@@ -6,14 +6,11 @@ import { Location } from 'src/api/location/entities/location-entity';
 import { Order } from 'src/api/order/entities/orders-entity';
 import { Photo } from 'src/api/photo/entities/photo-entity';
 import { Product } from 'src/api/product/entities/product-entity';
+import { Menu } from 'src/api/menu/entities/menu-entity';
 import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToMany,
-  OneToMany,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, OneToMany } from 'typeorm';
+import { Review } from 'src/api/review/entities/review-entity';
+//import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 
 @Entity()
 export class Restaurant extends BaseEntity {
@@ -44,4 +41,15 @@ export class Restaurant extends BaseEntity {
 
   @OneToMany(() => Delivery, (delivery) => delivery.restaurant)
   deliveries: Delivery[];
+
+  @OneToMany(() => Event, (event) => event.restaurant)
+  events: Event[];
+
+  @OneToMany(() => Menu, (menu) => menu.restaurant)
+  menus: Menu[];
+  @OneToMany(() => Booking, (booking) => booking.restaurant)
+  bookings:  Booking[];
+
+  @OneToMany(() => Review, (review) => review.restaurant)
+  reviews: Review[];
 }
