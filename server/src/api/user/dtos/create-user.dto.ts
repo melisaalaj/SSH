@@ -14,7 +14,7 @@ import { IsUnique } from 'src/common/decorators/validation.decorator';
 
 export class CreateUserDto {
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ example: 'Melisa' })
   firstName: string;
 
   @IsString()

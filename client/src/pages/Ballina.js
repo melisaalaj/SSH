@@ -1,5 +1,4 @@
 import React from "react";
-import Navbar from "../component/Navbar";
 import SearchBar from "../component/SearchBar";
 import Footer from "../component/Footer";
 import Carousel1 from "../component/Carousel1";
@@ -11,8 +10,7 @@ import { ScreenClassProvider } from "react-grid-system";
 
 export default function Ballina() {
   return (
-    <>
-      <Navbar />
+    <ScreenClassProvider className="App">
       <div className="searchbar--">
         <SearchBar />
       </div>
@@ -20,6 +18,6 @@ export default function Ballina() {
       <h1 className="h11">Choose the restaurant:</h1>
       <ResList />
       <Footer />
-    </>
+    </ScreenClassProvider>
   );
 }

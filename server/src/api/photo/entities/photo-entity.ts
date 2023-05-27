@@ -11,7 +11,7 @@ export class Photo extends BaseEntity {
   @Column({
     type: 'bytea',
   })
-  data: Uint8Array;
+  data: Buffer;
 
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.photos)
   restaurant: Restaurant;

@@ -6,7 +6,6 @@ import {
   Get,
   HttpCode,
   HttpStatus,
-  NotFoundException,
   Param,
   Post,
   Query,
@@ -56,9 +55,7 @@ export class RestaurantController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const restaurant = await this.restaurantService.findOne(id);
-    if (!restaurant) {
-      throw new NotFoundException('Restaurant not found');
-    }
+
     return restaurant;
   }
 
@@ -72,10 +69,6 @@ export class RestaurantController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string) {
-    const restaurant = await this.restaurantService.findOne(id);
-    if (!restaurant) {
-      throw new NotFoundException('Restaurant not found');
-    }
     await this.restaurantService.remove(id);
   }
 
@@ -84,10 +77,6 @@ export class RestaurantController {
     const restaurantInfo = await this.restaurantService.getRestaurantDetails(
       id,
     );
-
-    if (!restaurantInfo) {
-      throw new NotFoundException('Restaurant not found');
-    }
 
     return restaurantInfo;
   }

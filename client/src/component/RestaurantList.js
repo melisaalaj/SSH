@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import '../assets/styles/rescard.css';
 import foto1 from '../assets/images/res1.jpg';
 import foto2 from '../assets/images/res2.jpg';
 import foto3 from '../assets/images/res3.jpg';
-
+import { Link } from "react-router-dom";
 
 const restaurants = [
   {
@@ -31,31 +32,44 @@ const restaurants = [
 ];
 
 
-function RestaurantCard({ restaurant }) {
-  return (
-    <div className="restaurant-card">
+const RestaurantCards = () => {
+  return restaurants.map(restaurant => (
+    <Link to="/restaurant/:menuId" className="restaurant-card">
+    <div className="restaurant-card" key={restaurant.id}>
       <img src={restaurant.photo} alt={restaurant.name} />
       <div className="restaurant-info">
         <h5 className="restaurant-name">{restaurant.name}</h5>
         <p className="restaurant-location">{restaurant.location}</p>
         <p className="restaurant-type">{restaurant.type}</p>
-        <p className="crestaurant-opening">{restaurant.opening_hours}</p>
+        <p className="crestaurant-opening">{restaurant.openingHours}</p>
       </div>
     </div>
-  );
-}
-
+    </Link>
+  ));
+};
 
 function RestaurantList() {
+  const [restaurants, setRestaurants] = useState([]);
 
+  useEffect(() => {
+    // Fetch data from the database using Axios
+    axios.get('/api/restaurants') 
+      .then(response => {
+        setRestaurants(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching restaurants:', error);
+      });
+  }, []);
   return (
     <div>
-      <div className="container">
-        {restaurants.map(restaurant => (
+      <div class="container">
+        {/* {restaurants.map(restaurant => (
           <div className="" key={restaurant.id}>
             <RestaurantCard restaurant={restaurant} />
           </div>
-        ))}
+        ))} */}
+        {RestaurantCards()}
       </div>
     </div>
   );
