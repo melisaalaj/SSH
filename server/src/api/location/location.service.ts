@@ -29,7 +29,7 @@ export class LocationService {
   }
 
   async findOne(id: string) {
-    const location = await this.repo.findOneBy({ id: parseInt(id) });
+    const location = await this.repo.findOne({where: { id: parseInt(id) }});
     if (!location) {
       throw new NotFoundException();
     }

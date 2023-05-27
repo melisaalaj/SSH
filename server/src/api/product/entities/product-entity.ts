@@ -1,5 +1,5 @@
-import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
-import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
+import { Restaurant } from '../../../api/restaurant/entities/restaurant-entity';
+import { BaseEntity } from '../../../common/db/customBaseEntites/BaseEntity';
 import { Entity, ManyToOne } from 'typeorm';
 
 @Entity()

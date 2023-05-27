@@ -20,7 +20,7 @@ import { UpdateDeliveryDto } from './dtos/update-delivery.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { RolesGuard } from 'src/common/guards/roles.guard';
 import { UserRoles } from '../user/enums/roles.enum';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 
 @ApiTags('Delivery')
 @Controller('delivery')

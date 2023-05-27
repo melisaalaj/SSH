@@ -13,25 +13,31 @@ export class RestaurantService {
     @InjectRepository(Restaurant) private repo: Repository<Restaurant>,
   ) {}
 
-  create(createRestaurantDto: CreateRestaurantDto) {
-    return this.repo.save(this.repo.create(createRestaurantDto));
+  async create(dto: CreateRestaurantDto): Promise<Restaurant> {
+    return await this.repo.save(this.repo.create(dto));
   }
 
   async findOne(id: string) {
-    const res = await this.repo.findOneBy({ id: parseInt(id) });
+    const res = await this.repo.findOne({ where: {id: parseInt(id)} });
     if (!res) {
-      throw new NotFoundException();
+      throw new NotFoundException('Restaurant not found');
     }
     return res;
   }
 
   async remove(id: string) {
     const restaurant = await this.findOne(id);
-    return this.repo.remove(restaurant);
+    if (!restaurant) {
+      throw new NotFoundException('Restaurant not found');
+    }
+    await this.repo.remove(restaurant);
   }
 
   async update(id: string, dto: UpdateRestaurantDto) {
     const restaurant = await this.findOne(id);
+    if (!restaurant) {
+      throw new NotFoundException('Restaurant not found');
+    }
     await this.repo.update(restaurant.id, dto);
   }
 
@@ -54,7 +60,7 @@ export class RestaurantService {
       description,
       photos: loadedPhotos.map((photo) => ({
         id: photo.id,
-        data: Readable.from(photo.data),
+        data: Readable.from([photo.data]),
       })),
       locations: locations.map((location) => ({
         id: location.id,

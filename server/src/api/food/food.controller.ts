@@ -20,7 +20,7 @@ import { UpdateFoodDto } from './dto/update-food';
 import { Photo } from '../photo/entities/photo-entity';
 import { RolesGuard } from 'src/common/guards/roles.guard';
 import { UserRoles } from '../user/enums/roles.enum';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 import { AuthGuard } from '../auth/auth.guard';
 
 @ApiTags('Food')
