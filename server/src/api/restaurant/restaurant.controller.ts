@@ -1,26 +1,37 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
   HttpCode,
   HttpStatus,
-  NotFoundException,
   Param,
   Post,
+  Query,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { RestaurantService } from './restaurant.service';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { Restaurant } from './entities/restaurant-entity';
 import { PhotoService } from '../photo/photo.service';
+import { AuthGuard } from '../auth/auth.guard';
+import { Roles } from 'src/common/decorators/roles.decorato';
+import { UserRoles } from '../user/enums/roles.enum';
 
 @Controller('restaurants')
+@UsePipes(new ValidationPipe())
+@UseInterceptors(ClassSerializerInterceptor)
+@UseGuards(AuthGuard)
+@ApiBearerAuth()
 @ApiTags('Restaurant')
 export class RestaurantController {
   constructor(
@@ -28,32 +39,36 @@ export class RestaurantController {
     private readonly photoService: PhotoService,
   ) {}
 
+  @Roles(UserRoles.ADMIN)
   @Post('/create')
   create(@Body() createRestaurantDto: CreateRestaurantDto) {
     return this.restaurantService.create(createRestaurantDto);
   }
 
+  @Roles(UserRoles.ADMIN)
   @Post('/update/:id')
   async update(@Param('id') id: string, @Body() body: UpdateRestaurantDto) {
     return await this.restaurantService.update(id, body);
   }
 
+  @Roles(UserRoles.ADMIN, UserRoles.CUSTOMER, UserRoles.USER)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const restaurant = await this.restaurantService.findOne(id);
-    if (!restaurant) {
-      throw new NotFoundException('Restaurant not found');
-    }
+
     return restaurant;
   }
 
+  @Get()
+  async getLocation(@Query('name') name?: string) {
+    const restaurant = await this.restaurantService.findByName(name);
+    return restaurant;
+  }
+
+  @Roles(UserRoles.ADMIN)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string) {
-    const restaurant = await this.restaurantService.findOne(id);
-    if (!restaurant) {
-      throw new NotFoundException('Restaurant not found');
-    }
     await this.restaurantService.remove(id);
   }
 
@@ -63,13 +78,10 @@ export class RestaurantController {
       id,
     );
 
-    if (!restaurantInfo) {
-      throw new NotFoundException('Restaurant not found');
-    }
-
     return restaurantInfo;
   }
 
+  @Roles(UserRoles.ADMIN)
   @Post('/photos/:id')
   @UseInterceptors(FileInterceptor('file'))
   async addPhotoToRestaurant(

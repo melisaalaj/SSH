@@ -1,18 +1,30 @@
 .bottom-navigation {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+   position: absolute;
+  /*bottom: 0;
+  left: 0; */
   width: 100%;
   height: 300px;
   background-color: #f2f2f2;
   display: flex;
   justify-content: space-between;
 }
+.footer-adresa{
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  margin-left: 0px;
+ padding-left:0px;
+ margin-top: 20px;
+}
+.abonimform{
+  margin-left:0px;
+  padding: auto;
+}
 
 .left-side {
   display: block;
-  flex-direction: column;
-  justify-content: center;
+  /* flex-direction: column;
+  justify-content: center; */
   margin-left: 300px;
 }
 .bottom-navigation .left-side select {
@@ -34,6 +46,7 @@
   color: white;
   border: none;
   cursor: pointer;
+  margin-left: 10px;
 }
 .left-side form button {
   color: white;
@@ -69,37 +82,17 @@
 .legal-note a:hover {
   color: #4caf50;
 }
-footer h3 {
-  color: black;
-  margin-left: -70px;
+.h33{
+  color:black;
+  margin-right: 28px;
+  padding: 10px;
 }
-footer #p1 {
-  font-size: 12px;
-  font-family: "Arial ";
-  font-weight: 10;
-  margin-left: -105px;
-}
-footer #p2 {
-  font-size: 12px;
-  font-family: "Arial ";
-  font-weight: 10;
-  margin-left: -185px;
-}
-footer #p3 {
-  font-size: 12px;
-  font-family: "Arial ";
-  font-weight: 10;
-  margin-left: -177px;
-}
-footer .gjuha {
-  margin-left: -180px;
-}
-footer .project ul {
+.project ul{
   margin: 0px;
 }
-footer .project ul li {
+.project ul li{
   margin: 0px;
 }
-footer h4 {
-  color: black;
+h4{
+  color:black;
 }

@@ -1,10 +1,11 @@
+import { Booking } from 'src/api/booking/entities/booking-entity';
 import { Delivery } from 'src/api/delivery/entities/delivery-entity';
+import { Event } from 'src/api/event/entities/event-entity';
 import { Food } from 'src/api/food/entities/food-entity';
 import { Location } from 'src/api/location/entities/location-entity';
 import { Order } from 'src/api/order/entities/orders-entity';
 import { Photo } from 'src/api/photo/entities/photo-entity';
 import { Product } from 'src/api/product/entities/product-entity';
-import { Event } from 'src/api/event/entities/event-entity';
 import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
 import {
   Column,
@@ -13,7 +14,6 @@ import {
   ManyToMany,
   OneToMany,
 } from 'typeorm';
-import { Menu } from 'src/api/menu/entities/menu-entity';
 
 @Entity()
 export class Restaurant extends BaseEntity {
@@ -22,6 +22,9 @@ export class Restaurant extends BaseEntity {
 
   @Column({ nullable: true })
   description: string;
+
+  @Column({ nullable: true })
+  email: string;
 
   @JoinColumn({ name: 'photoId' })
   @OneToMany(() => Photo, (photo) => photo.restaurant, { nullable: true })
@@ -41,10 +44,4 @@ export class Restaurant extends BaseEntity {
 
   @OneToMany(() => Delivery, (delivery) => delivery.restaurant)
   deliveries: Delivery[];
-
-  @OneToMany(() => Event, (event) => event.restaurant)
-  events: Event[];
-
-  @OneToMany(() => Menu, (menu) => menu.restaurant)
-  menus: Menu[];
 }

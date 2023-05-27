@@ -1,20 +1,24 @@
-import { Module } from '@nestjs/common';
-import { FoodService } from './food.service';
-import { FoodController } from './food.controller';
+import { forwardRef, Module } from '@nestjs/common';
+import { RestaurantModule } from '../restaurant/restaurant.module';
+import { PhotoModule } from '../photo/photo.module';
+import { UserModule } from '../user/user.module';
+import { StripeModule } from '../stripe/stripe.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Food } from './entities/food-entity';
-import { Restaurant } from '../restaurant/entities/restaurant-entity';
-import { RestaurantService } from '../restaurant/restaurant.service';
-import { PhotoService } from '../photo/photo.service';
-import { Photo } from '../photo/entities/photo-entity';
+import { FoodService } from './food.service';
+import { FoodController } from './food.controller';
+import { StripeService } from '../stripe/stripe.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Food]), 
-    TypeOrmModule.forFeature([Restaurant]),
-    TypeOrmModule.forFeature([Photo]),
-],
-  providers: [FoodService, RestaurantService, PhotoService],
+    TypeOrmModule.forFeature([Food]),
+    RestaurantModule,
+    PhotoModule,
+    ConfigModule,
+    UserModule,
+  ],
+  providers: [FoodService, StripeService],
   controllers: [FoodController],
   exports: [FoodService],
 })

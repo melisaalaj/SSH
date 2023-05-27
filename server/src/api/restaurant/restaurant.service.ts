@@ -1,10 +1,9 @@
 import { Injectable, NotFoundException, StreamableFile } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Restaurant } from './entities/restaurant-entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
-import { PhotoService } from '../photo/photo.service';
 import { Photo } from '../photo/entities/photo-entity';
 import { Readable } from 'stream';
 
@@ -12,32 +11,28 @@ import { Readable } from 'stream';
 export class RestaurantService {
   constructor(
     @InjectRepository(Restaurant) private repo: Repository<Restaurant>,
-    private readonly photoService: PhotoService,
   ) {}
 
   create(createRestaurantDto: CreateRestaurantDto) {
     return this.repo.save(this.repo.create(createRestaurantDto));
   }
 
-  findOne(id: string) {
-    if (!id) {
-      return null;
+  async findOne(id: string) {
+    const res = await this.repo.findOneBy({ id: parseInt(id) });
+    if (!res) {
+      throw new NotFoundException();
     }
-    return this.repo.findOneBy({ id: parseInt(id) });
+    return res;
   }
 
   async remove(id: string) {
-    const restaurant = await this.repo.findOneBy({ id: parseInt(id) });
-    if (!restaurant) {
-      throw new NotFoundException('User not found');
-    }
+    const restaurant = await this.findOne(id);
     return this.repo.remove(restaurant);
   }
 
   async update(id: string, dto: UpdateRestaurantDto) {
-    const restaurant = await this.repo.findOne({ where: { id: parseInt(id) } });
+    const restaurant = await this.findOne(id);
     await this.repo.update(restaurant.id, dto);
-    return await this.repo.findOne({ where: { id: parseInt(id) } });
   }
 
   async getRestaurantDetails(id: string) {
@@ -68,6 +63,16 @@ export class RestaurantService {
         postalCode: location.postalCode,
       })),
     };
+  }
+
+  async findByName(name?: string) {
+    const restaurant = {
+      where: {
+        ...(name && { name: ILike(`%${name}%`) }),
+      },
+    };
+
+    return await this.repo.find(restaurant);
   }
 
   async addPhotoToRestaurant(

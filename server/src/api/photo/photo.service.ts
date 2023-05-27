@@ -1,7 +1,13 @@
-import { ClassSerializerInterceptor, Injectable, NotFoundException, UseInterceptors } from '@nestjs/common';
+import {
+  ClassSerializerInterceptor,
+  Injectable,
+  NotFoundException,
+  UseInterceptors,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Photo } from './entities/photo-entity';
 import { Repository } from 'typeorm';
+import { retry } from 'rxjs';
 
 @Injectable()
 export class PhotoService {
@@ -14,25 +20,20 @@ export class PhotoService {
   }
 
   async getPhotoById(id: string) {
-    const photo = await this.repo.findOne({ where: { id: parseInt(id) } });
+    const photo = await this.findOne(id);
+    return photo;
+  }
+
+  findOne(id: string) {
+    const photo = this.repo.findOneBy({ id: parseInt(id) });
     if (!photo) {
       throw new NotFoundException('Photo not found!');
     }
     return photo;
   }
 
-  findOne(id: string) {
-    if (!id) {
-      return null;
-    }
-    return this.repo.findOneBy({ id: parseInt(id) });
-  }
-
   async remove(id: string) {
-    const photo = await this.repo.findOneBy({ id: parseInt(id) });
-    if (!photo) {
-      throw new NotFoundException('User not found');
-    }
+    const photo = await this.findOne(id);
     return this.repo.remove(photo);
   }
 }

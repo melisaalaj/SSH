@@ -11,12 +11,14 @@ import { In, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import EventEmitter from 'events';
 import { InjectEventEmitter } from 'nest-emitter';
+import { StripeService } from '../stripe/stripe.service';
 
 @Injectable()
 export class UserService implements IUserService {
   constructor(
     @InjectRepository(User) private userRepository: Repository<User>,
     @InjectEventEmitter() private readonly emitter: EventEmitter,
+    private stripeService: StripeService,
   ) {}
 
   async findOne(userId: string): Promise<User> {
@@ -43,8 +45,16 @@ export class UserService implements IUserService {
   }
 
   async create(createUserDto: CreateUserDto): Promise<User> {
+    const stripeCustomer = await this.stripeService.createCustomer(
+      createUserDto.firstName,
+      createUserDto.email,
+    );
+
     return await this.userRepository.save(
-      this.userRepository.create(createUserDto),
+      this.userRepository.create({
+        ...createUserDto,
+        stripeCustomerId: stripeCustomer.id,
+      }),
     );
   }
 
