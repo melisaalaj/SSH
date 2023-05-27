@@ -20,8 +20,8 @@ const LoginSignUp = () => {
     email: "",
     username: "",
     password: "",
-    phone: "043-123-456",
-    gender: "female",
+    phone: "",
+    gender: "",
     role: 2,
   });
 
@@ -50,6 +50,8 @@ const LoginSignUp = () => {
 
     if (!response.error) {
       setSuccessState("signup-success");
+
+      setTimeout(() => setSignIn(true), 1500);
     } else {
       setSuccessState("signup-error");
       setSuccessState("has-error");
@@ -90,12 +92,6 @@ const LoginSignUp = () => {
         return (
           <div className="responseWrapper">
             <h1>Signup was successful</h1>
-            <div className="signInWrapper">
-              Do you want to sign in?
-              <span role="button" onClick={() => toggleSignIn(true)}>
-                Sign In
-              </span>
-            </div>
           </div>
         );
       case "has-error":
@@ -192,6 +188,31 @@ const LoginSignUp = () => {
                     required
                   />
                   <label className="input-label">Password</label>
+                </div>
+                <div className="input">
+                  <input
+                    type="text"
+                    className="input-field"
+                    value={signUpFormData.phone}
+                    name="phone"
+                    onChange={(e) => handleSignUpChange(e)}
+                    required
+                  />
+                  <label className="input-label">Phone</label>
+                </div>
+                <div className="input">
+                  <select
+                    className="input-field"
+                    value={signUpFormData.gender}
+                    name="gender"
+                    onChange={handleSignUpChange}
+                    required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <label className="input-label">Gender</label>
                 </div>
                 <div className="action">
                   <button className="action-button">Sign Up</button>
