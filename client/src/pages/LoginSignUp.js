@@ -51,7 +51,10 @@ const LoginSignUp = () => {
     if (!response.error) {
       setSuccessState("signup-success");
 
-      setTimeout(() => setSignIn(true), 1500);
+      setTimeout(() => {
+        setSignIn(true);
+        setSuccessState("");
+      }, 2500);
     } else {
       setSuccessState("signup-error");
       setSuccessState("has-error");
