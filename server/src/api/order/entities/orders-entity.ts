@@ -21,7 +21,7 @@ export class Order extends BaseEntity {
   user: User;
 
   @OneToMany(() => Food, (food) => food.order)
-  foods: Food;
+  foods: Food[];
 
   @ManyToOne(() => Restaurant, (restuarant) => restuarant.orders)
   restaurant: Restaurant;
