@@ -1,4 +1,5 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "../assets/styles/LoginSignUp.css";
 
@@ -6,6 +7,7 @@ const LoginSignUp = () => {
   const [signIn, setSignIn] = useState(false);
 
   const [successState, setSuccessState] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const [loginFormData, setLoginFormData] = useState({
     email: "",
@@ -23,6 +25,8 @@ const LoginSignUp = () => {
     role: 2,
   });
 
+  const navigate = useNavigate();
+
   const handleSignUpChange = (e) => {
     const { name, value } = e.target;
     setSignUpFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
@@ -35,49 +39,72 @@ const LoginSignUp = () => {
   const toggleSignIn = (value) => setSignIn(value);
 
   const handleSignUpSubmit = async (event) => {
-    console.log(signUpFormData);
     event.preventDefault();
     const response = await fetch("http://localhost:3000/api/auth/signup", {
       method: "POST",
-      body: JSON.stringify(signUpFormData)
-    }).then((data) => data.json())
-
-    console.log(response);
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signUpFormData),
+    }).then((data) => data.json());
 
     if (!response.error) {
       setSuccessState("signup-success");
     } else {
       setSuccessState("signup-error");
+      setSuccessState("has-error");
+      setErrorMessage(response.message);
     }
   };
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    console.log(loginFormData);
 
     const response = await fetch("http://localhost:3000/api/auth/login", {
       method: "POST",
-      body: JSON.stringify(loginFormData)
-    }).then((data) => data.json())
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginFormData),
+    }).then((data) => data.json());
 
-    if (
-      !response.statusCode
-      ) {
+    if (response && response.access_token) {
       setSuccessState("login-success");
+      localStorage.setItem("accessToken", response.access_token);
+      setTimeout(() => navigate("/"), 2000);
     } else {
       setSuccessState("has-error");
+      setErrorMessage(response.message);
     }
-    console.log(response);
   };
 
   const stateRenderer = (val) => {
     switch (val) {
       case "login-success":
-        return <h1>Login was successfull</h1>;
+        return (
+          <div className="responseWrapper">
+            <h1>Login was successful</h1>
+          </div>
+        );
       case "signup-success":
-        return <h1>Signup was successfull</h1>;
+        return (
+          <div className="responseWrapper">
+            <h1>Signup was successful</h1>
+            <div className="signInWrapper">
+              Do you want to sign in?
+              <span role="button" onClick={() => toggleSignIn(true)}>
+                Sign In
+              </span>
+            </div>
+          </div>
+        );
       case "has-error":
-        return <h1>There was a problem with your request!</h1>;
+        return (
+          <div className="responseWrapper">
+            <h1>There was an error with your request!</h1>
+            <p>{errorMessage}</p>
+          </div>
+        );
       default:
         return (
           <>
@@ -202,9 +229,7 @@ const LoginSignUp = () => {
           <small>Let us create your account</small>
         </h2>
       </div>
-      <div className="form-wrapper">
-        {stateRenderer(successState)}
-      </div>
+      <div className="form-wrapper">{stateRenderer(successState)}</div>
     </div>
   );
 };
