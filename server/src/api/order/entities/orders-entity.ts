@@ -26,9 +26,6 @@ export class Order extends BaseEntity {
   @ManyToOne(() => Restaurant, (restuarant) => restuarant.orders)
   restaurant: Restaurant;
 
-  @OneToOne(() => Delivery, (delivery) => delivery.order)
-  delivery: Delivery;
-
-  // @OneToOne(() => Payment, (payment) => payment.order) 
-  // payment: Payment 
+  @OneToMany(() => Delivery, (delivery) => delivery.orders)
+  delivery: Delivery; 
 }

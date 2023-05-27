@@ -18,13 +18,12 @@ export class Delivery extends AuditEntity {
     })
   type: DeliveryType;
 
-  @OneToOne(() => Order, (order) => order.delivery)
-  order: Order;
+  @ManyToOne(() => Order, (order) => order.delivery)
+  orders: Order;
 
   @OneToOne(() => Location, (location) => location.delivery)
   location: Location;
 
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.deliveries)
-  restaurant: Restaurant;
-  
+  restaurant: Restaurant;  
 }

@@ -12,16 +12,18 @@ import { FoodService } from "../food/food.service";
 import { RestaurantModule } from "../restaurant/restaurant.module";
 import { PhotoModule } from "../photo/photo.module";
 import { FoodModule } from "../food/food.module";
+import { ConfigModule } from "@nestjs/config";
+import { StripeService } from "../stripe/stripe.service";
 
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Menu]),
-    RestaurantModule,
     PhotoModule,
-    FoodModule
+    ConfigModule,
+    RestaurantModule,
   ],
-  providers: [MenuService],
+  providers: [MenuService, StripeService],
   controllers: [MenuController],
   exports: [MenuService],
 })

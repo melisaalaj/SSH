@@ -6,6 +6,7 @@ import { Delivery } from "./entities/delivery-entity";
 import { PhotoModule } from "../photo/photo.module";
 import { RestaurantModule } from "../restaurant/restaurant.module";
 import { UserModule } from "../user/user.module";
+import { OrderModule } from "../order/order.module";
 
 
 @Module({
@@ -13,7 +14,8 @@ import { UserModule } from "../user/user.module";
     TypeOrmModule.forFeature([Delivery]),
     PhotoModule,
     RestaurantModule,
-    UserModule
+    UserModule,
+    OrderModule,
   ],
   providers: [DeliveryService],
   controllers: [DeliveryController],

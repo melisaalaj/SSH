@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { CreateDeliveryDto } from './dtos/create-delivery.dto';
 import { Restaurant } from '../restaurant/entities/restaurant-entity';
 import { UpdateDeliveryDto } from './dtos/update-delivery.dto';
+import { Order } from '../order/entities/orders-entity';
 
 
 @Injectable()
@@ -12,9 +13,9 @@ export class DeliveryService {
   constructor(@InjectRepository(Delivery) private repo: Repository<Delivery>) {}
 
 
-  create(createDeliveryDto: CreateDeliveryDto, res: Restaurant) {
+  create(createDeliveryDto: CreateDeliveryDto, order: Order) {
     const delivery = this.repo.create(createDeliveryDto);
-    delivery.restaurant = res;
+    delivery.orders = order;
     return this.repo.save(delivery);
   }
 
