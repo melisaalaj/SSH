@@ -18,7 +18,8 @@ export class CreateMenuWithRestaurantDto {
   @ApiProperty()
   restaurantName: string;
 
-  @ValidateNested()
+  @IsArray()
+  @ValidateNested({ each: true })
   @ApiProperty({ type: CreateMenuDto })
   menu: CreateMenuDto;
 }

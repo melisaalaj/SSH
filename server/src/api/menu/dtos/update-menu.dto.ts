@@ -20,7 +20,8 @@ export class UpdateMenuWithRestaurantDto {
   @ApiProperty()
   restaurantName: string;
 
-  @ValidateNested()
+  @IsArray()
+  @ValidateNested({each: true})
   @ApiProperty({ type: UpdateMenuDto})
   @IsOptional()
   menu: UpdateMenuDto;
