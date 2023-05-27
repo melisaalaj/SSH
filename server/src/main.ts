@@ -1,10 +1,9 @@
 /* eslint-disable prettier/prettier */
 
-import { NestFactory } from "@nestjs/core";
-import { AppModule } from "./app.module";
-import { RequestMethod, ValidationPipe } from "@nestjs/common";
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+import { RequestMethod, ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 const port = process.env.PORT || 3000;
 

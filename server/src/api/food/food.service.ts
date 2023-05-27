@@ -8,29 +8,51 @@ import { Restaurant } from '../restaurant/entities/restaurant-entity';
 import { RestaurantService } from '../restaurant/restaurant.service';
 import { PhotoService } from '../photo/photo.service';
 import { Photo } from '../photo/entities/photo-entity';
+import { StripeService } from '../stripe/stripe.service';
 
 @Injectable()
 export class FoodService {
   constructor(
     @InjectRepository(Food) private repo: Repository<Food>,
-    private restaurantService: RestaurantService,
-    private photoService: PhotoService,
+    private readonly stripeService: StripeService,
   ) {}
 
-
-  create(createFoodDto: CreateFoodDto, res: Restaurant) {
-    const food = this.repo.create(createFoodDto);
-    food.restaurants = [res];
-    return this.repo.save(food);
-  }
-
-  createFood(createFoodDto: CreateFoodDto, photo: Photo) {
-    const food = this.repo.create(createFoodDto);
-    food.photos = [photo];
-    return this.repo.save(food);
-  }
-
+  async create(createFoodDto: CreateFoodDto, res: Restaurant, photo: Photo) {
+    const stripeProduct = await this.stripeService.createProduct(
+      createFoodDto.name,
+      createFoodDto.price,
+    );
   
+    const food = this.repo.create({
+      ...createFoodDto,
+      productId: stripeProduct.product.id,
+      restaurants: [res],
+      photos: [photo],
+    });
+  
+    return this.repo.save(food);
+  }
+
+  async createFoodProduct(createFood: CreateFoodDto): Promise<Food> {
+    const stripeProduct = await this.stripeService.createProduct(
+      createFood.name,
+      createFood.price,
+    );
+
+    return await this.repo.save(
+      this.repo.create({
+        ...createFood,
+        productId: stripeProduct.product.id,
+      }),
+    );
+  }
+  
+
+  // createFood(createFoodDto: CreateFoodDto, photo: Photo) {
+  //   const food = this.repo.create(createFoodDto);
+  //   food.photos = [photo];
+  //   return this.repo.save(food);
+  // }
 
   findOne(id: string) {
     if (!id) {
@@ -40,9 +62,9 @@ export class FoodService {
   }
 
   async update(id: string, dto: UpdateFoodDto) {
-      const food = await this.repo.findOne({ where: { id: parseInt(id) } });
-      await this.repo.update(food.id, dto);
-      return await this.repo.findOne({ where: { id: parseInt(id) } });
+    const food = await this.repo.findOne({ where: { id: parseInt(id) } });
+    await this.repo.update(food.id, dto);
+    return await this.repo.findOne({ where: { id: parseInt(id) } });
   }
 
   async remove(id: string) {
@@ -69,13 +91,12 @@ export class FoodService {
         })
       : [];
 
-      return {
-        name,
-        description,
-        photos: loadedPhotos.map((photo) => ({
-          id: photo.id,
-        })),
-      };
+    return {
+      name,
+      description,
+      photos: loadedPhotos.map((photo) => ({
+        id: photo.id,
+      })),
+    };
   }
-
 }
