@@ -35,12 +35,11 @@ export class Food extends AuditEntity {
   @Column({ nullable: true })
   productId: string;
 
+  @ManyToOne(() => Menu, (menu) => menu.foods)
+  menu: Menu;
+
   @OneToMany(() => Photo, (photo) => photo.food, { nullable: true })
   photos?: Photo[];
-
-  @OneToMany(() => Menu, (menu) => menu.food, { nullable: true })
-  @JoinTable()
-  menus?: Menu[];
 
   @ManyToOne(() => Order, (order) => order.foods, { nullable: true })
   order?: Order;
