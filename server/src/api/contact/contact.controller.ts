@@ -11,6 +11,8 @@ import {
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './dto/create-contact.fto';
 import { UpdateContactDto } from './dto/update-contact.dto';
+import { Roles } from 'src/common/decorators/roles.decorato';
+import { UserRoles } from '../user/enums/roles.enum';
   
   @ApiTags('Contact')
   @Controller('contact')
@@ -29,6 +31,7 @@ import { UpdateContactDto } from './dto/update-contact.dto';
       return await this.contactService.update(id, body);
     }
   
+    @Roles(UserRoles.ADMIN)
     @Delete(':id')
     async remove(@Param('id') id: string) {
       const contact = await this.contactService.findOne(id);
@@ -37,7 +40,8 @@ import { UpdateContactDto } from './dto/update-contact.dto';
       }
       await this.contactService.remove(id);
     }
-  
+
+    @Roles(UserRoles.ADMIN)
     @Get(':id')
     async findOne(@Param('id') id: string) {
       const order = await this.contactService.findOne(id);
@@ -46,7 +50,8 @@ import { UpdateContactDto } from './dto/update-contact.dto';
       }
       return order;
     }
-  
+    
+    @Roles(UserRoles.ADMIN)
     @Get()
     async findAll() {
       return await this.contactService.findAll();

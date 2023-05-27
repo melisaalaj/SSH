@@ -5,10 +5,12 @@ import { Repository } from 'typeorm';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Restaurant } from '../restaurant/entities/restaurant-entity';
+import { FoodService } from '../food/food.service';
 
 @Injectable()
 export class OrderService {
-  constructor(@InjectRepository(Order) private repo: Repository<Order>) {}
+  constructor(@InjectRepository(Order) private repo: Repository<Order>,
+              private foodService: FoodService) {}
 
   create(createOrderDto: CreateOrderDto, res: Restaurant) {
     const order = this.repo.create(createOrderDto);
@@ -64,5 +66,32 @@ export class OrderService {
         price: food.price,
       })),
     };
+  }
+
+
+  async addFoodToOrder(orderId: string, foodId: string) {
+    const order = await this.repo.findOne({
+      where: { id: parseInt(orderId) },
+      relations: ['foods'],
+    });
+
+    if (!order) {
+      throw new NotFoundException('Order not found');
+    }
+
+    const food = await this.foodService.findOne(foodId);
+
+    if (!food) {
+      throw new NotFoundException('Food not found');
+    }
+
+    if (!order.foods) {
+      order.foods = [food];
+    } else {
+      order.foods.push(food);
+    }
+
+    await this.repo.save(order);
+    return this.getOrderDetails(orderId);
   }
 }
