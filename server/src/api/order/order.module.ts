@@ -13,21 +13,20 @@ import { RestaurantService } from '../restaurant/restaurant.service';
 import { FoodService } from '../food/food.service';
 import { Photo } from '../photo/entities/photo-entity';
 import { PhotoService } from '../photo/photo.service';
+import { StripeModule } from '../stripe/stripe.module';
+import { RestaurantModule } from '../restaurant/restaurant.module';
+import { PhotoModule } from '../photo/photo.module';
+import { FoodModule } from '../food/food.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Order]),
-    TypeOrmModule.forFeature([Restaurant]),
-    TypeOrmModule.forFeature([Photo]),
-    TypeOrmModule.forFeature([Food]),
+    RestaurantModule,
+    PhotoModule,
+    FoodModule,
   ],
-  providers: [
-    OrderService,
-    RestaurantService,
-    PhotoService,
-    FoodService,
-  ],
+  providers: [OrderService],
   controllers: [OrderController],
   exports: [OrderService],
 })
-export class OrderModule { }
+export class OrderModule {}

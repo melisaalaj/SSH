@@ -7,6 +7,7 @@ import { jwtConstants } from './constants/constants';
 import { User } from '../user/entities/user.entity';
 import { MailerModule } from '../mailer/mailer.module';
 import { UserService } from '../user/user.service';
+import { StripeModule } from '../stripe/stripe.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
@@ -16,6 +17,7 @@ import { UserService } from '../user/user.service';
       signOptions: { expiresIn: '60m' },
     }),
     MailerModule,
+    StripeModule
   ],
   controllers: [AuthController],
   providers: [AuthService, UserService],
