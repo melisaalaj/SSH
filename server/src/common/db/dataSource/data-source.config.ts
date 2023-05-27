@@ -1,17 +1,17 @@
 import 'dotenv/config';
-import { Booking } from 'src/api/booking/entities/booking-entity';
-import { Contact } from 'src/api/contact/entities/contact-entity';
-import { Delivery } from 'src/api/delivery/entities/delivery-entity';
-import { Event } from 'src/api/event/entities/event-entity';
-import { Food } from 'src/api/food/entities/food-entity';
-import { Location } from 'src/api/location/entities/location-entity';
-import { Menu } from 'src/api/menu/entities/menu-entity';
-import { Order } from 'src/api/order/entities/orders-entity';
-import { Photo } from 'src/api/photo/entities/photo-entity';
-import { Product } from 'src/api/product/entities/product-entity';
-import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
-import { Review } from 'src/api/review/entities/review-entity';
-import { User } from 'src/api/user/entities/user.entity';
+import { Booking } from '../../../api/booking/entities/booking-entity';
+import { Contact } from '../../../api/contact/entities/contact-entity';
+import { Delivery } from '../../../api/delivery/entities/delivery-entity';
+import { Event } from '../../../api/event/entities/event-entity';
+import { Food } from '../../../api/food/entities/food-entity';
+import { Location } from '../../../api/location/entities/location-entity';
+import { Menu } from '../../../api/menu/entities/menu-entity';
+import { Order } from '../../../api/order/entities/orders-entity';
+import { Photo } from '../../../api/photo/entities/photo-entity';
+import { Product } from '../../../api/product/entities/product-entity';
+import { Restaurant } from '../../../api/restaurant/entities/restaurant-entity';
+import { Review } from '../../../api/review/entities/review-entity';
+import { User } from '../../../api/user/entities/user.entity';
 
 export const config = {
   name: 'default',

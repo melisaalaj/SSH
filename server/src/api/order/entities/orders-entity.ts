@@ -1,8 +1,8 @@
-import { Delivery } from 'src/api/delivery/entities/delivery-entity';
-import { Food } from 'src/api/food/entities/food-entity';
-import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
-import { User } from 'src/api/user/entities/user.entity';
-import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
+import { Delivery } from '../../../api/delivery/entities/delivery-entity';
+import { Food } from '../../../api/food/entities/food-entity';
+import { Restaurant } from '../../../api/restaurant/entities/restaurant-entity';
+import { User } from '../../../api/user/entities/user.entity';
+import { BaseEntity } from '../../../common/db/customBaseEntites/BaseEntity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity({ name: 'order' })

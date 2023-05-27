@@ -1,5 +1,5 @@
-import { User } from 'src/api/user/entities/user.entity';
-import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
+import { User } from '../../../api/user/entities/user.entity';
+import { BaseEntity } from '../../../common/db/customBaseEntites/BaseEntity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity({ name: 'contact' })

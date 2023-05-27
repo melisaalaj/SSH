@@ -17,10 +17,10 @@ import { RestaurantService } from '../restaurant/restaurant.service';
 import { CreateEventDto } from './dtos/create-event.dto';
 import { UpdateEventDto } from './dtos/update-event.dto';
 import { EventService } from './event.service';
-import { RolesGuard } from 'src/common/guards/roles.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserRoles } from '../user/enums/roles.enum';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 
 @ApiTags('Event')
 @Controller('Event')

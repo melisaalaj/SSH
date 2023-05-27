@@ -24,7 +24,7 @@ import { Express } from 'express';
 import { Restaurant } from './entities/restaurant-entity';
 import { PhotoService } from '../photo/photo.service';
 import { AuthGuard } from '../auth/auth.guard';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 import { UserRoles } from '../user/enums/roles.enum';
 
 @Controller('restaurants')
