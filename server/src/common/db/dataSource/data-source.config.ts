@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { Booking } from 'src/api/booking/entities/booking-entity';
 import { Contact } from 'src/api/contact/entities/contact-entity';
 import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 import { Event } from 'src/api/event/entities/event-entity';
@@ -35,6 +36,7 @@ export const config = {
     Restaurant,
     Review,
     Contact,
+    Booking,
   ],
   migrations: [process.env.TYPEORM_MIGRATIONS],
   logging: process.env.NODE_ENV === 'localhost',
@@ -63,6 +65,7 @@ export const configNoEntities = {
     Restaurant,
     Review,
     Contact,
+    Booking,
   ],
   migrations: [process.env.TYPEORM_MIGRATIONS],
   logging: process.env.NODE_ENV === 'localhost',
