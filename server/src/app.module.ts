@@ -20,6 +20,7 @@ import { NestEmitterModule } from 'nest-emitter';
 import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
 import { OrderModule } from './api/order/order.module';
 import { ContactModule } from './api/contact/contact.module';
+import { BookingModule } from './api/booking/booking.module';
 import { ReviewModule } from './api/review/review.module';
 import { StripeModule } from './api/stripe/stripe.module';
 
@@ -60,6 +61,7 @@ import { StripeModule } from './api/stripe/stripe.module';
     DeliveryModule,
     OrderModule,
     ContactModule,
+    BookingModule,
     ReviewModule,
     StripeModule
   ],

@@ -1,4 +1,4 @@
-import { Contact } from 'src/api/contact/entities/contact-entity';
+import { Booking } from 'src/api/booking/entities/booking-entity';
 import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 import { Event } from 'src/api/event/entities/event-entity';
 import { Food } from 'src/api/food/entities/food-entity';
@@ -8,7 +8,6 @@ import { Photo } from 'src/api/photo/entities/photo-entity';
 import { Product } from 'src/api/product/entities/product-entity';
 import { Review } from 'src/api/review/entities/review-entity';
 import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
-
 import { Column, Entity, JoinColumn, ManyToMany, OneToMany } from 'typeorm';
 //import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 
@@ -44,6 +43,9 @@ export class Restaurant extends BaseEntity {
 
   @OneToMany(() => Event, (event) => event.restaurant)
   events: Event[];
+
+  @OneToMany(() => Booking, (booking) => booking.restaurant)
+  bookings:  Booking[];
 
   @OneToMany(() => Review, (review) => review.restaurant)
   reviews: Review[];
