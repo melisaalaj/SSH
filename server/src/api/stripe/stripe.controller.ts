@@ -7,10 +7,12 @@ import { CreateFoodDto } from '../food/dto/create-food';
 import { AuthGuard } from '../auth/auth.guard';
 import { CurrentUser } from '../auth/currentUser';
 import { User } from '../user/entities/user.entity';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 
 @Controller('stripe')
+@ApiTags('Stripe')
+@UseGuards(AuthGuard)
 @ApiBearerAuth()
 export class StripeController {
   constructor(
@@ -34,7 +36,6 @@ export class StripeController {
     return { product, price };
   }
 
-  @UseGuards(AuthGuard)
   @Post('chargeByProduct/:productId')
   async chargeByProduct(
     @Body() card: AddCreditCardDto,
