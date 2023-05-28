@@ -1,7 +1,6 @@
 import { Menu } from '../../../api/menu/entities/menu-entity';
 import { Order } from '../../../api/order/entities/orders-entity';
 import { Photo } from '../../../api/photo/entities/photo-entity';
-import { Restaurant } from '../../../api/restaurant/entities/restaurant-entity';
 import { AuditEntity } from '../../../common/db/customBaseEntites/AuditEntity';
 import {
   Column,
@@ -34,11 +33,4 @@ export class Food extends AuditEntity {
 
   @ManyToOne(() => Order, (order) => order.foods, { nullable: true })
   order?: Order;
-
-  @ManyToMany(() => Restaurant, (resturant) => resturant.foods, {
-    nullable: true,
-  })
-  @JoinTable()
-  restaurants?: Restaurant[];
-
 }

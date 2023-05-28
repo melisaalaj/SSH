@@ -9,6 +9,7 @@ import { RestaurantService } from '../restaurant/restaurant.service';
 import { PhotoService } from '../photo/photo.service';
 import { Photo } from '../photo/entities/photo-entity';
 import { StripeService } from '../stripe/stripe.service';
+import { Menu } from '../menu/entities/menu-entity';
 
 @Injectable()
 export class FoodService {
@@ -17,7 +18,7 @@ export class FoodService {
     private readonly stripeService: StripeService,
   ) {}
 
-  async create(createFoodDto: CreateFoodDto, res: Restaurant, photo: Photo) {
+  async create(createFoodDto: CreateFoodDto, menu: Menu, photo: Photo) {
     const stripeProduct = await this.stripeService.createProduct(
       createFoodDto.name,
       createFoodDto.price,
@@ -26,7 +27,7 @@ export class FoodService {
     const food = this.repo.create({
       ...createFoodDto,
       productId: stripeProduct.product.id,
-      restaurants: [res],
+      menu: menu,
       photos: [photo],
     });
   
