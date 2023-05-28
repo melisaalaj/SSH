@@ -1,11 +1,11 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { CreateEventDto } from "./dtos/create-event.dto";
 import { Restaurant } from "../restaurant/entities/restaurant-entity";
 import { UpdateEventDto } from "./dtos/update-event.dto";
 import { Event } from "./entities/event-entity";
-
+import { Injectable } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common/exceptions';
 
 
 @Injectable()
@@ -36,10 +36,8 @@ export class EventService {
 
   findOne(id: string) {
     if (!id) {
-      return null;
+      throw new NotFoundException()
     }
-    return this.repo.findOneBy({ id: parseInt(id) });
+    return this.repo.findOne({where: { id: parseInt(id) }});
   }
-
-  
 }

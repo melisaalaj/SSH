@@ -21,9 +21,9 @@ import { User } from './entities/user.entity';
 import { PaginationInterceptor } from 'src/common/interceptors/pagination.interceptor';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { AuthGuard } from '../auth/auth.guard';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 import { UserRoles } from './enums/roles.enum';
-import { RolesGuard } from 'src/common/guards/roles.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
 
 @Controller('user')
 @ApiTags('User')

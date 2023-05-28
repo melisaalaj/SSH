@@ -1,6 +1,6 @@
-import { Food } from 'src/api/food/entities/food-entity';
-import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
-import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
+import { Food } from '../../../api/food/entities/food-entity';
+import { Restaurant } from '../../../api/restaurant/entities/restaurant-entity';
+import { BaseEntity } from '../../../common/db/customBaseEntites/BaseEntity';
 import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 
 @Entity()

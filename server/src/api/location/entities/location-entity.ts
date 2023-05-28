@@ -1,6 +1,6 @@
-import { Delivery } from 'src/api/delivery/entities/delivery-entity';
-import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
-import { BaseEntity } from 'src/common/db/customBaseEntites/BaseEntity';
+import { Delivery } from '../../../api/delivery/entities/delivery-entity';
+import { Restaurant } from '../../../api/restaurant/entities/restaurant-entity';
+import { BaseEntity } from '../../../common/db/customBaseEntites/BaseEntity';
 import { Column, Entity, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 
 @Entity()
@@ -12,7 +12,7 @@ export class Location extends BaseEntity {
   street: string;
 
   @Column({ nullable: true })
-  postalCode: number;
+  postalCode: string;
 
   @ManyToOne(() => Restaurant, (restaurant) => restaurant.locations)
   restaurant: Restaurant;

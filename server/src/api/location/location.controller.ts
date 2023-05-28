@@ -18,10 +18,10 @@ import { LocationService } from './location.service';
 import { CreateLocationDto } from './dto/create-location.dto';
 import { RestaurantService } from '../restaurant/restaurant.service';
 import { UpdateLocationDto } from './dto/update-location.dto';
-import { RolesGuard } from 'src/common/guards/roles.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import { AuthGuard } from '../auth/auth.guard';
 import { UserRoles } from '../user/enums/roles.enum';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 
 @Controller('location')
 @ApiBearerAuth()

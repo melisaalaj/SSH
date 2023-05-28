@@ -13,14 +13,13 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { RestaurantService } from '../restaurant/restaurant.service';
 import { DeliveryService } from './delivery.service';
 import { CreateDeliveryDto } from './dtos/create-delivery.dto';
 import { UpdateDeliveryDto } from './dtos/update-delivery.dto';
 import { AuthGuard } from '../auth/auth.guard';
-import { RolesGuard } from 'src/common/guards/roles.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import { UserRoles } from '../user/enums/roles.enum';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 import { OrderService } from '../order/order.service';
 
 @ApiTags('Delivery')

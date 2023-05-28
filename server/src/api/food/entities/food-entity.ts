@@ -1,8 +1,8 @@
-import { Menu } from 'src/api/menu/entities/menu-entity';
-import { Order } from 'src/api/order/entities/orders-entity';
-import { Photo } from 'src/api/photo/entities/photo-entity';
-import { Restaurant } from 'src/api/restaurant/entities/restaurant-entity';
-import { AuditEntity } from 'src/common/db/customBaseEntites/AuditEntity';
+import { Menu } from '../../../api/menu/entities/menu-entity';
+import { Order } from '../../../api/order/entities/orders-entity';
+import { Photo } from '../../../api/photo/entities/photo-entity';
+import { Restaurant } from '../../../api/restaurant/entities/restaurant-entity';
+import { AuditEntity } from '../../../common/db/customBaseEntites/AuditEntity';
 import {
   Column,
   Entity,
