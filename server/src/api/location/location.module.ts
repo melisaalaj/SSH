@@ -12,7 +12,6 @@ import { RestaurantModule } from '../restaurant/restaurant.module';
     TypeOrmModule.forFeature([Location]),
     PhotoModule,
     UserModule,
-    RestaurantModule,
   ],
   providers: [LocationService],
   controllers: [LocationController],
