@@ -7,19 +7,13 @@ import { PhotoService } from '../photo/photo.service';
 import { Booking } from './entities/booking-entity';
 import { BookingService } from './booking.service';
 import { BookingController } from './booking.controller';
+import { RestaurantModule } from '../restaurant/restaurant.module';
+import { PhotoModule } from '../photo/photo.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Booking]),
-    TypeOrmModule.forFeature([Restaurant]),
-    TypeOrmModule.forFeature([Photo])
-  ],
-  providers: [
-    BookingService,
-    RestaurantService,
-    PhotoService,
-  ],
+  imports: [TypeOrmModule.forFeature([Booking]), RestaurantModule, PhotoModule],
+  providers: [BookingService],
   controllers: [BookingController],
   exports: [BookingService],
 })
-export class BookingModule { }
+export class BookingModule {}

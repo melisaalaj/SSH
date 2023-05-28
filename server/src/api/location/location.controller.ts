@@ -30,23 +30,12 @@ import { Roles } from '../../common/decorators/roles.decorato';
 @UseInterceptors(ClassSerializerInterceptor)
 @UseGuards(AuthGuard, RolesGuard)
 export class LocationController {
-  constructor(
-    private readonly locationService: LocationService,
-    private readonly resturantService: RestaurantService,
-  ) {}
+  constructor(private readonly locationService: LocationService) {}
 
   @Roles(UserRoles.ADMIN)
   @Post('/create/:id')
-  async createLocation(
-    @Param('id') restaurantId: string,
-    @Body() createLocationDto: CreateLocationDto,
-  ) {
-    const restaurant = await this.resturantService.findOne(restaurantId);
-    const location = await this.locationService.create(
-      createLocationDto,
-      restaurant,
-    );
-
+  async createLocation(@Body() createLocationDto: CreateLocationDto) {
+    const location = await this.locationService.create(createLocationDto);
     return location;
   }
 

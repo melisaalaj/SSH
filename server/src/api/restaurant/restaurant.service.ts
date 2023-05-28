@@ -6,15 +6,30 @@ import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Photo } from '../photo/entities/photo-entity';
 import { Readable } from 'stream';
+import { Location } from '../location/entities/location-entity';
+import { LocationService } from '../location/location.service';
 
 @Injectable()
 export class RestaurantService {
   constructor(
     @InjectRepository(Restaurant) private repo: Repository<Restaurant>,
+    private locationService: LocationService
   ) {}
 
   async create(dto: CreateRestaurantDto): Promise<Restaurant> {
-    return await this.repo.save(this.repo.create(dto));
+    const { name, description, location } = dto;
+
+    const newRestaurant = this.repo.create({ name, description });
+
+    let newLocation: Location | undefined;
+    if (location) {
+      newLocation = await this.locationService.create(location);
+      newRestaurant.locations = [newLocation];
+    }
+
+    const createdRestaurant = await this.repo.save(newRestaurant);
+
+    return createdRestaurant;
   }
 
   async findOne(id: string) {

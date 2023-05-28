@@ -10,9 +10,8 @@ import { UpdateLocationDto } from './dto/update-location.dto';
 export class LocationService {
   constructor(@InjectRepository(Location) private repo: Repository<Location>) {}
 
-  create(dto: CreateLocationDto, res: Restaurant) {
+  create(dto: CreateLocationDto) {
     const location = this.repo.create(dto);
-    location.restaurant = res;
     return this.repo.save(location);
   }
 
