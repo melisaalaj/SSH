@@ -22,6 +22,7 @@ import { RolesGuard } from 'src/common/guards/roles.guard';
 import { UserRoles } from '../user/enums/roles.enum';
 import { Roles } from '../../common/decorators/roles.decorato';
 import { AuthGuard } from '../auth/auth.guard';
+import { MenuService } from '../menu/menu.service';
 
 @ApiTags('Food')
 @Controller('food')
@@ -32,22 +33,22 @@ import { AuthGuard } from '../auth/auth.guard';
 export class FoodController {
   constructor(
     private readonly foodService: FoodService,
-    private readonly resturantService: RestaurantService,
+    private readonly menuService: MenuService,
   ) {}
   
   @Roles(UserRoles.ADMIN)
   @Post('/create/:id')
   async createFood(
-    @Param('id') restaurantId: string,
+    @Param('id') menuId: string,
     @Body() createFoodDto: CreateFoodDto,
     @Body() photo?: Photo,
   ) {
-    const restaurant = await this.resturantService.findOne(restaurantId);
-    if (!restaurant) {
-      throw new NotFoundException('Restaurant not found');
+    const menu = await this.menuService.findOne(menuId);
+    if (!menu) {
+      throw new NotFoundException('Menu not found');
     }
 
-    const food = await this.foodService.create(createFoodDto, restaurant, photo);
+    const food = await this.foodService.create(createFoodDto, menu, photo);
     return food;
   }
 

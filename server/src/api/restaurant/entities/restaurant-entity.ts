@@ -27,9 +27,6 @@ export class Restaurant extends BaseEntity {
   @OneToMany(() => Photo, (photo) => photo.restaurant, { nullable: true })
   photos?: Photo[];
 
-  @ManyToMany(() => Food, (food) => food.restaurants)
-  foods: Food[];
-
   @OneToMany(() => Location, (location) => location.restaurant)
   locations: Location[];
 
@@ -47,6 +44,7 @@ export class Restaurant extends BaseEntity {
 
   @OneToMany(() => Menu, (menu) => menu.restaurant)
   menus: Menu[];
+  
   @OneToMany(() => Booking, (booking) => booking.restaurant)
   bookings: Booking[];
 

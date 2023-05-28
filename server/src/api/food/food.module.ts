@@ -9,6 +9,7 @@ import { FoodService } from './food.service';
 import { FoodController } from './food.controller';
 import { StripeService } from '../stripe/stripe.service';
 import { ConfigModule } from '@nestjs/config';
+import { MenuModule } from '../menu/menu.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { ConfigModule } from '@nestjs/config';
     PhotoModule,
     ConfigModule,
     UserModule,
+    MenuModule,
   ],
   providers: [FoodService, StripeService],
   controllers: [FoodController],
