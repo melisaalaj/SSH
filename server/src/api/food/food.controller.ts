@@ -7,6 +7,7 @@ import {
   NotFoundException,
   Param,
   Post,
+  UploadedFile,
   UseGuards,
   UseInterceptors,
   UsePipes,
@@ -23,6 +24,7 @@ import { UserRoles } from '../user/enums/roles.enum';
 import { Roles } from '../../common/decorators/roles.decorato';
 import { AuthGuard } from '../auth/auth.guard';
 import { MenuService } from '../menu/menu.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Food')
 @Controller('food')
@@ -36,17 +38,28 @@ export class FoodController {
     private readonly menuService: MenuService,
   ) {}
   
-  @Roles(UserRoles.ADMIN)
-  @Post('/create/:id')
+  @Post('/create')
+  @UseInterceptors(FileInterceptor('foodImage'))
   async createFood(
-    @Param('id') menuId: string,
-    @Body() createFoodDto: CreateFoodDto,
-    @Body() photo?: Photo,
+    @Body()
+    createFoodDto: {
+      name: string;
+      description: string;
+      price: number;
+      menuId: string;
+    },
+    @UploadedFile() foodImage: Express.Multer.File,
   ) {
-    const menu = await this.menuService.findOne(menuId);
+    const menu = await this.menuService.findOne(createFoodDto.menuId);
     if (!menu) {
       throw new NotFoundException('Menu not found');
     }
+
+    const photo = new Photo();
+    photo.filename = foodImage.filename;
+    photo.data = foodImage.buffer;
+    photo.restaurant = null;
+    photo.food = [];
 
     const food = await this.foodService.create(createFoodDto, menu, photo);
     return food;
