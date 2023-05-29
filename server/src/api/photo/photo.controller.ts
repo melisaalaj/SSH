@@ -22,8 +22,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { Readable } from 'stream';
 import { Response } from 'express';
 import { AuthGuard } from '../auth/auth.guard';
-import { RolesGuard } from 'src/common/guards/roles.guard';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { RolesGuard } from '../../common/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorato';
 import { UserRoles } from '../user/enums/roles.enum';
 
 @Controller('photo')

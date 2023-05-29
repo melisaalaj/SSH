@@ -7,6 +7,7 @@ import {
   NotFoundException,
   Param,
   Post,
+  UploadedFile,
   UseGuards,
   UseInterceptors,
   UsePipes,
@@ -20,8 +21,10 @@ import { UpdateFoodDto } from './dto/update-food';
 import { Photo } from '../photo/entities/photo-entity';
 import { RolesGuard } from 'src/common/guards/roles.guard';
 import { UserRoles } from '../user/enums/roles.enum';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 import { AuthGuard } from '../auth/auth.guard';
+import { MenuService } from '../menu/menu.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('Food')
 @Controller('food')
@@ -32,59 +35,34 @@ import { AuthGuard } from '../auth/auth.guard';
 export class FoodController {
   constructor(
     private readonly foodService: FoodService,
-    private readonly resturantService: RestaurantService,
+    private readonly menuService: MenuService,
   ) {}
-
-  // @Post('/create/:id')
-  // async createFood(
-  //   @Param('id') restaurantId: string,
-  //   @Body() createFoodDto: CreateFoodDto,
-  // ) {
-  //   const restaurant = await this.resturantService.findOne(restaurantId);
-  //   if (!restaurant) {
-  //     throw new NotFoundException('Food not found');
-  //   }
-
-  //   const food = await this.foodService.create(
-  //     createFoodDto,
-  //     restaurant,
-  //   );
-
-  //   return food;
-  // }
-
-  // @Post('/create/:id')
-  // async createFood(
-  // @Param('id') restaurantId: string,
-  // @Body() createFoodDto: CreateFoodDto,
-  // @Body() photo: Photo,
-  // ) {
-  // const restaurant = await this.resturantService.findOne(restaurantId);
-  // if (!restaurant) {
-  //   throw new NotFoundException('Food not found');
-  // }
-
-  // const food = await this.foodService.createFood(
-  //   createFoodDto,
-  //   photo,
-  // );
-
-  // return food;
-  // }
-
+  
   @Roles(UserRoles.ADMIN)
-  @Post('/create/:id')
+  @Post('/create')
+  @UseInterceptors(FileInterceptor('foodImage'))
   async createFood(
-    @Param('id') restaurantId: string,
-    @Body() createFoodDto: CreateFoodDto,
-    @Body() photo?: Photo,
+    @Body()
+    createFoodDto: {
+      name: string;
+      description: string;
+      price: number;
+      menuId: string;
+    },
+    @UploadedFile() foodImage: Express.Multer.File,
   ) {
-    const restaurant = await this.resturantService.findOne(restaurantId);
-    if (!restaurant) {
-      throw new NotFoundException('Restaurant not found');
+    const menu = await this.menuService.findOne(createFoodDto.menuId);
+    if (!menu) {
+      throw new NotFoundException('Menu not found');
     }
 
-    const food = await this.foodService.create(createFoodDto, restaurant, photo);
+    const photo = new Photo();
+    photo.filename = foodImage.filename;
+    photo.data = foodImage.buffer;
+    photo.restaurant = null;
+    photo.food = [];
+
+    const food = await this.foodService.create(createFoodDto, menu, photo);
     return food;
   }
 
@@ -104,6 +82,7 @@ export class FoodController {
     await this.foodService.remove(id);
   }
 
+  
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const food = await this.foodService.findOne(id);

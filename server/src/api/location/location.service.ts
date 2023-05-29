@@ -10,9 +10,8 @@ import { UpdateLocationDto } from './dto/update-location.dto';
 export class LocationService {
   constructor(@InjectRepository(Location) private repo: Repository<Location>) {}
 
-  create(dto: CreateLocationDto, res: Restaurant) {
+  create(dto: CreateLocationDto) {
     const location = this.repo.create(dto);
-    location.restaurant = res;
     return this.repo.save(location);
   }
 
@@ -29,7 +28,7 @@ export class LocationService {
   }
 
   async findOne(id: string) {
-    const location = await this.repo.findOneBy({ id: parseInt(id) });
+    const location = await this.repo.findOne({where: { id: parseInt(id) }});
     if (!location) {
       throw new NotFoundException();
     }

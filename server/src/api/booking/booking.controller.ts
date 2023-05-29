@@ -12,6 +12,8 @@ import { BookingService } from './booking.service';
 import { RestaurantService } from '../restaurant/restaurant.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
+import { Roles } from 'src/common/decorators/roles.decorato';
+import { UserRoles } from '../user/enums/roles.enum';
   
   @ApiTags('Booking')
   @Controller('booking')
@@ -35,12 +37,13 @@ import { UpdateBookingDto } from './dto/update-booking.dto';
   
       return booking;
     }
-  
+    
     @Post('/update/:id')
     async update(@Param('id') id: string, @Body() body: UpdateBookingDto) {
       return await this.bookingService.update(id, body);
     }
   
+    @Roles(UserRoles.ADMIN)
     @Delete(':id')
     async remove(@Param('id') id: string) {
       const booking = await this.bookingService.findOne(id);
@@ -49,7 +52,8 @@ import { UpdateBookingDto } from './dto/update-booking.dto';
       }
       await this.bookingService.remove(id);
     }
-  
+    
+    @Roles(UserRoles.ADMIN)
     @Get(':id')
     async findOne(@Param('id') id: string) {
       const booking = await this.bookingService.findOne(id);
@@ -58,7 +62,8 @@ import { UpdateBookingDto } from './dto/update-booking.dto';
       }
       return booking;
     }
-  
+    
+    @Roles(UserRoles.ADMIN)
     @Get()
     async findAll() {
       return await this.bookingService.findAll();

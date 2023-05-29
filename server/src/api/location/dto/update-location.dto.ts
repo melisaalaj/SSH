@@ -13,7 +13,7 @@ export class UpdateLocationDto {
   street: string;
 
   @IsOptional()
-  @IsNumber()
+  @IsString()
   @ApiProperty()
-  postalCode: number;
+  postalCode: string;
 }
