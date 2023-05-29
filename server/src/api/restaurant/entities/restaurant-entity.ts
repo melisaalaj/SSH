@@ -1,14 +1,12 @@
 import { Booking } from '../../../api/booking/entities/booking-entity';
 import { Delivery } from '../../../api/delivery/entities/delivery-entity';
 import { Event } from '../../../api/event/entities/event-entity';
-import { Food } from '../../../api/food/entities/food-entity';
 import { Location } from '../../../api/location/entities/location-entity';
 import { Order } from '../../../api/order/entities/orders-entity';
 import { Photo } from '../../../api/photo/entities/photo-entity';
-import { Product } from '../../../api/product/entities/product-entity';
 import { Menu } from '../../../api/menu/entities/menu-entity';
 import { BaseEntity } from '../../../common/db/customBaseEntites/BaseEntity';
-import { Column, Entity, JoinColumn, ManyToMany, OneToMany } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 import { Review } from '../../../api/review/entities/review-entity';
 //import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 
@@ -32,9 +30,6 @@ export class Restaurant extends BaseEntity {
 
   @OneToMany(() => Order, (order) => order.restaurant)
   orders: Order[];
-
-  @OneToMany(() => Product, (product) => product.restaurant)
-  products: Product[];
 
   @OneToMany(() => Delivery, (delivery) => delivery.restaurant)
   deliveries: Delivery[];

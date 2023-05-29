@@ -3,21 +3,18 @@ import { ReviewService } from './review.service';
 import { ReviewController } from './review.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Review } from './entities/review-entity';
-import { Restaurant } from '../restaurant/entities/restaurant-entity';
-import { RestaurantService } from '../restaurant/restaurant.service';
-import { PhotoService } from '../photo/photo.service';
-import { LocationService } from '../location/location.service';
-import { Photo } from '../photo/entities/photo-entity';
-import { Location } from '../location/entities/location-entity';
+import { RestaurantModule } from '../restaurant/restaurant.module';
+import { PhotoModule } from '../photo/photo.module';
+import { LocationModule } from '../location/location.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Review]),
-    TypeOrmModule.forFeature([Restaurant]),
-    TypeOrmModule.forFeature([Photo]),
-    TypeOrmModule.forFeature([Location]),
+    RestaurantModule,
+    PhotoModule,
+    LocationModule,
   ],
-  providers: [ReviewService, RestaurantService, PhotoService, LocationService],
+  providers: [ReviewService],
   controllers: [ReviewController],
   exports: [ReviewService],
 })

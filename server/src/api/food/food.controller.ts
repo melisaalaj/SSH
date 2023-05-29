@@ -38,6 +38,7 @@ export class FoodController {
     private readonly menuService: MenuService,
   ) {}
   
+  @Roles(UserRoles.ADMIN)
   @Post('/create')
   @UseInterceptors(FileInterceptor('foodImage'))
   async createFood(
@@ -81,6 +82,7 @@ export class FoodController {
     await this.foodService.remove(id);
   }
 
+  
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const food = await this.foodService.findOne(id);

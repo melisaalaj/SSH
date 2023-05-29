@@ -43,6 +43,7 @@ export class OrderController {
     return await this.orderService.update(id, body);
   }
 
+  @Roles(UserRoles.ADMIN)
   @Delete(':orderid')
   async remove(@Param('orderid') id: string) {
     const order = await this.orderService.findOne(id);
@@ -52,6 +53,7 @@ export class OrderController {
     await this.orderService.remove(id);
   }
 
+  @Roles(UserRoles.ADMIN)
   @Get(':orderid')
   async findOne(@Param('orderid') id: string) {
     const order = await this.orderService.findOne(id);
@@ -67,6 +69,7 @@ export class OrderController {
     return await this.orderService.findAll();
   }
 
+  @Roles(UserRoles.ADMIN)
   @Get('/info/:orderid')
   async getRestaurantInfo(@Param('orderid') id: string) {
     const orderInfo = await this.orderService.getOrderDetails(id);

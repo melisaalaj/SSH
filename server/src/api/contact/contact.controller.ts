@@ -44,11 +44,11 @@ import { UserRoles } from '../user/enums/roles.enum';
     @Roles(UserRoles.ADMIN)
     @Get(':id')
     async findOne(@Param('id') id: string) {
-      const order = await this.contactService.findOne(id);
-      if (!order) {
+      const contact = await this.contactService.findOne(id);
+      if (!contact) {
         throw new NotFoundException('Order not found');
       }
-      return order;
+      return contact;
     }
     
     @Roles(UserRoles.ADMIN)

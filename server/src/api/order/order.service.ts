@@ -40,7 +40,9 @@ export class OrderService {
   }
 
   async findAll() {
-    return await this.repo.findAndCount();
+    return await this.repo.findAndCount({
+      relations: ['restaurant', 'user'],
+    });
   }
 
   async getOrderDetails(id: string) {
