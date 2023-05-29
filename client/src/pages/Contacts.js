@@ -6,12 +6,17 @@ const Contacts = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
     const fetchContactMessages = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/contact');
+        const response = await fetch('http://localhost:3000/api/contact', {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
         if (response.ok) {
           const data = await response.json();
-          setContactMessages(data);
+          setContactMessages(data[0]); // Access the array of messages using data[0]
         } else {
           throw new Error('Error fetching contact messages');
         }
