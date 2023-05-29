@@ -16,19 +16,22 @@ export class FoodService {
   constructor(
     @InjectRepository(Food) private repo: Repository<Food>,
     private readonly stripeService: StripeService,
+    private readonly photoService: PhotoService,
   ) {}
 
-  async create(createFoodDto: CreateFoodDto, menu: Menu, photo: Photo) {
+  async create(createFoodDto: CreateFoodDto, menu: Menu, photo?: Photo) {
     const stripeProduct = await this.stripeService.createProduct(
       createFoodDto.name,
       createFoodDto.price,
     );
   
+    const newPhoto = await this.photoService.uploadPhotos(photo.data, photo.filename);
+  
     const food = this.repo.create({
       ...createFoodDto,
       productId: stripeProduct.product.id,
       menu: menu,
-      photos: [photo],
+      photos: [newPhoto],
     });
   
     return this.repo.save(food);
