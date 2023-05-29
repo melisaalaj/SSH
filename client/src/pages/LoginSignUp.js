@@ -22,7 +22,7 @@ const LoginSignUp = () => {
     password: "",
     phone: "",
     gender: "",
-    role: 2,
+    role: 1,
   });
 
   const navigate = useNavigate();
