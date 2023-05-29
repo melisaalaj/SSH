@@ -8,7 +8,6 @@ import { Location } from '../../../api/location/entities/location-entity';
 import { Menu } from '../../../api/menu/entities/menu-entity';
 import { Order } from '../../../api/order/entities/orders-entity';
 import { Photo } from '../../../api/photo/entities/photo-entity';
-import { Product } from '../../../api/product/entities/product-entity';
 import { Restaurant } from '../../../api/restaurant/entities/restaurant-entity';
 import { Review } from '../../../api/review/entities/review-entity';
 import { User } from '../../../api/user/entities/user.entity';
@@ -32,7 +31,6 @@ export const config = {
     Menu,
     Order,
     Photo,
-    Product,
     Restaurant,
     Review,
     Contact,
@@ -61,7 +59,6 @@ export const configNoEntities = {
     Menu,
     Order,
     Photo,
-    Product,
     Restaurant,
     Review,
     Contact,

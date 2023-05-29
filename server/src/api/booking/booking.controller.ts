@@ -37,12 +37,13 @@ import { UserRoles } from '../user/enums/roles.enum';
   
       return booking;
     }
-  
+    
     @Post('/update/:id')
     async update(@Param('id') id: string, @Body() body: UpdateBookingDto) {
       return await this.bookingService.update(id, body);
     }
   
+    @Roles(UserRoles.ADMIN)
     @Delete(':id')
     async remove(@Param('id') id: string) {
       const booking = await this.bookingService.findOne(id);
@@ -51,7 +52,8 @@ import { UserRoles } from '../user/enums/roles.enum';
       }
       await this.bookingService.remove(id);
     }
-  
+    
+    @Roles(UserRoles.ADMIN)
     @Get(':id')
     async findOne(@Param('id') id: string) {
       const booking = await this.bookingService.findOne(id);
