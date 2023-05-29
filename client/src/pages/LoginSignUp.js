@@ -1,4 +1,5 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import "../assets/styles/LoginSignUp.css";
 
@@ -6,6 +7,7 @@ const LoginSignUp = () => {
   const [signIn, setSignIn] = useState(false);
 
   const [successState, setSuccessState] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const [loginFormData, setLoginFormData] = useState({
     email: "",
@@ -18,12 +20,14 @@ const LoginSignUp = () => {
     email: "",
     username: "",
     password: "",
-    phone: "043-123-456",
-    role: 2,
+    phone: "",
+    gender: "",
+    role: 1,
   });
 
+  const navigate = useNavigate();
+
   const handleSignUpChange = (e) => {
-    console.log(e);
     const { name, value } = e.target;
     setSignUpFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
@@ -38,38 +42,68 @@ const LoginSignUp = () => {
     event.preventDefault();
     const response = await fetch("http://localhost:3000/api/auth/signup", {
       method: "POST",
-      body: signUpFormData
-    }).then((data) => data.json())
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signUpFormData),
+    }).then((data) => data.json());
 
-    if (response) {
+    if (!response.error) {
       setSuccessState("signup-success");
-    }
 
-    console.log(response);
-    
+      setTimeout(() => {
+        setSignIn(true);
+        setSuccessState("");
+      }, 2500);
+    } else {
+      setSuccessState("signup-error");
+      setSuccessState("has-error");
+      setErrorMessage(response.message);
+    }
   };
 
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-    console.log(loginFormData);
 
     const response = await fetch("http://localhost:3000/api/auth/login", {
       method: "POST",
-      body: signUpFormData
-    }).then((data) => data.json())
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(loginFormData),
+    }).then((data) => data.json());
 
-    if (response.access_token) {
+    if (response && response.access_token) {
       setSuccessState("login-success");
+      localStorage.setItem("accessToken", response.access_token);
+      setTimeout(() => navigate("/"), 2000);
+    } else {
+      setSuccessState("has-error");
+      setErrorMessage(response.message);
     }
-    console.log(response);
   };
 
   const stateRenderer = (val) => {
     switch (val) {
       case "login-success":
-        return <h1>Login was successfull</h1>;
+        return (
+          <div className="responseWrapper">
+            <h1>Login was successful</h1>
+          </div>
+        );
       case "signup-success":
-        return <h1>Signup was successfull</h1>;
+        return (
+          <div className="responseWrapper">
+            <h1>Signup was successful</h1>
+          </div>
+        );
+      case "has-error":
+        return (
+          <div className="responseWrapper">
+            <h1>There was an error with your request!</h1>
+            <p>{errorMessage}</p>
+          </div>
+        );
       default:
         return (
           <>
@@ -158,6 +192,31 @@ const LoginSignUp = () => {
                   />
                   <label className="input-label">Password</label>
                 </div>
+                <div className="input">
+                  <input
+                    type="text"
+                    className="input-field"
+                    value={signUpFormData.phone}
+                    name="phone"
+                    onChange={(e) => handleSignUpChange(e)}
+                    required
+                  />
+                  <label className="input-label">Phone</label>
+                </div>
+                <div className="input">
+                  <select
+                    className="input-field"
+                    value={signUpFormData.gender}
+                    name="gender"
+                    onChange={handleSignUpChange}
+                    required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                  <label className="input-label">Gender</label>
+                </div>
                 <div className="action">
                   <button className="action-button">Sign Up</button>
                 </div>
@@ -194,9 +253,7 @@ const LoginSignUp = () => {
           <small>Let us create your account</small>
         </h2>
       </div>
-      <div className="form-wrapper">
-        {stateRenderer(successState)}
-      </div>
+      <div className="form-wrapper">{stateRenderer(successState)}</div>
     </div>
   );
 };

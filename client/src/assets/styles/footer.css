@@ -1,6 +1,6 @@
 .bottom-navigation {
-   position: absolute;
-  /*bottom: 0;
+  /* position: absolute;
+  bottom: 0;
   left: 0; */
   width: 100%;
   height: 300px;
@@ -8,16 +8,16 @@
   display: flex;
   justify-content: space-between;
 }
-.footer-adresa{
+.footer-adresa {
   display: flex;
   flex-direction: column;
   justify-content: left;
   margin-left: 0px;
- padding-left:0px;
- margin-top: 20px;
+  padding-left: 0px;
+  margin-top: 20px;
 }
-.abonimform{
-  margin-left:0px;
+.abonimform {
+  margin-left: 0px;
   padding: auto;
 }
 
@@ -82,17 +82,17 @@
 .legal-note a:hover {
   color: #4caf50;
 }
-.h33{
-  color:black;
+.h33 {
+  color: black;
   margin-right: 28px;
   padding: 10px;
 }
-.project ul{
+.project ul {
   margin: 0px;
 }
-.project ul li{
+.project ul li {
   margin: 0px;
 }
-h4{
-  color:black;
+h4 {
+  color: black;
 }
