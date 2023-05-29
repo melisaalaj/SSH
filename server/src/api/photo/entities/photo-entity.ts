@@ -5,11 +5,12 @@ import { Column, Entity, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Photo extends BaseEntity {
-  @Column()
+  @Column({nullable: true})
   filename: string;
 
   @Column({
     type: 'bytea',
+    nullable: true
   })
   data: Buffer;
 
