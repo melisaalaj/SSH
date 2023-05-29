@@ -1,6 +1,8 @@
 import React from "react";
 import "../assets/styles/footer.css";
-
+import {
+  Link
+} from "react-router-dom";
 function Footer() {
   return (
     <footer className="bottom-navigation">
@@ -24,18 +26,18 @@ function Footer() {
       <div className="right-side">
         <div className="project">
           <h3 className="h33">The project</h3>
-          <a href="#">Main</a>
-          <a href="#">Order food</a>
-          <a href="#">News</a>
-          <a href="#">Restaurants</a>
-          <a href="#">Login</a>
+       <Link to="/" >Main</Link>
+       <Link to="/restaurant/:menuId" >Order food</Link>
+       <Link to="/">News</Link>
+       <Link to="/restaurantet" >Restaurants</Link>
+       <Link  to="/login">Login</Link>
         </div>
         <div className="legal-note">
           <h3 className="h33">Legal note</h3>
           <a href="#">We Are Hiring!</a>
           <a href="#">Privacy Statement</a>
           <a href="#">Terms & Conditions</a>
-          <a href="#">SignUp</a>
+          <Link  to="/login">SignUp</Link>
         </div>
       </div>
     </footer>
