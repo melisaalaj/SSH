@@ -1,0 +1,40 @@
+.restaurant-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 150px;
+    padding: 20px;
+  }
+  
+  .restaurant-form h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .restaurant-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .restaurant-form label {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .restaurant-form label input {
+    padding: 5px;
+  }
+  
+  .restaurant-form button {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .restaurant-form button:hover {
+    background-color: #45a049;
+  }
+  

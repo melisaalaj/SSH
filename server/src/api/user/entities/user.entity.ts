@@ -4,9 +4,10 @@ import { Column, Entity, OneToMany } from 'typeorm';
 import { UserGender } from '../enums/userGender.enum';
 import { UserRoles } from '../enums/roles.enum';
 import { AuditEntity } from '../../../common/db/customBaseEntites/AuditEntity';
-import { Order } from 'src/api/order/entities/orders-entity';
-import { Contact } from 'src/api/contact/entities/contact-entity';
-import { Review } from 'src/api/review/entities/review-entity';
+import { Order } from '../../../api/order/entities/orders-entity';
+import { Contact } from '../../../api/contact/entities/contact-entity';
+import { Booking } from '../../../api/booking/entities/booking-entity';
+import { Review } from '../../../api/review/entities/review-entity';
 
 @Entity('users')
 export class User extends AuditEntity {
@@ -63,6 +64,9 @@ export class User extends AuditEntity {
   @OneToMany(() => Contact, (contact) => contact.user)
   contacts: Contact[];
 
+  @OneToMany(() => Booking, (booking) => booking.user)
+  bookings: Booking;
+ 
   @OneToMany(() => Review, (review) => review.restaurant)
   reviews: Review[];
 }

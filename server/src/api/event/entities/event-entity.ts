@@ -1,7 +1,6 @@
-import { Restaurant } from "src/api/restaurant/entities/restaurant-entity";
-import { Location } from "src/api/location/entities/location-entity";
-import { BaseEntity } from "src/common/db/customBaseEntites/BaseEntity";
-import { Column, Entity, ManyToOne, OneToOne } from "typeorm";
+import { Restaurant } from "../../../api/restaurant/entities/restaurant-entity";
+import { BaseEntity } from "../../../common/db/customBaseEntites/BaseEntity";
+import { Column, Entity, ManyToOne, OneToMany, OneToOne } from "typeorm";
 
 @Entity()
 export class Event extends BaseEntity {

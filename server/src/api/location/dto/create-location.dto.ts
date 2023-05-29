@@ -10,7 +10,7 @@ export class CreateLocationDto {
   @ApiProperty()
   street: string;
 
-  @IsNumber()
+  @IsString()
   @ApiProperty()
-  postalCode: number;
+  postalCode: string;
 }

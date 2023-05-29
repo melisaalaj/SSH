@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { EventController } from './event.controller';
 
-describe('DeliveryController', () => {
+describe('EventController', () => {
   let controller: EventController;
 
   beforeEach(async () => {

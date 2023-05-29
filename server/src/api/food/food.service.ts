@@ -9,25 +9,29 @@ import { RestaurantService } from '../restaurant/restaurant.service';
 import { PhotoService } from '../photo/photo.service';
 import { Photo } from '../photo/entities/photo-entity';
 import { StripeService } from '../stripe/stripe.service';
+import { Menu } from '../menu/entities/menu-entity';
 
 @Injectable()
 export class FoodService {
   constructor(
     @InjectRepository(Food) private repo: Repository<Food>,
     private readonly stripeService: StripeService,
+    private readonly photoService: PhotoService,
   ) {}
 
-  async create(createFoodDto: CreateFoodDto, res: Restaurant, photo: Photo) {
+  async create(createFoodDto: CreateFoodDto, menu: Menu, photo?: Photo) {
     const stripeProduct = await this.stripeService.createProduct(
       createFoodDto.name,
       createFoodDto.price,
     );
   
+    const newPhoto = await this.photoService.uploadPhotos(photo.data, photo.filename);
+  
     const food = this.repo.create({
       ...createFoodDto,
       productId: stripeProduct.product.id,
-      restaurants: [res],
-      photos: [photo],
+      menu: menu,
+      photos: [newPhoto],
     });
   
     return this.repo.save(food);
