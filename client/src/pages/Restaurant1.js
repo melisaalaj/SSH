@@ -1,32 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "../assets/styles/restaurant1.css";
 
 const Restaurant1 = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [breakfast, setBreakfast] = useState("");
-  const [distance, setDistance] = useState("");
-  const [transportCost, setTransportCost] = useState("");
-  const [minOrder, setMinOrder] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleAddRestaurant = async () => {
     try {
+      const accessToken = localStorage.getItem("accessToken");
+
       const response = await fetch("http://localhost:3000/api/restaurants/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
           name,
-          address,
-          breakfast,
-          distance,
-          transportCost,
-          minOrder,
+          description,
         }),
       });
-      
+
       if (response.ok) {
         // Restaurant added successfully, navigate back to the RestaurantPage
         navigate("/Restaurant");
@@ -41,11 +37,11 @@ const Restaurant1 = () => {
   };
 
   return (
-    <div>
+    <div className="restaurant-form">
       <h2>Add Restaurant</h2>
       <form>
         <label>
-          Name:
+          Name:<br/>
           <input
             type="text"
             value={name}
@@ -53,43 +49,11 @@ const Restaurant1 = () => {
           />
         </label><br/>
         <label>
-          Address:
+          Description:<br/>
           <input
             type="text"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-          />
-        </label><br/>
-        <label>
-          Breakfast:
-          <input
-            type="text"
-            value={breakfast}
-            onChange={(e) => setBreakfast(e.target.value)}
-          />
-        </label><br/>
-        <label>
-          Distance:
-          <input
-            type="text"
-            value={distance}
-            onChange={(e) => setDistance(e.target.value)}
-          />
-        </label><br/>
-        <label>
-          Transport Cost:
-          <input
-            type="text"
-            value={transportCost}
-            onChange={(e) => setTransportCost(e.target.value)}
-          />
-        </label><br/>
-        <label>
-          Minimum Order:
-          <input
-            type="text"
-            value={minOrder}
-            onChange={(e) => setMinOrder(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </label><br/>
         <button type="button" onClick={handleAddRestaurant}>
