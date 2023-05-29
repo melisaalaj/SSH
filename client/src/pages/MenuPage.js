@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useRef,useContext } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import "../assets/styles/MenuPage.css";
 import { menuData } from "../data/datacard";
 import { useParams } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
-import {Button, Tooltip} from "@mui/material";
+import { Button, Tooltip } from "@mui/material";
 import Footer from "../component/Footer";
 import { SelectedItemsContext } from "../services/SelectedItemsContext";
 
@@ -12,7 +12,8 @@ const MenuPage = () => {
 
   console.log(menuId);
   const [currentItem, setCurrentItem] = useState(null);
-  // const [menuData, setMenuData] = useState([]);
+  const [restaurantMenuData, setRestaurantMenuData] = useState([]);
+  const [loading, setLoading] = useState(false);
   const itemsRef = useRef([]);
 
   const menuItems = [
@@ -38,14 +39,24 @@ const MenuPage = () => {
     setCurrentItem(item);
   };
 
+  const fetchMenuDetails = async () => {
+    const response = await fetch(`http://localhost:3000/api/Menu/${menuId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((data) => data.json());
+
+    if (response) {
+      setLoading(false);
+      if (response.foods.length > 1) {
+        setRestaurantMenuData(response.foods);
+      }
+    }
+  };
+
   useEffect(() => {
-    // Replace api call below with backend endpoint api, to fetch data
-    fetch(`https://localhost:3000/api/restaurants/${menuId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        
-      });
+    fetchMenuDetails();
   }, []);
   const { addToSelectedItems } = useContext(SelectedItemsContext);
 
@@ -54,7 +65,6 @@ const MenuPage = () => {
   };
   return (
     <>
-    
       <div className="menuPage">
         <div className="container">
           <h2 className="pageTitle">
@@ -94,7 +104,9 @@ const MenuPage = () => {
                         <div className="item-price">
                           <p>{item.price}</p>
                           <Tooltip title="Shto ne shporte">
-                            <Button variant="contained"   onClick={() => handleAddToCart(item)}>
+                            <Button
+                              variant="contained"
+                              onClick={() => handleAddToCart(item)}>
                               <AddIcon />
                               Shto
                             </Button>
@@ -110,7 +122,7 @@ const MenuPage = () => {
           </div>
         </div>
       </div>
-      <Footer /> 
+      <Footer />
     </>
   );
 };
