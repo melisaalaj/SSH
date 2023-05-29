@@ -4,11 +4,11 @@ import '../assets/styles/sidebar.css';
 
 const Sidebar = () => {
   return (
-    <div>
+    <div className='sidebar'>
       <h2>Admin</h2>
       <ul>
-        <li>
-          <Link to="/dashboard">Dashboard</Link>
+      <li>
+          <Link to="/">Order</Link>
         </li>
         <li>
           <Link to="/contacts">Contacts</Link>

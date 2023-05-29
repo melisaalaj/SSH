@@ -12,7 +12,7 @@ import { SelectedItemsProvider } from './services/SelectedItemsContext';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 
-const stripePromise = loadStripe('pk_test_51N8NsNJfPtLrc5k00vcYa3vSsCQSGtXz0CDPqnFhusQZnio6fVWHhhq6Oi1FjGO2XvSjsesFphe8stsb8fQqoSYk00GmypY5Hv');
+const stripePromise = loadStripe('pk_test_51N3dURKQk7qhCl2R1hIgUXl0yG3mdGVyo5iTh66kUlQiCZOr2UJwsNN3QwqwI9myhvTyYl16DUI8rg2bt8FXCR6900tg8kJn4T');
 
 function App() {
   return (

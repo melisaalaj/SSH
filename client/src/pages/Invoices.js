@@ -1,74 +1,99 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import "../assets/styles/invoices.css";
 const Invoices = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const [menuId, setMenuId] = useState("");
   const [foodName, setFoodName] = useState("");
   const [foodDescription, setFoodDescription] = useState("");
   const [foodPrice, setFoodPrice] = useState("");
-  
+  const [foodImage, setFoodImage] = useState(null);
 
-  const handleAddFood = () => {
-    const newFoodItem = {
-      name: foodName,
-      description: foodDescription,
-      price: foodPrice
-    };
-  
-    // Make an API call to add the new food item
-    // Replace `API_ENDPOINT` with your actual API endpoint for adding food items
-    fetch(`http://localhost:3000/api/food/create/1`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newFoodItem),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('New food item added:', data);
-        // Handle the response data or update the state in the parent component
-        // For example, you can add the new food item to the menuData state in the parent component
-        // setMenuData([...menuData, data]);
-  
-        // Navigate back to the MenuPage
-        navigate("/MenuPage");
-      })
-      .catch(error => {
-        console.error('Error adding food item:', error);
-        // Handle the error if necessary
+  const handleAddFood = async () => {
+    const accessToken = localStorage.getItem("accessToken");
+
+    const price = parseFloat(foodPrice);
+
+    if (isNaN(price)) {
+      console.log("Invalid price value");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("foodImage", foodImage);
+    formData.append("menuId", menuId);
+    formData.append("name", foodName);
+    formData.append("description", foodDescription);
+    formData.append("price", price);
+
+    try {
+      const response = await fetch("http://localhost:3000/api/food/create", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("New food item added:", data);
+        
+        navigate("/MenuPage");
+      } else {
+        const errorData = await response.json();
+        console.log("API call failed:", errorData);
+
+        const errorMessages = errorData.message;
+        console.log("Error messages:", errorMessages);
+      }
+    } catch (error) {
+      console.log("API call error:", error);
+    }
   };
-  
+
   const handleCancel = () => {
-    // Navigate back to the MenuPage without adding a new food item
     navigate("/MenuPage");
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setFoodImage(file);
+  };
+
   return (
-    <div>
+    <div className="mainpart">
       <h2>Add Food Item</h2>
+      <TextField
+        label="Menu ID"
+        value={menuId}
+        onChange={(e) => setMenuId(e.target.value)}
+      /><br/>
       <TextField
         label="Food Name"
         value={foodName}
         onChange={(e) => setFoodName(e.target.value)}
-      />
+      /><br/>
       <TextField
         label="Description"
         value={foodDescription}
         onChange={(e) => setFoodDescription(e.target.value)}
-      />
+      /><br/>
       <TextField
         label="Price"
         value={foodPrice}
         onChange={(e) => setFoodPrice(e.target.value)}
-      />
+      /><br/>
+      <input type="file" accept="image/*" onChange={handleImageChange} /><br/>
+      <div className="buttons">
       <Button variant="contained" onClick={handleAddFood}>
         Add Food
       </Button>
       <Button variant="contained" onClick={handleCancel}>
         Cancel
       </Button>
+      </div>
     </div>
   );
 };

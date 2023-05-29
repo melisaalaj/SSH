@@ -61,7 +61,7 @@ const MenuPage = () => {
   const { addToSelectedItems } = useContext(SelectedItemsContext);
 
   const handleAddToCart = (item) => {
-    addToSelectedItems({ name: item.name, price: item.price });
+    addToSelectedItems({ name: item.name, price: item.price ,restaurantId: menuId });
   };
   return (
     <>
