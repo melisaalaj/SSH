@@ -1,19 +1,17 @@
-import { Injectable, NotFoundException } from "@nestjs/common";
-import { InjectRepository } from "@nestjs/typeorm";
-import { Repository } from "typeorm";
-import { Menu } from "./entities/menu-entity";
-import { Restaurant } from "../restaurant/entities/restaurant-entity";
-import { CreateMenuWithRestaurantDto } from "./dtos/create-menu.dto";
-import { UpdateMenuWithRestaurantDto } from "./dtos/update-menu.dto";
-import { Food } from "../food/entities/food-entity";
-
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Menu } from './entities/menu-entity';
+import { Restaurant } from '../restaurant/entities/restaurant-entity';
+import { UpdateMenuWithRestaurantDto } from './dtos/update-menu.dto';
+import { Food } from '../food/entities/food-entity';
+import { CreateMenuDto } from './dtos/create-menu.dto';
 
 @Injectable()
 export class MenuService {
   constructor(@InjectRepository(Menu) private repo: Repository<Menu>) {}
 
-
-  create(createMenuWithRestaurantDto: CreateMenuWithRestaurantDto, res: Restaurant) {
+  create(createMenuWithRestaurantDto: CreateMenuDto, res: Restaurant) {
     const menu = this.repo.create({
       ...createMenuWithRestaurantDto,
       restaurant: res,
@@ -21,19 +19,25 @@ export class MenuService {
     return this.repo.save(menu);
   }
 
-  async update(id: string, updateMenuWithRestaurantDto: UpdateMenuWithRestaurantDto) {
-    const menu = await this.repo.findOne({ where: { id: parseInt(id, 10) }, relations: ['foods'] });
+  async update(
+    id: string,
+    updateMenuWithRestaurantDto: UpdateMenuWithRestaurantDto,
+  ) {
+    const menu = await this.repo.findOne({
+      where: { id: parseInt(id, 10) },
+      relations: ['foods'],
+    });
     if (!menu) {
       throw new NotFoundException('Menu not found');
     }
-  
+
     if (updateMenuWithRestaurantDto.menu) {
       const { name, foods } = updateMenuWithRestaurantDto.menu;
-  
+
       if (name) {
         menu.name = name;
       }
-  
+
       if (foods) {
         menu.foods = foods.map((updateFoodDto) => {
           const food = new Food();
@@ -44,11 +48,9 @@ export class MenuService {
         });
       }
     }
-  
+
     return this.repo.save(menu);
   }
-  
-  
 
   async remove(id: string) {
     const menu = await this.repo.findOneBy({ id: parseInt(id) });
@@ -62,8 +64,9 @@ export class MenuService {
     if (!id) {
       return null;
     }
-    return this.repo.findOne({ where: { id: parseInt(id) }, relations: ['restaurant', 'foods'] });
+    return this.repo.findOne({
+      where: { id: parseInt(id) },
+      relations: ['restaurant', 'foods'],
+    });
   }
-
-  
 }
