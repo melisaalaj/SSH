@@ -22,22 +22,25 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('Invalid email or password');
     }
-
+  
     const passwordMatch = await bcrypt.compare(
       loginDto.password,
       user.password,
     );
-
+  
     if (!passwordMatch) {
       throw new UnauthorizedException('Invalid email or password');
     }
-
+  
     const payload = { email: user.email, sub: user.id };
+    const accessToken = await this.jwtService.signAsync(payload);
+  
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token: accessToken,
+      user: user, // Include the user data in the response
     };
   }
-
+  
   async getUserByEmail(email: string): Promise<User | null> {
     return await this.usersRepository.findOne({ where: { email } });
   }
