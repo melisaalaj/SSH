@@ -13,6 +13,10 @@ export class CreateLocationDto {
 
   @IsString()
   @ApiProperty()
+  location: string;
+
+  @IsString()
+  @ApiProperty()
   postalCode: string;
 }
 

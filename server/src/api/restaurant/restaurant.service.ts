@@ -13,7 +13,7 @@ import { LocationService } from '../location/location.service';
 export class RestaurantService {
   constructor(
     @InjectRepository(Restaurant) private repo: Repository<Restaurant>,
-    private locationService: LocationService
+    private locationService: LocationService,
   ) {}
 
   async create(dto: CreateRestaurantDto): Promise<Restaurant> {
@@ -33,7 +33,11 @@ export class RestaurantService {
   }
 
   async findOne(id: string) {
-    const res = await this.repo.findOne({ where: {id: parseInt(id)} });
+    const res = await this.repo.findOne({
+      where: { id: parseInt(id) },
+      relations: ['photos', 'locations'],
+    });
+
     if (!res) {
       throw new NotFoundException('Restaurant not found');
     }

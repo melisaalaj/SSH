@@ -51,11 +51,9 @@ export class RestaurantController {
     return await this.restaurantService.update(id, body);
   }
 
-  @Roles(UserRoles.ADMIN, UserRoles.CUSTOMER, UserRoles.USER)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const restaurant = await this.restaurantService.findOne(id);
-
     return restaurant;
   }
 

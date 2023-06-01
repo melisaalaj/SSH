@@ -8,7 +8,6 @@ import { Menu } from '../../../api/menu/entities/menu-entity';
 import { BaseEntity } from '../../../common/db/customBaseEntites/BaseEntity';
 import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 import { Review } from '../../../api/review/entities/review-entity';
-//import { Delivery } from 'src/api/delivery/entities/delivery-entity';
 
 @Entity()
 export class Restaurant extends BaseEntity {
@@ -20,7 +19,7 @@ export class Restaurant extends BaseEntity {
 
   @Column({ nullable: true })
   email: string;
-
+  
   @JoinColumn({ name: 'photoId' })
   @OneToMany(() => Photo, (photo) => photo.restaurant, { nullable: true })
   photos?: Photo[];
