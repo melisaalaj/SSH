@@ -23,8 +23,7 @@
 
 .left-side {
   display: block;
-  /* flex-direction: column;
-  justify-content: center; */
+  margin-top: 25px;
   margin-left: 300px;
 }
 .bottom-navigation .left-side select {
@@ -34,6 +33,7 @@
 .left-side input {
   margin-bottom: 10px;
   padding: 5px;
+  border-radius: 5px;
 }
 
 .left-side,
@@ -42,7 +42,8 @@
 }
 .left-side button {
   padding: 5px 10px;
-  background-color: #4caf50;
+  background-color: #e01818;
+  border-radius: 5px;
   color: white;
   border: none;
   cursor: pointer;
@@ -50,7 +51,7 @@
 }
 .left-side form button {
   color: white;
-  background-color: darkred;
+  background-color: #e01818;
   font-size: 17px;
 }
 
@@ -80,7 +81,7 @@
 
 .project a:hover,
 .legal-note a:hover {
-  color: #4caf50;
+  color: #e01818;
 }
 .h33 {
   color: black;
