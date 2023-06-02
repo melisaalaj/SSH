@@ -8,6 +8,8 @@ import { Menu } from '../../../api/menu/entities/menu-entity';
 import { BaseEntity } from '../../../common/db/customBaseEntites/BaseEntity';
 import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 import { Review } from '../../../api/review/entities/review-entity';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsUnique } from 'src/common/decorators/validation.decorator';
 
 @Entity()
 export class Restaurant extends BaseEntity {
@@ -17,9 +19,12 @@ export class Restaurant extends BaseEntity {
   @Column({ nullable: true })
   description: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, unique: true })
   email: string;
-  
+
+  @ApiProperty({ type: 'string', format: 'binary' })
+  image: any;
+
   @JoinColumn({ name: 'photoId' })
   @OneToMany(() => Photo, (photo) => photo.restaurant, { nullable: true })
   photos?: Photo[];
@@ -38,7 +43,7 @@ export class Restaurant extends BaseEntity {
 
   @OneToMany(() => Menu, (menu) => menu.restaurant)
   menus: Menu[];
-  
+
   @OneToMany(() => Booking, (booking) => booking.restaurant)
   bookings: Booking[];
 

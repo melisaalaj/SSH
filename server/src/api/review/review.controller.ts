@@ -41,9 +41,9 @@ export class ReviewController {
     return await this.reviewService.update(id, body);
   }
 
-  @Roles(UserRoles.ADMIN)
-  @Get('average-rating/:id')
-  async getAverageRating(@Param('id') restaurantId: number): Promise<number> {
-    return this.reviewService.getAverageRating(restaurantId);
-  }
+  // @Roles(UserRoles.ADMIN)
+  // @Get('average-rating/:id')
+  // async getAverageRating(@Param('id') restaurantId: number): Promise<number> {
+  //   return this.reviewService.getAverageRating(restaurantId);
+  // }
 }

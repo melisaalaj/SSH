@@ -17,31 +17,41 @@ export class RestaurantService {
   ) {}
 
   async create(dto: CreateRestaurantDto): Promise<Restaurant> {
-    const { name, description, location } = dto;
-
-    const newRestaurant = this.repo.create({ name, description });
-
+    console.log('Received DTO:', dto);
+  
+    const newRestaurant = this.repo.create(dto);
+    console.log('Created Restaurant:', newRestaurant);
+  
     let newLocation: Location | undefined;
-    if (location) {
-      newLocation = await this.locationService.create(location);
+    if (dto.location) {
+      newLocation = await this.locationService.create(dto.location);
+      console.log('Created Location:', newLocation);
       newRestaurant.locations = [newLocation];
     }
-
+  
+    if (dto.image) {
+      console.log('Image Filename:', dto.image.filename);
+      newRestaurant.image = dto.image.filename; // Save the image filename
+    }
+  
     const createdRestaurant = await this.repo.save(newRestaurant);
-
+    console.log('Created Restaurant:', createdRestaurant);
+  
     return createdRestaurant;
   }
+  
 
   async findOne(id: string) {
-    const res = await this.repo.findOne({
+    const restaurant = await this.repo.findOne({
       where: { id: parseInt(id) },
-      relations: ['photos', 'locations'],
+      relations: ['locations'],
     });
-
-    if (!res) {
+  
+    if (!restaurant) {
       throw new NotFoundException('Restaurant not found');
     }
-    return res;
+  
+    return restaurant;
   }
 
   async remove(id: string) {
