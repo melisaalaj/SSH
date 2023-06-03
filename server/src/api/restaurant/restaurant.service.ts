@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, StreamableFile } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Restaurant } from './entities/restaurant-entity';
-import { ILike, Repository } from 'typeorm';
+import { ILike, Repository, SelectQueryBuilder } from 'typeorm';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Photo } from '../photo/entities/photo-entity';
@@ -18,28 +18,27 @@ export class RestaurantService {
 
   async create(dto: CreateRestaurantDto): Promise<Restaurant> {
     console.log('Received DTO:', dto);
-  
+
     const newRestaurant = this.repo.create(dto);
     console.log('Created Restaurant:', newRestaurant);
-  
+
     let newLocation: Location | undefined;
     if (dto.location) {
       newLocation = await this.locationService.create(dto.location);
       console.log('Created Location:', newLocation);
       newRestaurant.locations = [newLocation];
     }
-  
+
     if (dto.image) {
       console.log('Image Filename:', dto.image.filename);
       newRestaurant.image = dto.image.filename; // Save the image filename
     }
-  
+
     const createdRestaurant = await this.repo.save(newRestaurant);
     console.log('Created Restaurant:', createdRestaurant);
-  
+
     return createdRestaurant;
   }
-  
 
   async findOne(id: string) {
     const restaurant = await this.repo.findOne({
@@ -127,4 +126,5 @@ export class RestaurantService {
     restaurant.photos.push(photo);
     return this.repo.save(restaurant);
   }
+  
 }

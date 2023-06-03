@@ -50,8 +50,8 @@ export class RestaurantController {
       storage: diskStorage({
         destination: './uploads',
         filename: (req, file, callback) => {
-          const { email } = req.body; 
-          const fileName = `${email}.jpg`; 
+          const { email } = req.body;
+          const fileName = `${email}.jpg`;
           callback(null, fileName);
         },
       }),
@@ -107,5 +107,12 @@ export class RestaurantController {
     const filename = photo.originalname;
     const newPhoto = await this.photoService.uploadPhotos(dataBuffer, filename);
     return this.restaurantService.addPhotoToRestaurant(restaurantId, newPhoto);
+  }
+
+  @Post('getByCity')
+  async getRestaurantsByCity(
+    @Body('city') city: string,
+  ): Promise<Restaurant[]> {
+    return this.locationService.getRestaurantsByCity(city);
   }
 }
