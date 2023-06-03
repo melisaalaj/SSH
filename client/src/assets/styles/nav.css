@@ -2,36 +2,47 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: #d22b24;
+  background-color: #e01818;
   color: aliceblue;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: "bradley hand", cursive;
   justify-content: space-between;
-  padding: 15px;
-  width: auto;
-  margin: auto;
+  padding: 8px;
+  width: 100%;
 }
+
 .h1-- {
   align-items: center;
   display: flex;
-  padding-left: 70px;
+  padding-left: 30px;
   padding-right: 20px;
-  margin-top: 8px;
+  margin-top: -8px;
+  font-size: 40px;
+  letter-spacing: 7px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0.8, 0.9);
 }
+
 .navbar--items {
   list-style: none;
   display: flex;
   font-size: 17px;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  padding: 5px;
+  font-family: "Open sans", serif;
+  font-weight: bold;
   padding-right: 10px;
+  margin-top: 8px;
 }
 
 .navbar--items > li {
   padding: 15px;
 }
+
 .nav-a {
   text-decoration: none;
   color: aliceblue;
+  transition: color 0.3s ease;
+}
+
+.nav-a:hover {
+  color:#ffcccc ;
 }
 
 .navbar--items .signOutButton {
@@ -43,10 +54,6 @@
   text-decoration: underline;
 }
 
-.shop-icon {
-  display: flex;
-  color: aliceblue;
-}
 .div1 {
   color: rgb(36, 38, 37);
   font-size: medium;

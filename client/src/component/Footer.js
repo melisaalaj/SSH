@@ -26,11 +26,11 @@ function Footer() {
       <div className="right-side">
         <div className="project">
           <h3 className="h33">The project</h3>
-       <Link to="/" >Main</Link>
+       <Link to="/" >Home Page</Link>
        <Link to="/restaurant/:menuId" >Order food</Link>
        <Link to="/">News</Link>
        <Link to="/restaurantet" >Restaurants</Link>
-       <Link  to="/login">Login</Link>
+       <Link  to="/login">Log In or Sign Up</Link>
         </div>
         <div className="legal-note">
           <h3 className="h33">Legal note</h3>
