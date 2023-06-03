@@ -22,7 +22,7 @@ const LoginSignUp = () => {
     password: "",
     phone: "",
     gender: "",
-    role: 1,
+    role: 2,
   });
 
   const navigate = useNavigate();
@@ -62,9 +62,11 @@ const LoginSignUp = () => {
     }
   };
 
+  
+
   const handleLoginSubmit = async (event) => {
     event.preventDefault();
-
+  
     const response = await fetch("http://localhost:3000/api/auth/login", {
       method: "POST",
       headers: {
@@ -72,16 +74,27 @@ const LoginSignUp = () => {
       },
       body: JSON.stringify(loginFormData),
     }).then((data) => data.json());
-
+  
     if (response && response.access_token) {
       setSuccessState("login-success");
+  
       localStorage.setItem("accessToken", response.access_token);
-      setTimeout(() => navigate("/"), 2000);
+      localStorage.setItem("user", JSON.stringify(response.user));
+  
+      setTimeout(() => {
+        const userRole = response.user.role; 
+        if (userRole === 1) {
+          navigate("/admin"); 
+        } else {
+          navigate("/"); 
+        }
+      }, 2000);
     } else {
       setSuccessState("has-error");
       setErrorMessage(response.message);
     }
   };
+
 
   const stateRenderer = (val) => {
     switch (val) {

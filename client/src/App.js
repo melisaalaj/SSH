@@ -1,20 +1,19 @@
-import "./assets/styles/App.css";
-import Navbar from "./component/Navbar";
-import Ballina from "./pages/Ballina";
-import Restaurantet from "./pages/Restaurantet";
-import Restaurant from "./pages/Restaurant";
-import MenuPage from "./pages/MenuPage";
-import Kontakti from "./pages/Kontakti";
-import LoginSignUp from "./pages/LoginSignUp";
-import ShopCard from "./pages/ShopCard";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { SelectedItemsProvider } from "./services/SelectedItemsContext";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './component/Navbar';
+import Ballina from './pages/Ballina';
+import Restaurantet from './pages/Restaurantet';
+import Restaurant from './pages/Restaurant';
+import MenuPage from './pages/MenuPage';
+import Kontakti from './pages/Kontakti';
+import LoginSignUp from './pages/LoginSignUp';
+import ShopCard from './pages/ShopCard';
+import { SelectedItemsProvider } from './services/SelectedItemsContext';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import Admin from './pages/Admin';
 
 const stripePromise = loadStripe('pk_test_51N3dURKQk7qhCl2R1hIgUXl0yG3mdGVyo5iTh66kUlQiCZOr2UJwsNN3QwqwI9myhvTyYl16DUI8rg2bt8FXCR6900tg8kJn4T');
-
 
 function App() {
   return (
@@ -36,6 +35,7 @@ function App() {
               </Elements>
             }
           />
+          <Route path="/admin/*" element={<Admin />} />
         </Routes>
       </SelectedItemsProvider>
     </Router>

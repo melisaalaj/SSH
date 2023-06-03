@@ -65,22 +65,22 @@ const Invoices = () => {
   return (
     <div className="mainpart">
       <h2>Add Food Item</h2>
-      <TextField
+      <TextField className="textfield"
         label="Menu ID"
         value={menuId}
         onChange={(e) => setMenuId(e.target.value)}
       /><br/>
       <TextField
-        label="Food Name"
+        label="Food Name" className="textfield"
         value={foodName}
         onChange={(e) => setFoodName(e.target.value)}
       /><br/>
-      <TextField
+      <TextField className="textfield"
         label="Description"
         value={foodDescription}
         onChange={(e) => setFoodDescription(e.target.value)}
       /><br/>
-      <TextField
+      <TextField className="textfield"
         label="Price"
         value={foodPrice}
         onChange={(e) => setFoodPrice(e.target.value)}

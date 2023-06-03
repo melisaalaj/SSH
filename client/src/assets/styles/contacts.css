@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f5f5f5;
+  background-color: plum;
 }
 
 .page-title {
@@ -15,11 +15,12 @@
 }
 
 .message-item {
-  border: 1px solid #ccc;
+  border: 1px solid darkred;
   border-radius: 4px;
   padding: 10px;
   margin-bottom: 10px;
   background-color: #fff;
+  width: 600px;
 }
 
 .message-name {
