@@ -1,6 +1,9 @@
 import { Body, Controller, Param, Post, Req, UseGuards } from '@nestjs/common';
 import { StripeService } from './stripe.service';
-import { AddCreditCardDto } from './dto/create-CreditCard.dto';
+import {
+  AddCreditCardDto,
+  ChargeByProductDto,
+} from './dto/create-CreditCard.dto';
 import { UserService } from '../user/user.service';
 import { FoodService } from '../food/food.service';
 import { CreateFoodDto } from '../food/dto/create-food';
@@ -8,7 +11,6 @@ import { AuthGuard } from '../auth/auth.guard';
 import { CurrentUser } from '../auth/currentUser';
 import { User } from '../user/entities/user.entity';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-
 
 @Controller('stripe')
 @ApiTags('Stripe')
@@ -36,21 +38,19 @@ export class StripeController {
     return { product, price };
   }
 
-  @Post('chargeByProduct/:productId')
+  @Post('chargeByProduct')
   async chargeByProduct(
-    @Body() card: AddCreditCardDto,
-    @Param('productId') productId: string,
+    @Body() requestData: ChargeByProductDto,
     @CurrentUser() user: User,
   ) {
     console.log(user);
     const currentUser = await this.userService.findByEmail(user.email);
-    const product = await this.foodService.findOne(productId);
 
-    return await this.stripeService.chargeByProduct(
-      card,
-      product.productId,
-      product.price,
+    const charges = await this.stripeService.chargeByProduct(
+      requestData.card,
+      requestData.products,
       currentUser.stripeCustomerId,
     );
+    return charges;
   }
 }

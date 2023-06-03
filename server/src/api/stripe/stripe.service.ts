@@ -7,9 +7,7 @@ import { AddCreditCardDto } from './dto/create-CreditCard.dto';
 export class StripeService {
   private stripe: Stripe;
 
-  constructor(
-    private configService: ConfigService,
-  ) {
+  constructor(private configService: ConfigService) {
     this.stripe = new Stripe(configService.get<string>('STRIPE_SECRET_KEY'), {
       apiVersion: '2022-11-15',
     });
@@ -60,8 +58,7 @@ export class StripeService {
 
   async chargeByProduct(
     card: AddCreditCardDto,
-    productId: string,
-    amount: number,
+    products: { productId: string; amount: number }[],
     customerId: string,
   ) {
     const token = await this.stripe.tokens.create({
@@ -73,20 +70,30 @@ export class StripeService {
         address_zip: card.zip,
       },
     });
-
+  
     const source = await this.stripe.customers.createSource(customerId, {
       source: token.id,
     });
-
-    const charge = await this.stripe.charges.create({
-      amount: amount,
-      customer: customerId,
-      currency: 'eur',
-      source: source.id,
-      description: 'Your description',
-      metadata: { productId: productId },
-    });
-
-    return charge;
+  
+    const charges = await Promise.all(
+      products.map(async (product) => {
+        const charge = await this.stripe.charges.create({
+          amount: product.amount,
+          customer: customerId,
+          currency: 'eur',
+          source: source.id,
+          description: 'Your description',
+          metadata: { productId: product.productId },
+        });
+        return charge;
+      }),
+    );
+  
+    const totalAmount = charges.reduce(
+      (total, charge) => total + charge.amount,
+      0,
+    );
+  
+    return { charges, totalAmount };
   }
 }

@@ -27,3 +27,19 @@ export class AddCreditCardDto {
   @IsNotEmpty()
   zip: string;
 }
+
+export class ChargeProductDto {
+  @ApiProperty({ type: String })
+  productId: string;
+
+  @ApiProperty({ type: Number })
+  amount: number;
+}
+
+export class ChargeByProductDto {
+  @ApiProperty()
+  card: AddCreditCardDto;
+
+  @ApiProperty({ type: [ChargeProductDto] })
+  products: ChargeProductDto[];
+}
