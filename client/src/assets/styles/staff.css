@@ -16,7 +16,7 @@ table {
 }
 
 thead th {
-  background-color: darkblue;
+  background-color: purple;
   text-align: left;
   padding: 10px;
   width: 300px;
@@ -24,8 +24,8 @@ thead th {
 
 tbody td {
   padding: 10px;
-  border-bottom: 1px solid #cfbbbb;
-  background-color: rgb(221, 235, 235);
+  border-bottom: 1px solid purple;
+  background-color: lightpink;
 }
 
 tbody tr:last-child td {

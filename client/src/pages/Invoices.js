@@ -87,10 +87,10 @@ const Invoices = () => {
       /><br/>
       <input type="file" accept="image/*" onChange={handleImageChange} /><br/>
       <div className="buttons">
-      <Button variant="contained" onClick={handleAddFood}>
+      <Button variant="contained" onClick={handleAddFood} className="b1">
         Add Food
       </Button>
-      <Button variant="contained" onClick={handleCancel}>
+      <Button variant="contained" onClick={handleCancel}className="b1">
         Cancel
       </Button>
       </div>

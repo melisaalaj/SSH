@@ -54,56 +54,56 @@ const Restaurant1 = () => {
   return (
     <div className="restaurant-form">
       <h2>Add Restaurant</h2>
-      <form>
-        <label>
+      <form className="form2">
+        <label className="label2">
           Name:<br/>
           <input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)} className="form1"
           />
         </label><br/>
-        <label>
+        <label className="label2">
           Description:<br/>
           <input
             type="text"
             value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}className="form1"
           />
         </label><br/>
-        <label>
+        <label className="label2" >
           Email:<br/>
           <input
             type="text"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}className="form1"
           />
         </label><br/>
-        <label>
+        <label className="label2">
           City:<br/>
           <input
             type="text"
             value={city}
-            onChange={(e) => setCity(e.target.value)}
+            onChange={(e) => setCity(e.target.value)}className="form1"
           />
         </label><br/>
-        <label>
+        <label className="label2">
           Street:<br/>
           <input
             type="text"
             value={street}
-            onChange={(e) => setStreet(e.target.value)}
+            onChange={(e) => setStreet(e.target.value)}className="form1"
           />
         </label><br/>
-        <label>
+        <label className="label2">
           Postal Code:<br/>
           <input
             type="text"
             value={postalCode}
-            onChange={(e) => setPostalCode(e.target.value)}
+            onChange={(e) => setPostalCode(e.target.value)}className="form1"
           />
         </label><br/>
-        <label>
+        <label className="label2">
           Photo:<br/>
           <input
             type="file"
@@ -111,7 +111,7 @@ const Restaurant1 = () => {
             onChange={handlePhotoChange}
           />
         </label><br/>
-        <button type="button" onClick={handleAddRestaurant}>
+        <button type="button" onClick={handleAddRestaurant}className="b2">
           Add Restaurant
         </button>
       </form>
