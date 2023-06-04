@@ -6,8 +6,41 @@ import SearchIcon from "@mui/icons-material/Search";
 import Footer from "../component/Footer";
 import { Link } from "react-router-dom";
 import "../assets/styles/restaurantet.css";
-
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 function Restaurantet() {
+  const navigate = useNavigate();
+  const [location, setLocation] = useState("");
+  const [restaurants, setRestaurants] = useState([]);
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    if (location.trim() !== "") {
+      try {
+        const city = location.trim();
+        const token = localStorage.getItem("accessToken");
+        const response = await fetch(`http://localhost:3000/api/restaurants/getByCity`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ city }),
+        });
+        const data = await response.json();
+        console.log(data);
+        if (data.length > 0) {
+          navigate(`/restaurant/city/${city}`);
+        } else {
+          console.log("No restaurants found for the given city.");
+        }
+      } catch (error) {
+        console.error("Error fetching restaurants data:", error);
+      }
+    }
+  };
+  const handleChange = (event) => {
+    setLocation(event.target.value);
+  };
   return (
     <>
       <div className="layer">
@@ -35,18 +68,19 @@ function Restaurantet() {
                   width: 400,
                 }}
                 className="forma"
+                onSubmit={handleSearch}
               >
                 <InputBase
                   sx={{ ml: 1, flex: 1 }}
                   placeholder="Address:"
                   inputProps={{ "aria-label": "search" }}
+                  onChange={handleChange}
                 />
                 <IconButton
                   type="button"
                   sx={{ p: "10px" }}
                   aria-label="search"
-                  component={Link}
-                  to="/Restaurant"
+            
                 >
                   <SearchIcon />
                 </IconButton>

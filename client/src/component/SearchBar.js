@@ -17,21 +17,18 @@ export default function SearchBar() {
       try {
         const city = location.trim();
         const token = localStorage.getItem("accessToken");
-        const response = await fetch(`http://localhost:3000/api/restaurants/getByCity`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({ city }),
-          }
-        );
+        const response = await fetch(`http://localhost:3000/api/restaurants/getByCity`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ city }),
+        });
         const data = await response.json();
         console.log(data);
         if (data.length > 0) {
-          const restaurantId = data[0].id; // Assuming you want to navigate to the first restaurant found
-          navigate(`/restaurant/${restaurantId}?location=${city}`);
+          navigate(`/restaurant/city/${city}`);
         } else {
           console.log("No restaurants found for the given city.");
         }
