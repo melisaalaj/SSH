@@ -1,30 +1,37 @@
+/* staff.css */
+
 .staff-container {
-    margin: 20px;
-  }
-  
-  .staff-container h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .staff-container table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .staff-container th,
-  .staff-container td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .staff-container th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-  
-  .staff-container tr:hover {
-    background-color: #f9f9f9;
-  }
-  
+  margin: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  background-color: purple;
+  text-align: left;
+  padding: 10px;
+  width: 300px;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid purple;
+  background-color: lightpink;
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: #f9f9f9;
+}

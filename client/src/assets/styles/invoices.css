@@ -1,32 +1,67 @@
+/* invoices.css */
+
 .mainpart {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 150px;
+  margin: 20px;
   padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  width: 400px;
 }
 
-.mainpart h2 {
+h2 {
   font-size: 24px;
+  font-weight: bold;
   margin-bottom: 20px;
-  text-align: center;
+  color: #333;
 }
 
-.mainpart .textfield {
-  margin-bottom: 20px;
+.textfield{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 50px;
+ margin-top: 50px;
+width: 500px;
+  border-radius: 5px;
+  height: 80px;
 }
-
-.mainpart .file-input {
+.textfield label{
+  display: block;
   margin-bottom: 20px;
+  color: gray;
+  width: 300px;
+  margin-top: 20px;
+  background-color: #fff;
+  height: 17px;
+}
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+ margin-top: 50px;
+width: 500px;
+  border-radius: 5px;
 }
 
 .buttons {
   display: flex;
-  gap: 10px;
+  justify-content: space-between;
   margin-top: 20px;
-  justify-content: center;
 }
 
-.mainpart .buttons button {
-  flex: 1;
+.b1 {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.b1:nth-child(1) {
+  background-color: #4caf50;
+  color: #fff;
+}
+
+.b1:nth-child(2) {
+  background-color: #f44336;
+  color: #fff;
 }

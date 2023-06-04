@@ -1,40 +1,63 @@
+/* restaurant1.css */
+
 .restaurant-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 150px;
-    padding: 20px;
-  }
+  margin: 20px;
+  padding: 20px;
+  background-color: lavenderblush;
+  border-radius: 5px;
+  width: 500px;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form2 {
+  display: flex;
+  flex-direction: column;
+  background-color:lavenderblush;
+}
+
+.label2 {
+  margin-bottom: 10px;
+  color: #555;
+  background-color: lavenderblush;
+}
+
+.form1{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  margin-top: 10px;
   
-  .restaurant-form h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .restaurant-form form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .restaurant-form label {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .restaurant-form label input {
-    padding: 5px;
-  }
-  
-  .restaurant-form button {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .restaurant-form button:hover {
-    background-color: #45a049;
-  }
-  
+}
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.b2 {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+}
+
+.b2:hover {
+  background-color: darkslategray;
+}
+
+.b2:active {
+  background-color: #3e8e41;
+}

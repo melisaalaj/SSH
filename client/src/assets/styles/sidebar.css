@@ -1,40 +1,52 @@
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+/* navbar.css */
+}
+/* sidebar.css */
+
 .sidebar {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: #D22B24;
-  color: aliceblue;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   justify-content: space-between;
-  padding: 15px;
+  align-items: center;
   width: 100%;
- 
-}
-
-.sidebar h2 {
-  margin-bottom: 20px;
+  background-color: red;
+  padding: 10px;
 }
 
 .sidebar ul {
+  display: flex;
   list-style: none;
   padding: 0;
   margin: 0;
-  display: flex;
 }
 
 .sidebar li {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .sidebar li:last-child {
   margin-right: 0;
 }
 
-.sidebar li a {
+.sidebar a {
   text-decoration: none;
-  color: #fff;
+  color: #333;
+  padding: 5px 10px;
 }
 
-.sidebar li a:hover {
-  color: #eee;
+
+.h1-{
+  font-size: xx-large;
+  color: #fff;
+  font-weight: 2000;
+  margin-left:100px ;
+}
+
+
+.sidebar li a {
+  color: #fff; /* Set the text color to white */
+  font-size: 15px;
+  font-style: bold;
 }

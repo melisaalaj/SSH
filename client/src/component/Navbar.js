@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-
 import "../assets/styles/nav.css";
 import ShoppingCartTwoToneIcon from "@mui/icons-material/ShoppingCartTwoTone";
 import { Link, useLocation } from "react-router-dom";
@@ -16,16 +15,23 @@ export default function Navbar() {
     setAccessToken(localStorage.getItem("accessToken"));
   }, []);
 
-  return location.pathname !== "/login" ? (
+  const hideNavbarPaths = ["/admin", "/admin/staff", "/admin/invoices","/admin/contacts", "/admin/restaurant1"];
+
+  if (hideNavbarPaths.includes(location.pathname)) {
+    return null; // Return null to hide the navbar on specific routes
+  }
+
+  return (
     <div className="navbar">
-      <h1 className="h1--"> DishDash</h1>
+      <h1 className="h1--">DishDash</h1>
       <nav>
         <ul className="navbar--items">
           <li>
             <Link to="/" className="nav-a">
-              {" "}
+
               Home
-            </Link>{" "}
+            </Link>
+
           </li>
           <li>
             <Link to="/restaurantet" className="nav-a">
@@ -34,14 +40,16 @@ export default function Navbar() {
           </li>
           <li>
             <Link to="/kontakti" className="nav-a">
-              {" "}
+
               Contact Us
+
             </Link>
           </li>
           <li>
             {!accessToken ? (
               <Link to="/login" className="nav-a">
-                {" "}
+
+            
                 Login / SignUp
               </Link>
             ) : (
@@ -50,17 +58,14 @@ export default function Navbar() {
               </button>
             )}
           </li>
-
           <li className="shop-icon">
             <Link to="/shop-card">
-              {" "}
               <ShoppingCartTwoToneIcon />
             </Link>
           </li>
         </ul>
       </nav>
     </div>
-  ) : (
-    ""
   );
 }
+
