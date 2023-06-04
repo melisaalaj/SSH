@@ -28,8 +28,10 @@ export default function Navbar() {
         <ul className="navbar--items">
           <li>
             <Link to="/" className="nav-a">
-              Main
+
+              Home
             </Link>
+
           </li>
           <li>
             <Link to="/restaurantet" className="nav-a">
@@ -38,13 +40,17 @@ export default function Navbar() {
           </li>
           <li>
             <Link to="/kontakti" className="nav-a">
-              Contact
+
+              Contact Us
+
             </Link>
           </li>
           <li>
             {!accessToken ? (
               <Link to="/login" className="nav-a">
-                Login/SignUp
+
+            
+                Login / SignUp
               </Link>
             ) : (
               <button className="signOutButton" onClick={() => signOut()}>

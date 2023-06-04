@@ -1,23 +1,25 @@
 .firstpart {
-  align-items: center;
-    justify-content: space-between;
-   background-size:inherit;
-    padding: 200px;
-    margin-bottom: 0;
+  background-image: url("../images/2206_w032_n003_500b_p1_500.jpg ");
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  min-height: 50vh;
+  padding: 200px;
 }
 .text-- {
   position: absolute;
-  top: 25%;
+  top: 42%;
   left: 50%;
   transform: translate(-50%, -50%);
   font: 2em sans-serif;
-  text-align:center;
+  text-align: center;
 }
 .searchbar {
   position: absolute;
-  top: 45%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);}
+  transform: translate(-50%, -50%);
+}
 .span {
   font-size: 18px;
 }
