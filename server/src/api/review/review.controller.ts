@@ -7,7 +7,7 @@ import { User } from '../user/entities/user.entity';
 import { UpdateReviewDto } from './dtos/update-review.dto';
 import { CurrentUser } from '../auth/currentUser';
 import { UserRoles } from '../user/enums/roles.enum';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 
 @Controller('review')
 @ApiTags('Review')
@@ -41,9 +41,9 @@ export class ReviewController {
     return await this.reviewService.update(id, body);
   }
 
-  // @Roles(UserRoles.ADMIN)
-  // @Get('average-rating/:id')
-  // async getAverageRating(@Param('id') restaurantId: number): Promise<number> {
-  //   return this.reviewService.getAverageRating(restaurantId);
-  // }
+  @Roles(UserRoles.ADMIN)
+  @Get('average-rating/:id')
+  async getAverageRating(@Param('id') restaurantId: number): Promise<number> {
+    return this.reviewService.getAverageRating(restaurantId);
+  }
 }

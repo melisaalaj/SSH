@@ -1,83 +1,85 @@
 import {
-    Body,
-    Controller,
-    Delete,
-    Get,
-    NotFoundException,
-    Param,
-    Post,
-  } from '@nestjs/common';
-  import { ApiTags } from '@nestjs/swagger';
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+} from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 import { BookingService } from './booking.service';
 import { RestaurantService } from '../restaurant/restaurant.service';
 import { CreateBookingDto } from './dto/create-booking.dto';
 import { UpdateBookingDto } from './dto/update-booking.dto';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 import { UserRoles } from '../user/enums/roles.enum';
-  
-  @ApiTags('Booking')
-  @Controller('booking')
-  export class BookingController {
-    constructor(
-      private readonly bookingService: BookingService,
-      private readonly restaurantService: RestaurantService,
-    ) {}
-  
-    @Post('/create/:id')
-    async create(
-      @Param('id') restaurantId: string,
-      @Body() createBookingDto: CreateBookingDto,
-    ) {
-      const restaurant = await this.restaurantService.findOne(restaurantId);
-      if (!restaurant) {
-        throw new NotFoundException('Restaurant not found');
-      }
-  
-      const booking = await this.bookingService.create(createBookingDto, restaurant);
-  
-      return booking;
+
+@ApiTags('Booking')
+@Controller('booking')
+export class BookingController {
+  constructor(
+    private readonly bookingService: BookingService,
+    private readonly restaurantService: RestaurantService,
+  ) {}
+
+  @Post('/create/:id')
+  async create(
+    @Param('id') restaurantId: string,
+    @Body() createBookingDto: CreateBookingDto,
+  ) {
+    const restaurant = await this.restaurantService.findOne(restaurantId);
+    if (!restaurant) {
+      throw new NotFoundException('Restaurant not found');
     }
-    
-    @Post('/update/:id')
-    async update(@Param('id') id: string, @Body() body: UpdateBookingDto) {
-      return await this.bookingService.update(id, body);
-    }
-  
-    @Roles(UserRoles.ADMIN)
-    @Delete(':id')
-    async remove(@Param('id') id: string) {
-      const booking = await this.bookingService.findOne(id);
-      if (!booking) {
-        throw new NotFoundException('Booking not found');
-      }
-      await this.bookingService.remove(id);
-    }
-    
-    @Roles(UserRoles.ADMIN)
-    @Get(':id')
-    async findOne(@Param('id') id: string) {
-      const booking = await this.bookingService.findOne(id);
-      if (!booking) {
-        throw new NotFoundException('Booking not found');
-      }
-      return booking;
-    }
-    
-    @Roles(UserRoles.ADMIN)
-    @Get()
-    async findAll() {
-      return await this.bookingService.findAll();
-    }
-  
-    @Get('/info/:id')
-    async getRestaurantInfo(@Param('id') id: string) {
-      const bookingInfo = await this.bookingService.getOrderDetails(id);
-  
-      if (!bookingInfo) {
-        throw new NotFoundException('Booking not found');
-      }
-  
-      return bookingInfo;
-    }
+
+    const booking = await this.bookingService.create(
+      createBookingDto,
+      restaurant,
+    );
+
+    return booking;
   }
-  
+
+  @Post('/update/:id')
+  async update(@Param('id') id: string, @Body() body: UpdateBookingDto) {
+    return await this.bookingService.update(id, body);
+  }
+
+  @Roles(UserRoles.ADMIN)
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    const booking = await this.bookingService.findOne(id);
+    if (!booking) {
+      throw new NotFoundException('Booking not found');
+    }
+    await this.bookingService.remove(id);
+  }
+
+  @Roles(UserRoles.ADMIN)
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    const booking = await this.bookingService.findOne(id);
+    if (!booking) {
+      throw new NotFoundException('Booking not found');
+    }
+    return booking;
+  }
+
+  @Roles(UserRoles.ADMIN)
+  @Get()
+  async findAll() {
+    return await this.bookingService.findAll();
+  }
+
+  @Get('/info/:id')
+  async getRestaurantInfo(@Param('id') id: string) {
+    const bookingInfo = await this.bookingService.getOrderDetails(id);
+
+    if (!bookingInfo) {
+      throw new NotFoundException('Booking not found');
+    }
+
+    return bookingInfo;
+  }
+}

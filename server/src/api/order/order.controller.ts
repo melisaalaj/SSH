@@ -12,7 +12,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { OrderService } from './order.service';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { RestaurantService } from '../restaurant/restaurant.service';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 import { UserRoles } from '../user/enums/roles.enum';
 
 @ApiTags('Order')

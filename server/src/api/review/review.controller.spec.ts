@@ -5,7 +5,6 @@ import { RestaurantService } from '../restaurant/restaurant.service';
 import { CreateReviewDto } from './dtos/create-review.dto';
 import { UpdateReviewDto } from './dtos/update-review.dto';
 import { User } from '../user/entities/user.entity';
-import { Roles } from 'src/common/decorators/roles.decorato';
 import { UserRoles } from '../user/enums/roles.enum';
 import { UserGender } from '../user/enums/userGender.enum';
 import { Order } from '../order/entities/orders-entity';
@@ -14,6 +13,8 @@ import { Restaurant } from '../restaurant/entities/restaurant-entity';
 import { Repository, UpdateResult } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Review } from './entities/review-entity';
+import { LocationService } from '../location/location.service';
+import { Location } from '../location/entities/location-entity';
 
 describe('ReviewController', () => {
   let controller: ReviewController;
@@ -27,6 +28,7 @@ describe('ReviewController', () => {
       providers: [
         ReviewService,
         RestaurantService,
+        LocationService,
         {
           provide: getRepositoryToken(Review),
           useClass: Repository,
@@ -35,13 +37,19 @@ describe('ReviewController', () => {
           provide: getRepositoryToken(Restaurant),
           useClass: Repository,
         },
+        {
+          provide: getRepositoryToken(Location),
+          useClass: Repository,
+        },
       ],
     }).compile();
 
     controller = module.get<ReviewController>(ReviewController);
     reviewService = module.get<ReviewService>(ReviewService);
     restaurantService = module.get<RestaurantService>(RestaurantService);
-    reviewRepository = module.get<Repository<Review>>(getRepositoryToken(Review)); 
+    reviewRepository = module.get<Repository<Review>>(
+      getRepositoryToken(Review),
+    );
   });
 
   describe('createReview', () => {
@@ -93,6 +101,7 @@ describe('ReviewController', () => {
         bookings: [],
         reviews: [],
         uuid: '',
+        image: undefined,
       };
 
       const createdReview = {
@@ -139,6 +148,7 @@ describe('ReviewController', () => {
           bookings: [],
           reviews: [],
           uuid: '',
+          image: undefined,
         },
       };
 

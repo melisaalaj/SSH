@@ -28,11 +28,14 @@ export class LocationService {
   }
 
   async findOne(id: string) {
-    const location = await this.repo.findOne({ where: { id: parseInt(id) } });
-    if (!location) {
-      throw new NotFoundException();
+    if (!id) {
+      throw new NotFoundException('Event not found');
     }
-    return location;
+    const event = await this.repo.findOne({ where: { id: parseInt(id) } });
+    if (!event) {
+      throw new NotFoundException('Event not found');
+    }
+    return event;
   }
 
   async findByName(city?: string, street?: string) {
@@ -51,13 +54,12 @@ export class LocationService {
       where: { city: ILike(`%${city}%`) },
       relations: ['restaurant'],
     });
-  
+
     if (locations.length === 0) {
       throw new NotFoundException('No data found for the specified city.');
     }
-  
+
     const restaurants = locations.map((location) => location.restaurant);
     return restaurants.filter((restaurant) => restaurant !== null);
   }
-
 }

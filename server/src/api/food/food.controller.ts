@@ -19,7 +19,7 @@ import { FoodService } from './food.service';
 import { CreateFoodDto } from './dto/create-food';
 import { UpdateFoodDto } from './dto/update-food';
 import { Photo } from '../photo/entities/photo-entity';
-import { RolesGuard } from 'src/common/guards/roles.guard';
+import { RolesGuard } from '../../common/guards/roles.guard';
 import { UserRoles } from '../user/enums/roles.enum';
 import { Roles } from '../../common/decorators/roles.decorato';
 import { AuthGuard } from '../auth/auth.guard';
@@ -37,7 +37,7 @@ export class FoodController {
     private readonly foodService: FoodService,
     private readonly menuService: MenuService,
   ) {}
-  
+
   @Roles(UserRoles.ADMIN)
   @Post('/create')
   @UseInterceptors(FileInterceptor('foodImage'))
@@ -82,7 +82,6 @@ export class FoodController {
     await this.foodService.remove(id);
   }
 
-  
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const food = await this.foodService.findOne(id);

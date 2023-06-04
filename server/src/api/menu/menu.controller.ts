@@ -12,7 +12,7 @@ import { RestaurantService } from '../restaurant/restaurant.service';
 import { MenuService } from './menu.service';
 import { UpdateMenuWithRestaurantDto } from './dtos/update-menu.dto';
 import { UserRoles } from '../user/enums/roles.enum';
-import { Roles } from 'src/common/decorators/roles.decorato';
+import { Roles } from '../../common/decorators/roles.decorato';
 import { CreateMenuDto } from './dtos/create-menu.dto';
 
 @ApiTags('Menu')

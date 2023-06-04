@@ -42,7 +42,7 @@ describe('EventService', () => {
       const createEventDto: CreateEventDto = {
         name: '',
         description: '',
-        date: undefined
+        date: undefined,
       };
       const restaurant: Restaurant = {
         name: '',
@@ -57,15 +57,16 @@ describe('EventService', () => {
         reviews: [],
         id: 0,
         uuid: '',
+        image: undefined,
       };
 
       const expectedEvent: Event = {
         name: '',
         description: '',
         date: undefined,
-        restaurant: new Restaurant,
+        restaurant: new Restaurant(),
         id: 0,
-        uuid: ''
+        uuid: '',
       };
 
       jest.spyOn(eventRepository, 'create').mockReturnValue(expectedEvent);
@@ -88,15 +89,15 @@ describe('EventService', () => {
       const updateEventDto: UpdateEventDto = {
         name: '',
         description: '',
-        date: undefined
+        date: undefined,
       };
       const existingEvent: Event = {
         name: '',
         description: '',
         date: undefined,
-        restaurant: new Restaurant,
+        restaurant: new Restaurant(),
         id: 0,
-        uuid: ''
+        uuid: '',
       };
 
       jest.spyOn(eventRepository, 'findOne').mockResolvedValue(existingEvent);
@@ -107,9 +108,16 @@ describe('EventService', () => {
       const result = await eventService.update(eventId, updateEventDto);
 
       // Assert
-      expect(eventRepository.findOne).toHaveBeenCalledWith({ where: { id: parseInt(eventId) } });
-      expect(eventRepository.update).toHaveBeenCalledWith(existingEvent.id, updateEventDto);
-      expect(eventRepository.findOne).toHaveBeenCalledWith({ where: { id: parseInt(eventId) } });
+      expect(eventRepository.findOne).toHaveBeenCalledWith({
+        where: { id: parseInt(eventId) },
+      });
+      expect(eventRepository.update).toHaveBeenCalledWith(
+        existingEvent.id,
+        updateEventDto,
+      );
+      expect(eventRepository.findOne).toHaveBeenCalledWith({
+        where: { id: parseInt(eventId) },
+      });
       expect(result).toEqual(existingEvent);
     });
   });
@@ -122,9 +130,9 @@ describe('EventService', () => {
         name: '',
         description: '',
         date: undefined,
-        restaurant: new Restaurant,
+        restaurant: new Restaurant(),
         id: 0,
-        uuid: ''
+        uuid: '',
       };
 
       jest.spyOn(eventRepository, 'findOneBy').mockResolvedValue(existingEvent);
@@ -134,7 +142,9 @@ describe('EventService', () => {
       const result = await eventService.remove(eventId);
 
       // Assert
-      expect(eventRepository.findOneBy).toHaveBeenCalledWith({ id: parseInt(eventId) });
+      expect(eventRepository.findOneBy).toHaveBeenCalledWith({
+        id: parseInt(eventId),
+      });
       expect(eventRepository.remove).toHaveBeenCalledWith(existingEvent);
       expect(result).toBeUndefined();
     });
@@ -162,22 +172,26 @@ describe('EventService', () => {
         date: undefined,
         restaurant: new Restaurant(),
         id: 0,
-        uuid: ''
+        uuid: '',
       };
-  
+
       jest.spyOn(eventRepository, 'findOne').mockResolvedValue(existingEvent);
-  
+
       // Act
       const result = await eventService.findOne(eventId);
-  
+
       // Assert
-      expect(eventRepository.findOne).toHaveBeenCalledWith({ where: { id: parseInt(eventId) } });
+      expect(eventRepository.findOne).toHaveBeenCalledWith({
+        where: { id: parseInt(eventId) },
+      });
       expect(result).toEqual(existingEvent);
     });
-  
+
     it('should throw NotFoundException if id is not provided', async () => {
       // Act and Assert
-      await expect(eventService.findOne('')).rejects.toThrowError(NotFoundException);
-    });    
-  });  
+      await expect(eventService.findOne('')).rejects.toThrowError(
+        NotFoundException,
+      );
+    });
+  });
 });

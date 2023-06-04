@@ -18,7 +18,7 @@ import { IUserController } from './interfaces/user.controller.interface';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { User } from './entities/user.entity';
-import { PaginationInterceptor } from 'src/common/interceptors/pagination.interceptor';
+import { PaginationInterceptor } from '../../common/interceptors/pagination.interceptor';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { AuthGuard } from '../auth/auth.guard';
 import { Roles } from '../../common/decorators/roles.decorato';

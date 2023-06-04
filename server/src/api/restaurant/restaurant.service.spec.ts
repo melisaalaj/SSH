@@ -9,19 +9,28 @@ import { Readable } from 'stream';
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Review } from '../review/entities/review-entity';
+import { LocationService } from '../location/location.service';
 
 describe('RestaurantService', () => {
   let service: RestaurantService;
   let repository: Repository<Restaurant>;
+  let locationService: LocationService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         RestaurantService,
+        LocationService,
         {
           provide: getRepositoryToken(Restaurant),
           useClass: Repository, // Update this line with the actual repository class
         },
+        {
+          provide: LocationService,
+          useValue: {
+            findOne: jest.fn()
+          }
+        }
       ],
     }).compile();
 
@@ -29,6 +38,7 @@ describe('RestaurantService', () => {
     repository = module.get<Repository<Restaurant>>(
       getRepositoryToken(Restaurant),
     );
+    locationService = module.get<LocationService>(LocationService);
   });
 
   describe('create', () => {
@@ -36,6 +46,9 @@ describe('RestaurantService', () => {
       const createDto: CreateRestaurantDto = {
         name: 'Restaurant Name',
         description: 'Restaurant Description',
+        uuid: '',
+        email: '',
+        image: undefined,
       };
       const saveSpy = jest
         .spyOn(repository, 'save')
@@ -64,21 +77,22 @@ describe('RestaurantService', () => {
         bookings: [],
         reviews: [],
         uuid: '',
+        image: undefined,
       };
       const findOneSpy = jest
         .spyOn(repository, 'findOne')
         .mockResolvedValueOnce(restaurant);
-
+  
       const result = await service.findOne(id);
-
-      console.log('Expected argument:', { where: { id: parseInt(id) } });
+  
+      console.log('Expected argument:', { where: { id: parseInt(id) }, relations: ['locations'] });
       console.log('Actual argument:', findOneSpy.mock.calls[0][0]);
-
+  
       expect(result).toEqual(restaurant);
-      expect(findOneSpy).toHaveBeenCalledWith({ where: { id: parseInt(id) } });
+      expect(findOneSpy).toHaveBeenCalledWith({ where: { id: parseInt(id) }, relations: ['locations'] });
     });
   });
-
+  
   describe('remove', () => {
     it('should remove a restaurant', async () => {
       const id = '1';
@@ -95,6 +109,7 @@ describe('RestaurantService', () => {
         bookings: [],
         reviews: [],
         uuid: '',
+        image: undefined,
       };
       const findOneSpy = jest
         .spyOn(service, 'findOne')
@@ -137,6 +152,7 @@ describe('RestaurantService', () => {
         bookings: [],
         reviews: [],
         uuid: '',
+        image: undefined,
       };
       const findOneSpy = jest
         .spyOn(service, 'findOne')
@@ -218,6 +234,7 @@ describe('RestaurantService', () => {
         bookings: [],
         reviews: [],
         uuid: '',
+        image: undefined,
       };
       const findOneSpy = jest
         .spyOn(repository, 'findOne')
@@ -270,6 +287,7 @@ describe('RestaurantService', () => {
           bookings: [],
           reviews: [],
           uuid: '',
+          image: undefined,
         },
         {
           id: 2,
@@ -284,6 +302,7 @@ describe('RestaurantService', () => {
           bookings: [],
           reviews: [],
           uuid: '',
+          image: undefined,
         },
       ];
       const findSpy = jest
@@ -313,6 +332,7 @@ describe('RestaurantService', () => {
           bookings: [],
           reviews: [],
           uuid: '',
+          image: undefined,
         },
         {
           id: 1,
@@ -327,6 +347,7 @@ describe('RestaurantService', () => {
           bookings: [],
           reviews: [],
           uuid: '',
+          image: undefined,
         },
       ];
       const findSpy = jest
@@ -365,6 +386,7 @@ describe('RestaurantService', () => {
         bookings: [],
         reviews: [],
         uuid: '',
+        image: undefined,
       };
       const findOneSpy = jest
         .spyOn(repository, 'findOne')

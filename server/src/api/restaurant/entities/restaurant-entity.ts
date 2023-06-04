@@ -9,7 +9,6 @@ import { BaseEntity } from '../../../common/db/customBaseEntites/BaseEntity';
 import { Column, Entity, JoinColumn, OneToMany } from 'typeorm';
 import { Review } from '../../../api/review/entities/review-entity';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsUnique } from 'src/common/decorators/validation.decorator';
 
 @Entity()
 export class Restaurant extends BaseEntity {
