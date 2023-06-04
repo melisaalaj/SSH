@@ -49,26 +49,10 @@ const RestaurantCards = () => {
 };
 
 function RestaurantList() {
-  const [restaurants, setRestaurants] = useState([]);
 
-  useEffect(() => {
-    // Fetch data from the database using Axios
-    axios.get('/api/restaurants') 
-      .then(response => {
-        setRestaurants(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching restaurants:', error);
-      });
-  }, []);
   return (
     <div>
       <div class="container">
-        {/* {restaurants.map(restaurant => (
-          <div className="" key={restaurant.id}>
-            <RestaurantCard restaurant={restaurant} />
-          </div>
-        ))} */}
         {RestaurantCards()}
       </div>
     </div>
