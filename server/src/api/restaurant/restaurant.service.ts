@@ -12,9 +12,14 @@ import { LocationService } from '../location/location.service';
 @Injectable()
 export class RestaurantService {
   constructor(
-    @InjectRepository(Restaurant) private repo: Repository<Restaurant>,
+    @InjectRepository(Restaurant)
+    private repo: Repository<Restaurant>,
     private locationService: LocationService,
-  ) {}
+  ) {
+    if (!this.repo) {
+      throw new Error('Repository is not properly injected');
+    }
+  }
 
   async create(dto: CreateRestaurantDto): Promise<Restaurant> {
     console.log('Received DTO:', dto);

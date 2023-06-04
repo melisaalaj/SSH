@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsArray, ValidateNested, IsOptional } from "class-validator";
-import { UpdateFoodDto } from "src/api/food/dto/update-food";
+import { UpdateFoodDto } from "../../../api/food/dto/update-food";
 
 export class UpdateMenuDto {
   @IsString()

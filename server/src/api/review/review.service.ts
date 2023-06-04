@@ -42,16 +42,15 @@ export class ReviewService {
     return this.repo.update(review.id, dto);
   }
 
-  // async getAverageRating(restaurantId: number): Promise<number> {
-  //   const restaurant = await this.restaurantService.findOne(restaurantId.toString());
-  //   const reviews = await this.repo.find({ where: { restaurant } });
+  async getAverageRating(restaurantId: number): Promise<number> {
+    const restaurant = await this.restaurantService.findOne(restaurantId.toString());
+    const reviews = await this.repo.find({ where: { restaurant } });
   
-  //   if (reviews.length === 0) {
-  //     return 0; 
-  //   }
-  
-  //   const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
-  //   const averageRating = totalRating / reviews.length;
-  //   return parseFloat(averageRating.toFixed(2));
-  // }
+    if (reviews.length === 0) {
+      return 0; 
+    }
+    const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+    const averageRating = totalRating / reviews.length;
+    return parseFloat(averageRating.toFixed(2));
+  }
 }

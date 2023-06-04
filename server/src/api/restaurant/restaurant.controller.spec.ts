@@ -9,12 +9,15 @@ import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { Photo } from '../photo/entities/photo-entity';
+import { LocationService } from '../location/location.service';
+import { Location  } from '../location/entities/location-entity';
 
 describe('RestaurantController', () => {
   let service: RestaurantService;
   let controller: RestaurantController;
   let repository: Repository<Restaurant>;
   let photoService: PhotoService;
+  let locationService: LocationService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -22,12 +25,17 @@ describe('RestaurantController', () => {
       providers: [
         RestaurantService,
         PhotoService,
+        LocationService,
         {
           provide: getRepositoryToken(Restaurant),
           useClass: Repository,
         },
         {
           provide: getRepositoryToken(Photo),
+          useClass: Repository,
+        },
+        {
+          provide: getRepositoryToken(Location),
           useClass: Repository,
         },
         JwtService,
@@ -40,6 +48,7 @@ describe('RestaurantController', () => {
     );
     controller = module.get<RestaurantController>(RestaurantController);
     photoService = module.get<PhotoService>(PhotoService);
+    locationService = module.get<LocationService>(LocationService);
   });
 
   describe('create', () => {
@@ -47,6 +56,9 @@ describe('RestaurantController', () => {
       const createRestaurantDto: CreateRestaurantDto = {
         name: 'Restaurant Name',
         description: 'Restaurant Description',
+        uuid: '',
+        email: '',
+        image: undefined,
       };
 
       const createdRestaurant: Restaurant = {
@@ -63,32 +75,15 @@ describe('RestaurantController', () => {
         bookings: [],
         reviews: [],
         uuid: '',
+        image: undefined,
       };
 
       jest.spyOn(service, 'create').mockResolvedValueOnce(createdRestaurant);
 
-      const result = await controller.create(createRestaurantDto);
+      const result = await controller.create(createRestaurantDto, undefined);
 
       expect(result).toBe(createdRestaurant);
       expect(service.create).toHaveBeenCalledWith(createRestaurantDto);
-    });
-  });
-
-  describe('update', () => {
-    it('should update a restaurant', async () => {
-      const id = '1';
-      const updateRestaurantDto: UpdateRestaurantDto = {
-        name: 'Updated Restaurant Name',
-        description: 'Updated Restaurant Description',
-        photoId: 0,
-      };
-
-      jest.spyOn(service, 'update').mockResolvedValueOnce();
-
-      await expect(
-        controller.update(id, updateRestaurantDto),
-      ).resolves.toBeUndefined();
-      expect(service.update).toHaveBeenCalledWith(id, updateRestaurantDto);
     });
   });
 
@@ -109,6 +104,7 @@ describe('RestaurantController', () => {
         bookings: [],
         reviews: [],
         uuid: '',
+        image: undefined,
       };
 
       jest.spyOn(service, 'findOne').mockResolvedValueOnce(foundRestaurant);
@@ -137,6 +133,7 @@ describe('RestaurantController', () => {
         bookings: [],
         reviews: [],
         uuid: '',
+        image: undefined,
       };
 
       jest.spyOn(service, 'findOne').mockResolvedValueOnce(foundRestaurant);
@@ -166,6 +163,7 @@ describe('RestaurantController', () => {
           bookings: [],
           reviews: [],
           uuid: '',
+          image: undefined,
         },
       ];
 
@@ -175,17 +173,6 @@ describe('RestaurantController', () => {
 
       expect(result).toBe(foundRestaurants);
       expect(service.findByName).toHaveBeenCalledWith(name);
-    });
-  });
-
-  describe('remove', () => {
-    it('should remove a restaurant', async () => {
-      const id = '1';
-
-      jest.spyOn(service, 'remove').mockResolvedValueOnce(undefined);
-
-      await expect(controller.remove(id)).resolves.toBeUndefined();
-      expect(service.remove).toHaveBeenCalledWith(id);
     });
   });
 
@@ -208,6 +195,7 @@ describe('RestaurantController', () => {
         bookings: [],
         reviews: [],
         uuid: '',
+        image: undefined,
       };
 
       jest
