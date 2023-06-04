@@ -23,7 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Ballina />} />
           <Route path="/restaurantet" element={<Restaurantet />} />
-          <Route path="/restaurant" element={<Restaurant />} />
+          <Route path="/restaurant/:city" element={<Restaurant />} />
           <Route path="/restaurant/:menuId" element={<MenuPage />} />
           <Route path="/kontakti" element={<Kontakti />} />
           <Route path="/login" element={<LoginSignUp />} />
