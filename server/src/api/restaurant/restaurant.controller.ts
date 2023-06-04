@@ -2,13 +2,11 @@ import {
   Body,
   ClassSerializerInterceptor,
   Controller,
-  Delete,
   Get,
-  HttpCode,
-  HttpStatus,
   Param,
   Post,
   Query,
+  Res,
   UploadedFile,
   UseGuards,
   UseInterceptors,
@@ -16,16 +14,20 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { RestaurantService } from './restaurant.service';
-import { CreateRestaurantDto } from './dto/create-restaurant.dto';
+import {
+  CreateLocationDto,
+  CreateRestaurantDto,
+} from './dto/create-restaurant.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Express } from 'express';
 import { Restaurant } from './entities/restaurant-entity';
 import { PhotoService } from '../photo/photo.service';
-import { AuthGuard } from '../auth/auth.guard';
 import { Roles } from '../../common/decorators/roles.decorato';
 import { UserRoles } from '../user/enums/roles.enum';
+import { diskStorage } from 'multer';
+import { LocationService } from '../location/location.service';
+import { AuthGuard } from '../auth/auth.guard';
 
 @Controller('restaurants')
 @UsePipes(new ValidationPipe())
@@ -37,25 +39,45 @@ export class RestaurantController {
   constructor(
     private readonly restaurantService: RestaurantService,
     private readonly photoService: PhotoService,
+    private readonly locationService: LocationService,
   ) {}
 
   @Roles(UserRoles.ADMIN)
+  @Roles(UserRoles.ADMIN)
   @Post('/create')
-  create(@Body() createRestaurantDto: CreateRestaurantDto) {
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: (req, file, callback) => {
+          const { email } = req.body;
+          const fileName = `${email}.jpg`;
+          callback(null, fileName);
+        },
+      }),
+    }),
+  )
+  async create(
+    @Body() createRestaurantDto: CreateRestaurantDto,
+    @UploadedFile() image: Express.Multer.File,
+  ) {
+    createRestaurantDto.image = image;
+
+    const { location } = createRestaurantDto;
+
+    if (location) {
+      const newLocation: CreateLocationDto = await this.locationService.create(
+        location,
+      );
+      createRestaurantDto.location = newLocation;
+    }
+
     return this.restaurantService.create(createRestaurantDto);
   }
 
-  @Roles(UserRoles.ADMIN)
-  @Post('/update/:id')
-  async update(@Param('id') id: string, @Body() body: UpdateRestaurantDto) {
-    return await this.restaurantService.update(id, body);
-  }
-
-  @Roles(UserRoles.ADMIN, UserRoles.CUSTOMER, UserRoles.USER)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const restaurant = await this.restaurantService.findOne(id);
-
     return restaurant;
   }
 
@@ -63,13 +85,6 @@ export class RestaurantController {
   async getLocation(@Query('name') name?: string) {
     const restaurant = await this.restaurantService.findByName(name);
     return restaurant;
-  }
-
-  @Roles(UserRoles.ADMIN)
-  @Delete(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
-  async remove(@Param('id') id: string) {
-    await this.restaurantService.remove(id);
   }
 
   @Get('/info/:id')
@@ -92,5 +107,12 @@ export class RestaurantController {
     const filename = photo.originalname;
     const newPhoto = await this.photoService.uploadPhotos(dataBuffer, filename);
     return this.restaurantService.addPhotoToRestaurant(restaurantId, newPhoto);
+  }
+
+  @Post('getByCity')
+  async getRestaurantsByCity(
+    @Body('city') city: string,
+  ): Promise<Restaurant[]> {
+    return this.locationService.getRestaurantsByCity(city);
   }
 }

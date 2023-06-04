@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException, StreamableFile } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Restaurant } from './entities/restaurant-entity';
-import { ILike, Repository } from 'typeorm';
+import { ILike, Repository, SelectQueryBuilder } from 'typeorm';
 import { CreateRestaurantDto } from './dto/create-restaurant.dto';
 import { UpdateRestaurantDto } from './dto/update-restaurant.dto';
 import { Photo } from '../photo/entities/photo-entity';
@@ -13,31 +13,44 @@ import { LocationService } from '../location/location.service';
 export class RestaurantService {
   constructor(
     @InjectRepository(Restaurant) private repo: Repository<Restaurant>,
-    private locationService: LocationService
+    private locationService: LocationService,
   ) {}
 
   async create(dto: CreateRestaurantDto): Promise<Restaurant> {
-    const { name, description, location } = dto;
+    console.log('Received DTO:', dto);
 
-    const newRestaurant = this.repo.create({ name, description });
+    const newRestaurant = this.repo.create(dto);
+    console.log('Created Restaurant:', newRestaurant);
 
     let newLocation: Location | undefined;
-    if (location) {
-      newLocation = await this.locationService.create(location);
+    if (dto.location) {
+      newLocation = await this.locationService.create(dto.location);
+      console.log('Created Location:', newLocation);
       newRestaurant.locations = [newLocation];
     }
 
+    if (dto.image) {
+      console.log('Image Filename:', dto.image.filename);
+      newRestaurant.image = dto.image.filename; // Save the image filename
+    }
+
     const createdRestaurant = await this.repo.save(newRestaurant);
+    console.log('Created Restaurant:', createdRestaurant);
 
     return createdRestaurant;
   }
 
   async findOne(id: string) {
-    const res = await this.repo.findOne({ where: {id: parseInt(id)} });
-    if (!res) {
+    const restaurant = await this.repo.findOne({
+      where: { id: parseInt(id) },
+      relations: ['locations'],
+    });
+  
+    if (!restaurant) {
       throw new NotFoundException('Restaurant not found');
     }
-    return res;
+  
+    return restaurant;
   }
 
   async remove(id: string) {
@@ -113,4 +126,5 @@ export class RestaurantService {
     restaurant.photos.push(photo);
     return this.repo.save(restaurant);
   }
+  
 }

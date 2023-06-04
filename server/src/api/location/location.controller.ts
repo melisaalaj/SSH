@@ -33,7 +33,7 @@ export class LocationController {
   constructor(private readonly locationService: LocationService) {}
 
   @Roles(UserRoles.ADMIN)
-  @Post('/create/:id')
+  @Post('/create')
   async createLocation(@Body() createLocationDto: CreateLocationDto) {
     const location = await this.locationService.create(createLocationDto);
     return location;

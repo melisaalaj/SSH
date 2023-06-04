@@ -21,9 +21,18 @@ export class CreateRestaurantDto {
   @ApiProperty()
   name: string;
 
+  uuid: string;
+
   @IsString()
   @ApiProperty()
   description: string;
+
+  @IsString()
+  @ApiProperty()
+  email: string;
+
+  @ApiProperty({ type: 'string', format: 'binary' })
+  image: Express.Multer.File;
 
   @ValidateNested()
   @Type(() => CreateLocationDto)
